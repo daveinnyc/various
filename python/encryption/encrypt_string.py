@@ -29,6 +29,7 @@ class Encryption:
         
         
     def decrypt(self, cypher_text, key):
+        #Doesn't do anything yet
         plain_text = cypher_text
         return plain_text
     
