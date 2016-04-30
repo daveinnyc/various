@@ -3,7 +3,7 @@ import random
 from collections import defaultdict
 
 '''
-Working, but harder than it should be:
+Working, but more complicated than it should be:
     string to list
     list encoded as numbers
     key to list
