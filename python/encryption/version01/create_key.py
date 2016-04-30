@@ -2,6 +2,10 @@ import string
 import random
 from collections import defaultdict
 
+'''
+OO version 
+'''
+
 
 class Secret:
     def __init__(self):
