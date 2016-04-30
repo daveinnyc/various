@@ -3,7 +3,7 @@ import random
 
 '''
 This version uses tuples instead to bind the 
-plain and cypher text together
+plain and cypher texts together
 ''' 
 
 def create_secret_key():
