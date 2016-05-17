@@ -1,0 +1,3 @@
+NOTE: The Makefile is almost certainly useless for any 
+of the earlier ex*.c files. It is updated during exercises
+for the most recent file.
