@@ -7,6 +7,7 @@
 ''' 
 import random
 MAX_NUM_RANGE = 10
+MAX_BASE_NUMBER = 10
 
 def num_range(max_num):
     random.seed()
@@ -82,7 +83,7 @@ def print_problems(problem_type, problem_elements):
             output_string += '</TABLE>'             
             
             #Put vertical space between the problem rows    
-            output_string += "<BR>" * 5
+            output_string += "<BR>" * 4
             #Reset values for next line
             counter = 0
             print_top_line = []
@@ -105,7 +106,7 @@ def print_body_open():
     return "<BODY>"
 
 def print_set_font():
-    return "<FONT face='verdana' size='5'>"
+    return "<FONT face='verdana' size='3'>"
 
 def print_body_close():
     return "</BODY>"
@@ -116,15 +117,20 @@ def print_html_close():
 if '__main__' == __name__:
     
     for pt in ['add', 'subtract']:
-        for i in range(1,3):
-            if 'add' == pt:
-                problem_elements = addition(i)
-            elif 'subtract' == pt:
-                problem_elements = subtraction(i)
-            else:
-                print "Bad problem type specifier"
+        #Loop to create 10*counter math problem sets using each 
+        #  integer from 1 to MAX_BASE_NUMBER as basis for a set
+        for i in range(1, MAX_BASE_NUMBER + 1):
+            problem_elements = []
+            for counter in range(3):
+                if 'add' == pt:
+                    problem_elements += addition(i)
+                elif 'subtract' == pt:
+                    problem_elements += subtraction(i)
+                else:
+                    print "Bad problem type specifier"
+                    
+            #Print the output as an html file
             output_file_string = ''
-        
             output_file_string += print_html_open()
             output_file_string += print_header()
             output_file_string += print_body_open()
@@ -132,7 +138,6 @@ if '__main__' == __name__:
             output_file_string += print_problems(pt, problem_elements)
             output_file_string += print_body_close()
             output_file_string += print_html_close()
-            
             output_file_name =  pt + "." + str(i) + ".html"
             output_file = open(output_file_name, 'w')
             output_file.write(output_file_string)
