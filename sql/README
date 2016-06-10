@@ -1,3 +1,7 @@
 Review exercises in SQL based on:
 http://sql.learncodethehardway.org/
 
+Helper: With two tabs open in the console, one to edit one & one to execute code, 
+        just bump the value for CURR when starting each new exercise.
+-- Edit tab: CURR=3 ; NEXT=$((${CURR}+1)) ; cp ex{${CURR},${NEXT}}.sql ; vi ex${NEXT}.sql
+-- Exec tab: rm *.db ; CURR=3 ; sqlite3 -echo ex${CURR}.db < ex${CURR}.sql 
