@@ -12,8 +12,8 @@ import pytest
 import time
 
 #GLOBALS
-BASE_URL='https://dev.workmarket.com'
-USER='jwald@workmarket.com'
+BASE_URL='INSERT TEST SERVER NAME HERE'
+USER='INSERT TEST USER NAME HERE'
 PWD='NEED TO UPDATE PASSWORD BEFORE RUNNING THIS SCRIPT'
 
 @pytest.fixture
