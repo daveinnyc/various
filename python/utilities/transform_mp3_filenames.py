@@ -9,6 +9,9 @@
 #     +   14..You're Gonna Miss Me.mp3
 #     =>  14..13th Floor Elevators..You're Gonna Miss Me.mp3
 #
+# Assumes script is run from the directory with extra information in the 
+#  filenames and will update the filenames in another directory
+#
 # Copyright 2017 Dave Cuthbert
 # MIT License
 
@@ -38,7 +41,6 @@ def get_artists():
 def insert_artist_name():
     artist_names = get_artists()
     old_filenames = os.listdir(TARGET_DIR)
-    new_filenames = []
     for (old_filename, artist) in zip(old_filenames, artist_names):
         new_filename = re.sub('\.\.', '..' + artist + '..', old_filename)
         os.rename(os.path.join(TARGET_DIR, old_filename), 
