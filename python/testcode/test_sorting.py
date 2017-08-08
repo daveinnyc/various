@@ -1,5 +1,8 @@
 '''
-Tests for sorting.py 
+Simple tests for sorting.py 
+
+Uses traditional test to verify error messages
+Use property based tests to verify generator and sort functions
 
 Author: Dave Cuthbert
 Copyright: 2017
@@ -56,5 +59,36 @@ def test_min_max_parameters():
     for i in l:
         assert i >= min_bound
         assert i <= max_bound
+
+
+# TESTS FOR BUBBLESORT()
+def test_sort_order_length():
+    unsorted_list = s.generate_list(200, min_value=0, max_value=500)
+    sorted_list = s.bubblesort(unsorted_list)
+    assert len(unsorted_list) == len(sorted_list)
+
+
+def test_sort_order_limits():
+    min_bound = 0
+    max_bound = 999
+    unsorted_list = s.generate_list(200, min_value=min_bound, max_value=max_bound)
+    sorted_list = s.bubblesort(unsorted_list)
+    assert sorted_list[0] >= min_bound
+    assert sorted_list[-1] <= max_bound
+
+
+def test_sort_order_ordering():
+    unsorted_list = s.generate_list(200, min_value=0, max_value=500)
+    sorted_list = s.bubblesort(unsorted_list)
+    i = 0
+    while i < (len(sorted_list) - 1):
+        assert sorted_list[i] <= sorted_list[i+1]
+        i += 1
+
+
+
+if __name__ == '__main__':
+   test_sort_order_ordering()
+
 
 #EOF

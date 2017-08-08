@@ -36,12 +36,15 @@ def generate_list(size, min_value=0, max_value=1000):
     return num_list
 
 
-def bubblesort():
-    num_list = generate_list(SIZE, MIN_VALUE, MAX_VALUE)
+def bubblesort(num_list=[]):
+    if len(num_list) == 0:
+        num_list = generate_list(SIZE, MIN_VALUE, MAX_VALUE)
     for i in range(len(num_list)):
         for j in range(len(num_list)-1):
             if num_list[j] > num_list[j+1]:
                 num_list[j], num_list[j+1] = num_list[j+1], num_list[j]
+
+    return num_list
 
 
 if __name__ == '__main__':
