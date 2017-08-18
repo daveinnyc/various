@@ -657,15 +657,13 @@ vim: go to beginning/end of block -> o
 vim: highlight text by characers, from current pos to 'Aa' -> v /Aa
 vim: highlight text by lines, from current pos to 'Aa' -> V /Aa
 vim: increment/decrement a number -> cursor on number ^a / ^x
+vim: match parenthesis  ),],} -> cursor on one and press %
 vim: remove extra white space -> :1,$s/[ ^I]*$//g
 vim: replace from start to end of file -> :1,$s/find/replace/g
 vim: replace from start to end of file -> :%s/find/replace/g
 vim: record commands into register a -> qa [ type commands ] q
 vim: yank to buffer a all text up to  # -> "ayt#
 vim: yank and add to buffer a all text up to  # -> "Ayt#
-
-
-vim: match parenthesis  ),],} -> cursor on one and press %
 
 
 vmware: Add a cdrom to machine.vmx config file -> ide1:0.deviceType = "cdrom-raw"
