@@ -139,6 +139,10 @@ cron: 0-59/5 range of 0 to 59 step every 5
 cron: >/dev/null 2>/&1 will stop mail messages being sent after execution
 
 
+curl: post to a form -> curl -X POST -F "name=user" -F "password=test" http://URL/example.php
+curl: post with data -> curl -d "data=example1&data2=example2" http://URL/example.cgi
+curl: post with file -> curl -X POST -F "image=@/path/example.gif" http://URL/uploadform.cgi
+curl: post without data -> curl -X POST http://URL/example.php
 curl: post nested json to https ->  curl -g --insecure -H 'Accept: application/json' -H 'Content-Type: application/json' --data '{"OuterJSON":{"InnerJSON":"val1","B":"1"},"MoreJSON":"DD"}'  -X POST  https://<server>/<endpoint>
 curl: download multiple files  -->  curl -O http://www.aa.com/file1 -O http://www.aa.com/file2 -O http://www.aa.com/file3
 curl: follow 30x redirects -->  curl -L google.com
