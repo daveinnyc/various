@@ -16,7 +16,7 @@ This version tries a different technique.
      If not, try next small divisor
 
 Solution:
-Dave Cuthbert copyright 2017
+Copyright 2017 Dave Cuthbert 
 License MIT
 '''
 

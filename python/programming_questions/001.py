@@ -7,7 +7,7 @@ Find the sum of all the multiples of 3 or 5 below 1000.
 
 
 Solution:
-Dave Cuthbert copyright 2017
+Copyright 2017 Dave Cuthbert 
 License MIT
 '''
 
