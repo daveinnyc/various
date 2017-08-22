@@ -1,2 +1,2 @@
 # various
-Bits and pieces of code
+Small projects, code snippets, and other bits and pieces
