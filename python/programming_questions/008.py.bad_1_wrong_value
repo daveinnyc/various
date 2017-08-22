@@ -79,7 +79,8 @@ def solve_problem(length):
     for index in range(len(SERIES) - length + 1):
         current_substring = SERIES[index:index+length]
         current_series = [int(ch) for ch in list(current_substring)]
-        
+       
+        # Skip series with 0s because 0 * product == 0  
         if 0 in current_series:
             continue
         else:
