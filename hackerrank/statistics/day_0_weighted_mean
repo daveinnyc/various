@@ -1,0 +1,33 @@
+import java.io.*;
+import java.util.*;
+
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        
+        Scanner scan = new Scanner(System.in); 
+        
+        int arrayLength = scan.nextInt();
+        
+        int numbers[] = new int[arrayLength];   
+        for(int n = 0; n < arrayLength; n++) {
+            numbers[n] = scan.nextInt();
+        }
+        
+        int weights[] = new int[arrayLength];   
+        for(int n = 0; n < arrayLength; n++) {
+            weights[n] = scan.nextInt();
+        }
+        
+        double weightedSum = 0.0;
+        int sumOfWeights = 0;
+        for(int i = 0; i < arrayLength; i++){
+            weightedSum += numbers[i] * weights[i];
+            sumOfWeights += weights[i];
+        }
+        
+        System.out.printf("%.1f", weightedSum / sumOfWeights);
+     }
+}
