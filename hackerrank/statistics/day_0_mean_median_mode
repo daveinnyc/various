@@ -1,0 +1,49 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner scan = new Scanner(System.in);
+        int arrayLength = scan.nextInt();
+        int numbers[] = new int[arrayLength];
+            
+        for(int n = 0; n < arrayLength; n++) {
+            numbers[n] = scan.nextInt();
+        }
+        
+        Arrays.sort(numbers);
+        // Need to start on numbers[1] for mode processing
+        double total = numbers[0];
+
+        int maxCount = 1;
+        int tmpCount = 1;
+        int mode = numbers[0];
+        for(int i = 1; i < arrayLength; i++){
+            //System.out.println(numbers[i]);    
+            // Get sum for mean
+            total += numbers[i];
+            
+            // Track occurances for mode
+            if (numbers[i-1] != numbers[i]){
+                if (tmpCount > maxCount){
+                    mode = numbers[i];
+                    maxCount = tmpCount;
+                }
+                tmpCount = 1;
+            }
+            else{
+                tmpCount += 1;
+            }
+            //System.out.println(mode + " " + numbers[i] + " " + tmpCount);
+        }
+        
+        double mean = total / arrayLength;
+        double median = (numbers[arrayLength / 2] + numbers[arrayLength / 2 - 1]) / 2.0;
+               
+        System.out.println(mean);
+        System.out.println(median);
+        System.out.println(mode);
+    }
+}
