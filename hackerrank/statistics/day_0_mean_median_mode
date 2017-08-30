@@ -1,5 +1,8 @@
 import java.io.*;
 import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
 
 public class Solution {
 
@@ -8,11 +11,11 @@ public class Solution {
         Scanner scan = new Scanner(System.in);
         int arrayLength = scan.nextInt();
         int numbers[] = new int[arrayLength];
-            
+    
         for(int n = 0; n < arrayLength; n++) {
             numbers[n] = scan.nextInt();
-        }
-        
+        }   
+    
         Arrays.sort(numbers);
         // Need to start on numbers[1] for mode processing
         double total = numbers[0];
@@ -24,26 +27,26 @@ public class Solution {
             //System.out.println(numbers[i]);    
             // Get sum for mean
             total += numbers[i];
-            
+    
             // Track occurances for mode
             if (numbers[i-1] != numbers[i]){
                 if (tmpCount > maxCount){
-                    mode = numbers[i];
+                    mode = numbers[i-1];
                     maxCount = tmpCount;
-                }
+                }   
                 tmpCount = 1;
-            }
+            }   
             else{
+                //System.out.println(mode + " " + numbers[i] + " " + tmpCount);
                 tmpCount += 1;
-            }
-            //System.out.println(mode + " " + numbers[i] + " " + tmpCount);
-        }
-        
+            }   
+        }   
+            
         double mean = total / arrayLength;
         double median = (numbers[arrayLength / 2] + numbers[arrayLength / 2 - 1]) / 2.0;
-               
-        System.out.println(mean);
-        System.out.println(median);
+                   
+        System.out.printf("%.1f\n",mean);
+        System.out.printf("%.1f\n",median);
         System.out.println(mode);
-    }
+    }   
 }
