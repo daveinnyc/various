@@ -1,0 +1,53 @@
+import java.io.*;
+import java.util.*;
+
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        
+        Scanner scan = new Scanner(System.in);
+        int n = scan.nextInt();
+        scan.nextLine();
+
+        // Loop over the rest of the input strings
+        for(int i = 0; i < n; i++){
+            String inputString = scan.nextLine(); 
+            char[] characters = inputString.toCharArray();
+            char odds[] = new char[inputString.length()];
+            char evens[] = new char[inputString.length()];
+
+            int evensCount = 0;
+            int oddsCount = 0;
+            for(int j = 0; j < inputString.length(); j++){
+                if(j % 2 == 0){
+                    evens[evensCount] = characters[j];
+                    evensCount += 1;
+                }
+                else{
+                    odds[oddsCount] = characters[j];
+                    oddsCount += 1;
+                }
+            }
+
+            int index = 0;
+            while(evens[index] != '\0'){
+                System.out.printf("%c", evens[index]);
+                index += 1;
+            }
+            
+            System.out.printf(" ");
+            
+            index = 0;
+            while(odds[index] != '\0'){
+                System.out.printf("%c", odds[index]);
+                index += 1;
+            }
+            System.out.printf("\n");
+        }
+        
+        scan.close();    
+    }
+}
+
