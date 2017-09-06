@@ -24,6 +24,8 @@ What is the value of the first triangle number to have over 500 divisors?
 
 Solution: Copyright 2017 Dave Cuthbert, MIT License
 '''
+import math
+
 
 def generate_triangle_number():
     current = 0
@@ -34,12 +36,28 @@ def generate_triangle_number():
         yield current
 
 
+def find_factors(number):
+    last_divisor = int(math.sqrt(number)) + 1
+    factors = set([])
+    found = -1
+    for divisor in range(1, last_divisor):
+        if (number % divisor == 0):
+            factors.add(divisor)
+            factors.add(int(number / divisor))
+    
+    if len(factors) > 500:
+        found = number
+
+    return found
+
+
 def solve_problem():
     triangle_number = generate_triangle_number()
-    for i in range(10):
-       print(next(triangle_number))
 
-    return "DONE"
+    while True:
+        number = find_factors(next(triangle_number))
+        if number > 0:
+           return number 
 
 
 if __name__ == "__main__":
