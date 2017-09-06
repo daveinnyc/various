@@ -1,0 +1,46 @@
+'''
+Problem 5
+
+2520 is the smallest number that can be divided by each of the numbers from 1 to
+      10 without any remainder.
+
+What is the smallest positive number that is evenly divisible by all of the 
+      numbers from 1 to 20?
+
+
+This worked on 1-16, but after 3200 itterations still hadn't found a match for the set of 1-20
+
+
+Solution:
+Dave Cuthbert copyright 2017
+License MIT
+'''
+
+from collections import defaultdict
+
+def solve_problem(start_num, end_num):
+    num_list = [number for number in range(start_num, end_num + 1)]
+
+    itteration_multiplier = 1
+    numbers_seen = defaultdict(set)
+    while True:
+        # For each value, create a bunch of multiples to check against
+        for num in num_list:
+            tmp_list = [itteration_multiplier * num * i for i in range(1, 1000)]
+
+            # Add the list to dictionary, note which num produced the multiple
+            for value in tmp_list:
+                numbers_seen[value].add(num)
+
+                # If all nums have contributed to a multiple, return it
+                if (len(numbers_seen[value]) == len(num_list)):
+                    return value
+
+        #print(itteration_multiplier)
+        itteration_multiplier += 1
+      
+           
+if __name__ == "__main__":
+    START_NUM = 1
+    END_NUM = 20
+    print(solve_problem(START_NUM, END_NUM))
