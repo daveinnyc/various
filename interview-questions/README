@@ -24,3 +24,10 @@ database-example.sql
  
   -- remove old DBs, create new one and display query results
   rm *db ; sqlite3 -column -header example.db < database-example.sql
+
+
+find_logo.py
+  The answer to this selenium question required examination of CSS that was
+  referenced by an element on the rendered page.
+
+#EOF
