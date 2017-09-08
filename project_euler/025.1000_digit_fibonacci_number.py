@@ -33,17 +33,21 @@ def gen_fibonacci():
 
     while True:
        next_term = term_1 + term_2
-       yield next
+       yield next_term
        term_2 = term_1
        term_1 = next_term
 
 
 def solve_problem():
-    get_fibonacci = gen_fibonacci
-    for i in range(10):
-        print(next(get_fibonacci))
-
-    return("DONE")
+    get_fibonacci = gen_fibonacci()
+    
+    count = 3    # Not starting with first term in sequence    
+    while True:
+        current_fib = next(get_fibonacci)
+        if len(str(current_fib)) >= 1000:
+            return(count)
+      
+        count +=1
 
 
 if __name__ == "__main__":
