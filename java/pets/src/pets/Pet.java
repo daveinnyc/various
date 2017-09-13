@@ -18,7 +18,8 @@ public class Pet {
         System.out.println("I'm hungry");
     }
     
-    public static String talk(String aWord){
+    //public static String talk(String aWord){
+    public String talk(String aWord){
         String response = "Ok, ok " + aWord;
         return response;
     }
