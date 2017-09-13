@@ -9,7 +9,14 @@ public class Fish extends Pet{
    
    public int dive(int howDeep){
        currentDepth = currentDepth + howDeep;
-       System.out.println("Diving " + howDeep + " feet");
+       
+       if(currentDepth > 100){
+           System.out.println("Too deep for me");
+           currentDepth = currentDepth - howDeep;
+       } else {
+           System.out.println("Diving " + howDeep + " feet");
+       }
+       
        System.out.println("Current depth: " + currentDepth);
        
        return currentDepth;

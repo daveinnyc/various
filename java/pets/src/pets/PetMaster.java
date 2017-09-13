@@ -21,5 +21,11 @@ public class PetMaster {
         System.out.println(nemo.talk("Hey Dori"));
         nemo.sleep();
         
+        Fish diver = new Fish();
+        diver.dive(50);
+        diver.dive(51);
+        diver.dive(49);
+        
+        System.out.println(diver.dive(0));
     }    
 }
