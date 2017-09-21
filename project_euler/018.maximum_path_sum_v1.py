@@ -75,12 +75,9 @@ def process_row(row):
         else:
             processed_row.append(right)
 
-    print(processed_row)
     while len(processed_row) < len(triangle[row]):
         processed_row.append(0)
 
-
-    print(processed_row)
     triangle[row - 1] = processed_row
 
     return processed_row
