@@ -1,33 +1,45 @@
-# Notes on the coding samples in this directory
-#
-# Author: Dave Cuthbert
-# Copyright: 2016
-# License MIT
+import re
+
+from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException        
+from selenium.webdriver.common.keys import Keys
+
+BASE_URL = "https://testCompany.com" 
+LOGO_URL = "https://cdn.testCompany.com/static/1DBa8k/images/frontend/onboarding/testCompany-small-orange-logo.png"
+
+regex_parens = re.compile('\((.*?)\)')
+
+def get_firefox_browser():
+    driver = webdriver.Firefox()
+    driver.set_window_size(1200,900)
+
+    return driver
 
 
-selenium-docker-test.py
-  While developing the following are useful one liners. Assumes not closing 
-  firefox explicitly while working on a particular test:
+def value_in_parens(string_with_parens):
+    # Returns an unquoted inner value
+    m = re.search(regex_parens, string_with_parens)
+    inner_string = m.group(1)
+    inner_string = inner_string.strip('"')
+    inner_string = inner_string.strip("'")
 
-  -- find and kill any running firefoxes, execute all tests
-  FFS=$(ps -e |grep firefox|cut -d" " -f1) ; if [ ${#FFS} -ne 0 ] ; \
-  then killall firefox ; fi ; py.test -q -s selenium-docker-test.py
-
-
-  -- find and kill any running firefoxes, execute only 'test_login'
-  FFS=$(ps -e |grep firefox|cut -d" " -f1) ;if [ ${#FFS} -ne 0 ] ; \
-  then killall firefox ; fi ; py.test -q -s selenium-docker-test.py::test_login
+    return inner_string
 
 
-database-example.sql
-  Development command line:
- 
-  -- remove old DBs, create new one and display query results
-  rm *db ; sqlite3 -column -header example.db < database-example.sql
+def test_check_for_logo(driver):
+    try:
+        css_background = browser.find_element_by_css_selector("div.header__logo").value_of_css_property("background-image")
+        css_background = value_in_parens(css_background)
+    except NoSuchElementException:
+        return False
+
+    return css_background 
 
 
-find_logo.py
-  The answer to this selenium question required examination of CSS that was
-  referenced by an element on the rendered page.
+browser = get_firefox_browser()
+browser.get(BASE_URL)
 
-#EOF
+assert test_check_for_logo(browser) == LOGO_URL
+
+browser.close()
+print("DONE")
