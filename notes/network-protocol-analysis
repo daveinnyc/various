@@ -2,6 +2,10 @@ bmon: graphic load monitoring tool
 
 bwm-ng: measure traffic on an interface
 
+cidr notation: 255.255.255.0 --> /24
+cidr notation: 255.255.0.0 --> /16
+cidr notation: 255.0.0.0 --> /8
+
 dig: get A Name, CNAME, MX records -->  dig www.someplace.com
 
 dstat: network info --> dstat -nt
