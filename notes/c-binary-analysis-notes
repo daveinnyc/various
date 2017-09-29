@@ -1,0 +1,57 @@
+​backtrace: for segmentation fault (linux) -->  catchsegv  someBinaryThatSegFaults
+
+binary analysis: check filetype --> file FILENAME
+binary analysis: show strings --> strings FILENAME
+binary analysis: get hexdump --> od -Ax -tx1z -v FILENAME
+binary analysis: disassemble --> readelf -a FILENAME
+binary analysis: disassemble obj file --> objdump -DaflSx FILENAME
+binary analysis: get obj symbals --> nm FILENAME
+binary analysis: show shared libs --> lld FILENAME
+binary analysis: dynamic trace libs --> dtrace FILENAME
+binary analysis: debug execution --> dbg FILENAME
+
+build: from src -->  tar zxvf source.tgz ; cd source ; mkdir build ; cd build ; ../configure ; make ; make check ; make install
+
+cat: add line numbers --> ​cat –n hello.c
+
+catchsegv:  get backtrace for segmentation fault (linux) -->  catchsegv  someBinaryThatSegFaults
+
+​​diff: use side-by-side output --> diff -y --width 60 hello.c hello.c~ 
+
+​display process stack --> $pgrep -f program ; $sudocat/proc/<PROC ID>/stack
+
+gcc: gnu assembler executable --> as asm_source.s
+gcc: compile flags for c types --> -ansi, -std=c89, -std=c99
+gcc: compile with level 3 debug info (inc macros) 2 default--> gcc -g3 source.c
+gcc: compile with optimization (0 is none) --> gcc -O2 source.c
+gcc: compile with profiling info --> gcc -a -g -c source.c -o object.o
+gcc: compile without linking --> gcc -c source.c -o object.o
+gcc: compile to assembly code --> gcc -S source.c -o asm.s
+gcc: compile with static libraries --> gcc -static source.c
+gcc: compile with dynamic libraries --> gcc -dynamic source.c
+gcc: print PATH info --> gcc -print-search-dirs hello.c -o hello
+gcc: show linker search PATH --> echo $LD_LIBRARY_PATH
+
+​gdb: check if an expression changes --> watchpoints
+gdb: alert when exec calls or library loads happen --> catchpoints
+
+ldd: list dynamically linked libs --> ldd some_exe
+
+ltrace: trace libraries, child processes, time stamps and time diffs --> ltrace -S -tt -r -f ./a.out
+
+nm: ​list symbols in file with line numbers --> nm -s libcommon.a -l
+
+objdump: disassemble, displaying source --> objdump -d -S a.out|more
+
+packers: common indicators  -->  PE file onnly has LoadLibrary, GetProcAddress
+packers: common ID strings  -->  UPX0, UPX1, aspack, adata, NSP0, NSP1, WinRAR, SFX, PEC2 PECompact2, Themida, Orean.sys, NTkrnl, Secure Suite
+packers: tools  -->  PEiD, LordPE, python peutils
+
+proc file sys: info on running process -> cat /proc/self
+proc file sys: currently open file descriptors -> /proc/self/dev/fd
+
+sdiff: interactively merge two files
+​
+strings: show all strings and file locations --> strings -a -f someExe
+
+strip: remove excess from binaries

@@ -1,0 +1,77 @@
+bmon: graphic load monitoring tool 
+
+bwm-ng: measure traffic on an interface
+
+dig: get A Name, CNAME, MX records -->  dig www.someplace.com
+
+dstat: network info --> dstat -nt
+
+host:  map IP to host -->  host www.google.com
+
+hostname: current machine name --> hostname
+
+ifstat: format reports for parsing --> ifstat -t -i eth0 0.5
+
+iftop: bandwidth by individual process --> iftop
+iftop: don't resolve hostnames -->  iftop -n
+
+
+iperf: measure throughput between hosts on server port 2000  --> iperf -s -p 2000
+iperf: measure throughput between hosts on server port 2000, UDP (port 5001) --> iperf -s -u 
+iperf: client connection to 192.168.0.101, 20 seconds, 40K TCP window 1s intervals  --> iperf -c 192.168.0.101 -t 20 -p 2000 -w 40k -i 1
+iperf: client connection 100MB UDP to see jitter, out of order, lost packets  --> iperf -c 192.168.0.101 -u -b 100m
+
+ipm: convert an IP address to a MAC address
+
+iptraf: real time graphic traffic flow mapper
+
+mac address: mnemonic --> DE:AD:BE:EF:CA:FE
+
+nethogs:  map network usage, sorted by voluem and tied to PID
+
+nload:  quick overview of network bandwidth usage
+
+nslookup:  get A Name, CNAME, MX records -->  nslookup www.someplace.com
+
+ntop:  network monitoring
+
+ping: look up hostname -->  ping -a 192.168.1.100
+ping: limit itterations -->  ping -c 5 192.168.1.100
+
+route: display the routing table
+route: add default gateway  -->  route add default gw 192.168.0.1
+route: add route  -->  route add -net 10.10.10.0/24 gw 192.168.0.1
+route: del route  -->  route del -net 10.10.10.0/24 gw 192.168.0.1
+
+site check: is a site up --> http://downforeveryoneorjustme.com/www.siteURL.com
+
+speed:  upper boundaries on transfer -->  dsl: 1 mbps; 802.11b: 1-5 mbps; 802.11g: 1-12 mbps; Fast Ether 80+ mbs; Gigagbit ++
+
+tcpdump: write to file -->  tcpdump -ttttnnAi any -s0 -w file.cap
+tcpdump: read from file -->  tcpdump -ttttnnAr file.cap
+tcpdump: capture udp destination port 53 -->  tcpdump "udp dst port 53"
+tcpdump: capture udp source port 53 -->  tcpdump "udp src port 53"
+tcpdump: capture udp from port 53 -->  tcpdump "udp port 53"
+tcpdump: capture destination host -->  tcpdump "dst host www.somewhere.com"
+tcpdump: capture destination host and DNS -->  tcpdump "(dst host www.somewhere.com) or udp port 53"
+tcpdump: format the time --> tcpdump -tttt  
+tcpdump: dont resolve ports, IPs --> tcpdump -nn  
+tcpdump: listening interface --> tcpdump -i any  
+tcpdump: ASCII output --> tcpdump -nn  
+
+traceroute: TTL count to resolve time to each hop -->   traceroute -n 8.8.8.8
+traceroute: use TCP on port 80 instead of default UDP, no DNS resolution -->  traceroute -T -p 80 -n 10.20.30.40
+traceroute: use ICMP instead of default UDP, no DNS resolution -->  traceroute -I -n 10.20.30.40
+
+tracert: windows traceroute, tries three times for each hop -->  tracert www.somewhere.com
+tracert: return path -->  tracert -j <IP Target> <IP Start>
+
+vnstat: service that runs in the background keeping historical network info
+
+wireshark: capture filter host  --> host 10.1.1.30
+wireshark: capture filter two hosts  --> host 10.1.1.30 and host 192.168.1.1
+wireshark: capture filter protocol  --> tcp port http
+wireshark: display filter source  --> ip.src==10.1.11.0/24
+wireshark: display filter source  --> ip.src==10.1.11.0/24 && ip.src==192.168.1.24
+wireshark: display filter source  --> ip.src==10.1.11.0/24
+
