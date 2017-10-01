@@ -1,3 +1,9 @@
+/* 
+* Demonstrate why TWO * TWO doens't equal 4
+*
+* Copyright 2017 Dave Cuthbert, MIT license 
+*/
+
 #include <stdio.h>
 #define TWO 1 + 1
 #define WHAT TWO * (TWO + TWO)
