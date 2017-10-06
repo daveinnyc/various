@@ -1,0 +1,51 @@
+'''
+Problem 024
+
+A permutation is an ordered arrangement of objects. For example, 3124 is one 
+  possible permutation of the digits 1, 2, 3 and 4. If all of the permutations
+  are listed numerically or alphabetically, we call it lexicographic order. The
+  lexicographic permutations of 0, 1 and 2 are:
+
+  012   021   102   120   201   210
+
+What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5,
+    6, 7, 8 and 9?
+
+FAILURE: Runs on and on for at least 5 minutes  without producing an answer
+Solution: Copyright 2017 Dave Cuthbert, MIT License
+'''
+
+
+def solve_problem():
+    digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    count = 0
+    for digits[0] in range(0, len(digits)):
+        for digits[1] in range(0, len(digits)):
+            for digits[2] in range(0, len(digits)):
+                for digits[3] in range(0, len(digits)):
+                    for digits[4] in range(0, len(digits)):
+                        for digits[5] in range(0, len(digits)):
+                            for digits[6] in range(0, len(digits)):
+                                for digits[7] in range(0, len(digits)):
+                                    for digits[8] in range(0, len(digits)):
+                                        for digits[9] in range(0, len(digits)):
+                                            check_length = {digits[0], digits[1],
+                                                            digits[2], digits[3],
+                                                            digits[4], digits[5],
+                                                            digits[6], digits[7],
+                                                            digits[8], digits[9]}
+                if len(check_length) == 10:
+                    sequence = str(digits[0]) + str(digits[1]) + str(digits[2] +
+                                   digits[3]) + str(digits[4]) + str(digits[5] +
+                                   digits[6]) + str(digits[7]) + str(digits[8] +
+                                   digits[9]
+                                  )
+                    #print(sequence) 
+                    count += 1
+                    if count == 1000000:
+                        return(sequence)
+
+
+if __name__ == "__main__":
+    limit = 3
+    print(solve_problem())
