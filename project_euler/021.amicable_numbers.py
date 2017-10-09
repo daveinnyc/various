@@ -22,7 +22,7 @@ from collections import defaultdict
 class DivisorSums():
     sum_cache = defaultdict(lambda:1)
 
-    def _init_(self):
+    def __init__(self):
         self.sum_cache
 
     def add_value(self, n1, n2):
