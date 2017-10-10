@@ -24,7 +24,7 @@ Solution: Copyright 2017 Dave Cuthbert, MIT License
 class year_365():
     start_dates  = [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335]
 
-    def _init_(self):
+    def __init__(self):
         self.start_dates
 
     def get_dates(self):
@@ -34,7 +34,7 @@ class year_365():
 class year_366():
     start_dates  = [1, 32, 61, 92, 122, 153, 183, 214, 245, 275, 306, 336]
 
-    def _init_(self):
+    def __init__(self):
         self.start_dates
 
     def get_dates(self):
