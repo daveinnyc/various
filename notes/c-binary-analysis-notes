@@ -16,9 +16,9 @@ cat: add line numbers --> ​cat –n hello.c
 
 catchsegv:  get backtrace for segmentation fault (linux) -->  catchsegv  someBinaryThatSegFaults
 
-​​diff: use side-by-side output --> diff -y --width 60 hello.c hello.c~ 
+diff: use side-by-side output --> diff -y --width 60 hello.c hello.c~ 
 
-​display process stack --> $pgrep -f program ; $sudocat/proc/<PROC ID>/stack
+display process stack --> $pgrep -f program ; $sudocat/proc/<PROC ID>/stack
 
 gcc: gnu assembler executable --> as asm_source.s
 gcc: compile flags for c types --> -ansi, -std=c89, -std=c99
@@ -32,8 +32,9 @@ gcc: compile with dynamic libraries --> gcc -dynamic source.c
 gcc: print PATH info --> gcc -print-search-dirs hello.c -o hello
 gcc: show linker search PATH --> echo $LD_LIBRARY_PATH
 
-​gdb: check if an expression changes --> watchpoints
+gdb: check if an expression changes --> watchpoints
 gdb: alert when exec calls or library loads happen --> catchpoints
+gdb: split source view --> gdb -tui filename    or   <ctrl-x><ctrl-a> to toggle
 
 ldd: list dynamically linked libs --> ldd some_exe
 
