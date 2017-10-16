@@ -16,9 +16,9 @@ cat: add line numbers --> ​cat –n hello.c
 
 catchsegv:  get backtrace for segmentation fault (linux) -->  catchsegv  someBinaryThatSegFaults
 
-​​diff: use side-by-side output --> diff -y --width 60 hello.c hello.c~ 
+diff: use side-by-side output --> diff -y --width 60 hello.c hello.c~ 
 
-​display process stack --> $pgrep -f program ; $sudocat/proc/<PROC ID>/stack
+display process stack --> $pgrep -f program ; $sudocat/proc/<PROC ID>/stack
 
 gcc: gnu assembler executable --> as asm_source.s
 gcc: compile flags for c types --> -ansi, -std=c89, -std=c99
@@ -32,14 +32,16 @@ gcc: compile with dynamic libraries --> gcc -dynamic source.c
 gcc: print PATH info --> gcc -print-search-dirs hello.c -o hello
 gcc: show linker search PATH --> echo $LD_LIBRARY_PATH
 
-​gdb: check if an expression changes --> watchpoints
 gdb: alert when exec calls or library loads happen --> catchpoints
+gdb: check if an expression changes --> watchpoints
+gdb: split source view --> gdb -tui filename    or   <ctrl-x><ctrl-a> to toggle
+gdb: use intel syntax -->  set disassembly-flavor intel
 
 ldd: list dynamically linked libs --> ldd some_exe
 
 ltrace: trace libraries, child processes, time stamps and time diffs --> ltrace -S -tt -r -f ./a.out
 
-nm: ​list symbols in file with line numbers --> nm -s libcommon.a -l
+nm: list symbols in file with line numbers --> nm -s libcommon.a -l
 
 objdump: disassemble, displaying source --> objdump -d -S a.out|more
 
@@ -51,7 +53,7 @@ proc file sys: info on running process -> cat /proc/self
 proc file sys: currently open file descriptors -> /proc/self/dev/fd
 
 sdiff: interactively merge two files
-​
+
 strings: show all strings and file locations --> strings -a -f someExe
 
-strip: remove excess from binaries
+strip: remove excess non-code from binaries
