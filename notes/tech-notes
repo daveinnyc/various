@@ -127,6 +127,11 @@ code quality tools: which code is being executed --> gcov
 code quality tools: how code is being used--> gprof
 
 
+copy dvd 1: isoinfo -d -i /dev/sr0 | grep -i -E 'block size|volume size'
+copy dvd 2: dd if=/dev/sr1 of=/mnt/incoming/test.iso bs=<BLOCK SIZE> count=<VOLUME SIZE>
+copy dvd 3: wodim -eject -tao  speed=2 dev=/dev/sr1 -v -data myiso.iso
+
+
 cp: preserve file attributes -> cp -p fileName copyName
 
 
