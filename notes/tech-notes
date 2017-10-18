@@ -232,6 +232,9 @@ floppy: create a blank iso -> dd if=/dev/zero of=BlankFloppy.img bs=1 count=1440
 floppy: format as msdos -> mkfs msdos /dev/floppy
 
 
+git: view history --> git log --pretty=format:"%h  %an, %ar: %s"
+
+
 github: compare a branch across time ->  append '/compare' to repo url ; add @{YYYY-MM-DD} to branch name
 
 
