@@ -1,0 +1,24 @@
+Notes assembling,linking and running exit.s
+
+After entering the code on pps. 19-20:
+
+pftgu> as exit.s -o exit.o     # Assemble source
+pftgu> ld exit.o -o exit       # Link source
+pftgu> ./exit ; echo $?        # Run and verify return code
+0
+
+pftgu> vi exit.s               # Edit source
+pftgu> ./exit ; echo $?        # Demonstrate only source has changed
+0
+
+nd-up> as exit.s -o exit.o
+nd-up> ld exit.o -o exit
+nd-up> ./exit ; echo $?        # Rerun to demonstrate change
+4
+
+
+Note: Changed the value of $0 to $4 in the line:
+
+              movl $0 %ebx 
+
+      to change the return value from 0 to 4
