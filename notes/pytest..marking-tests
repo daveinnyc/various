@@ -1,0 +1,101 @@
+How to mark tests using pytest and run a subset of the total:
+
+#############################
+#### sample_function.py ####
+#############################
+def return_0():
+    return 0
+
+def return_1():
+    return 1
+
+def return_2():
+    return 2
+
+def return_3():
+    return 3
+
+def return_4():
+    return 4
+
+def return_5():
+    return 5
+
+def return_a():
+    return 'a'
+
+
+########################
+#### sample_test.py ####
+########################
+import pytest 
+import sample_functions as sf
+
+smoke = pytest.mark.smoke
+fire = pytest.mark.fire
+full = pytest.mark.full
+fullerest = pytest.mark.fullertest
+
+@smoke
+@full
+@fullerest
+def test_return_0():
+    assert sf.return_0() == 0
+
+@smoke
+@full
+@fullerest
+def test_return_1():
+    assert sf.return_1() == 1
+
+@full
+@fullerest
+@fire
+def test_return_2():
+    assert sf.return_2() == 2
+
+@full
+@fullerest
+@fire
+def test_return_3():
+    assert sf.return_3() == 3
+
+@fullerest
+@fire
+def test_return_4():
+    assert sf.return_4() == 4
+
+@fullerest
+@fire
+def test_return_5():
+    assert sf.return_5() == 5
+
+@smoke
+@full
+@fullerest
+@fire
+def test_return_a():
+    assert sf.return_a() == 'a'
+
+
+
+########################################
+#### command invocation and results ####
+########################################
+# Just run the smoke tests
+prompt>  python -m pytest -m 'smoke'   $(pwd)/sample_test.py
+<snip>
+collected 7 items                                                                                                                                            
+
+sample_test.py ...
+============ 4 tests deselected =====
+============ 3 passed, 4 deselected in 0.01 seconds =
+
+
+# Run the smoke and fire tests
+prompt>  python -m pytest  -m "'fire', 'smoke'"  $(pwd)/sample_test.py
+<snip>
+collected 7 items                                                                                                                                            
+
+sample_test.py .......
+============ 7 passed in 0.01 seconds ==
