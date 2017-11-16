@@ -510,7 +510,7 @@ proxy: configure yum -> add proxy=http://proxy.vmware.com:3128 to  /etc/yum.conf
 
 python: debugger ->  import pdb; pdb.set_trace()
 python: pipe 32 As to someProg -> python -c "print( 'A'*32)" | someProg
-python: virtual environment -> virutalenv ex ; cd ex/bin ; source activate
+python: virtual environment -> virutalenv ex ; cd ex/bin ; source activate ; <Do stuff> ; deactivate
 
 
 ram disk 1a:  mknod -m 660 /dev/ram b 1 1
