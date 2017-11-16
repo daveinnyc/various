@@ -1,0 +1,280 @@
+git: view history --> git log --pretty=format:"%h  %an, %ar: %s"
+
+
+github: compare a branch across time ->  append '/compare' to repo url ; add @{YYYY-MM-DD} to branch name
+
+
+gnome: remove desktop icons -> gconf-editor then unselect in  apps > nautilus > desktop
+
+
+google: search for file type ->   inurl:microsoft filetype:iso
+google: search for file type ->   allinurl:ftp:// <hostname> filetype:txt | xls | doc | docx | jpg | jpeg | pdf
+google: search for file type ->   site:<hostname> filetype:txt | xls | doc | docx | jpg | jpeg | pdf
+google: search for song/artist -> intitle:index.of (mp3 OR ogg) songTitle -html
+google: search for a directory -> intitle:index.of.etc
+
+
+google: map api -> http://maps.googleapis.com/maps/api/streetview?size=600x300&location=39.9334,-74.9443&sensor=false
+
+
+google sheets: include if threshhold reached ->    =COUNTIF(A2:A500,0)
+google sheets: select using SQL & boolean value -> =MIN(QUERY(A2:C500, "SELECT (C) WHERE A = 0"))
+google sheets: select using SQL & range value ->   =ROUND(AVERAGE(QUERY(B2:C500, "SELECT (C) WHERE (B>199 AND B<250)")), 2)
+google sheets: select using SQL range & boolean -> =ROUND((countif(QUERY(A2:C500, "SELECT (A) WHERE (B>199 AND B<250)"),0)) / (countif(QUERY(A2:C500, "SELECT (A) WHERE (B>199 AND B<250)"),1)), 2)
+
+
+grep: limit results to NUM characters on each side of search term:  ->   grep -E -o ".{0,NUM}wantedText.{0,NUM}" *
+
+
+here docs: until end of -> << EOF ... \nEOF
+
+
+hexdump: alias hexdump=`od -Ax -tx1z -v`
+hexdump: dd if=/dev/sda1 bs=1 count=512 | od -c -v
+
+
+http: test connection -> GET /index.htm HTTP/1.1 
+http: test connection -> host: some.host.com
+http: test connection -> <empty line>
+
+
+ical: wget --http-user=dave --http-passwd=pa55wd 192.168.1.19/servlet/webdav.ical
+
+
+images:  make thumbnails ->  djpeg  -scale 1/2 filename_in | cjpeg -quality 75 -outfile filename_out 
+
+
+IMAP server: to test connection -> telnet someimapserver.domain 143
+IMAP server: to test connection -> A001 NOOP
+IMAP server: to test connection -> A002 CAPABILITY
+IMAP server: to test connection -> A003 LOGIN user pass
+IMAP server: to test connection -> A004 LOGOUT
+IMAP server: to test connection -> Other commands FETCH [number] ALL
+IMAP server: to test connection -> Other commands LIST  "" inbox.*
+IMAP server: to test connection -> Other commands SELECT inbox
+IMAP server: to test connection -> Other commands
+IMAP server: to test connection -> Other commands
+IMAP server: to test connection -> Other commands
+
+
+.inputrc: "\e[A": history-search-backward
+.inputrc: "\e[B": history-search-forward
+
+
+ipv6: multicast ping to see who's on network ->  ping6 -I interface-name ff02::1
+
+
+java: enable auto updates tab -> regedit ; add DWORD EnableJavaUpdate to HKEY_LOCAL_MACHINE\SOFTWARE\JavaSoft\Java Update\Policy ; value == 1
+java: expand jar file: jar -xf foo.jar
+java: get jvm version -> java -version
+java: get jvm version ( windows) -> jview
+java: location of main() class in jar: META-INF/MANIFEST.MF -> Main-Class: myPrograms.MyClass
+java: JVM class loader -> -XX:+TraceClassLoading  ; -XX:+TraceClassUnloading 
+java: JVM debugging -> -XX:-PrintCommandLineFlags  
+java: JVM garbage collection -> -verbose:gc log GC runs and times  ; -XX+PrintGCDetails more info
+java: JVM list available options -> java -help ; java -X
+java: JVM memory options -> -Xms 256M  initial heap size ; -Xmx 256M   max heap size ; -Xss 256M   thread stack size
+java: JVM memory options -> -XX:PermSize=256M ; -XX:MaxPermSize=256M   PermGen space inside heap 
+java: JVM profiling -> -Xprof ; -Xrunhprof
+java: JVM remote debugging -> -Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000
+java: run a jar file: java -jar foo.jar
+java: wrap jar in an .exe for windows: jsmooth  jsmooth.sourceforge.com
+
+
+java tuning: -Xms == -Xmx ( aviod garbage collection during resize )
+java tuning: -XX:PermSize == -XXMaxPermSize ( aviod garbage collection during resize, both values required )
+
+
+javascript: set a breakpoint -> type 'debugger' at any point
+javascript: hide from non script browser ->  <SCRIPT>
+javascript: hide from non script browser ->  <!-- HTML comment hides javascript
+javascript: hide from non script browser ->  put javascript here
+javascript: hide from non script browser ->  // -->  javascript comment hides end of HTML comment
+javascript: hide from non script browser ->  </SCRIPT>  HTML ignores unknown tags, javascript ignores HTML Comments
+javascript: call external file form HTML -> <SCRIPT SRC="someFile.js">
+javascript: call external file form HTML -> document.write("Error message only appears if problems with someFile.js")
+javascript: call external file form HTML -> </SCRIPT>
+
+
+kali_linux: change screen resolution -> xrndr (to get sizes) ; xrndr -s 1400x1050    
+
+
+join pdfs: gs -sDEVICE=pdfwrite -o outfile.pdf <infile 1..n.pdf> ( using ghostview )
+
+
+kill a process using a file -> fuser -k 
+
+
+last reads the wtmp file, gives login/logout times/usrs
+
+
+LDAP logs - debug level can be increased by changing 'loglevel 0' to 'loglevel  256'
+LDAP restart: cmd> rcldap restart
+LDAP check server running:  netstat -tan |grep LISTEN |grep 389
+LDAP change pwd: as root run slappasswd to generate new passwd string
+LDAP change pwd: edit /etc/openldap/slapd.conf to replace rootDN password
+
+
+less: find matching lines ( forward , backward ) -> / string, ? string
+less: find non mathcing lines -> ! string
+less: ignore case toggle -> -i
+less: maintain page screen position -> ^K
+less: repeat search ( forward , backward ) -> n , N
+less: show 5 previous lines -> -j5
+
+
+locate: find files on the system -> locate <filename>
+
+
+look: lookup spelling of a word -> look beginString
+
+
+ls: list, sorted by size ->  ls -S
+
+
+lsof: lists open files and the processes that are accessing them
+lsof: what's listening to an open port -> lsof -i :portnumber
+
+
+mail: local mail not working after cyrus install -> cat > ~username/.forward
+mail: local mail not working after cyrus install ->   /var/spool/mail/username
+mail: send binary file -> uuencode some_archive.tar | mail a@a.com
+mail: send text and binary file -> (cat mailtext; uuencode in.jpeg out.jpg) | mail a@a.com
+mail: send text and attachment -> mutt -s "Subject goes here" -a attached.file a@a.org < file_with_body.txt
+mail: send text and no attachment -> mutt -s "Subject goes here" -a attached.file a@a.org < /dev/null
+
+
+man: get list of man pages with someThing -> apropos someThing
+
+
+mkdir: make any missing parent directories -> mkdir -p
+
+
+mount: remount file system rw -> mount -o remount,rw /
+mount iso: mount -o -t iso9660 filename.iso mountpoint
+mount floppy: mount -o loop -t msdos  floppy.img mountpoint
+mount SLES9 isos: mount points are SLES0 ... SLES5 ( disc name - 1 )
+
+
+mysql: change column header in result table -> SELECT COUNT(id) AS row_count FROM test_table;
+mysql: 'control c' like functionality within mysql -> ctrl + w
+mysql: edit multiline queries -> enter edit at mysql prompt, then normal vi
+mysql: fix root pwd 1 -> service mysql stop
+mysql: fix root pwd 2 -> mysqld_safe --skip-grant-tables &
+mysql: fix root pwd 3 -> mysql -uroot ( no pwd needed )
+mysql: fix root pwd 4 -> UPDATE user SET password=PASSWORD("abcd") WHERE user="root"; 
+mysql: fix root pwd 5 -> FLUSH PRIVILEGES;
+mysql: get number of distinct last names -> SELECT COUNT(DISTINCT lastname) AS lastname_count FROM master_name;
+mysql: get largest value in column -> SELECT MAX(name_dateadded) FROM master_name;
+mysql: get rows 11-15 from a table -> SELECT * FROM ccconf.rep LIMIT 10, 5 ; 
+mysql: get substring chars 1-10 from col -> SELECT substring( colname, 1, 10 ) AS Date FROM table;
+mysql: get substring nicely ordered -> SELECT DISTINCT substring( colname, 1, 10 ) AS Date FROM table ORDER BY  colname DESC LIMIT 10;
+mysql: get substring ordered & counted -> SELECT substring( starttime, 1, 10 ) AS  Date, count(*) as Count FROM table GROUP BY Date ORDER BY starttime DESC LIMIT 10;
+mysql: replication broken:  mysql> show slave status\G  --->  .. Slave_SQL_Running: No ..
+mysql: replication broken:  mysql> set global sql_slave_skip_counter=1;
+mysql: replication broken:  mysql> start slave;
+mysql: show version -> SELECT version(); or status; 
+mysql: show results as key value pairs > SELECT  * FROM table \G
+
+
+netsat: connections to/from machine -> netstat -tup
+netsat: open tcp ports & PIDs -> netstat -plant
+
+
+netsh.exe: MS commandline interface for configuration and monitoring of MS systems
+
+
+network: bounce remote network interface -> create & run nohup script:  ifdown eth0 ; sleep 10 ; ifup eth0   
+network: stats, change card config -> ethtool eth0
+
+
+NT password dump: ftp.samba.org/pub/samba/pwdump puts NT password dbase from registry into smbpasswd file
+
+
+opensssl:  check speed to return a page -> openssl s_time -connect remote.com:443 -www /some/page.html
+opensssl:  convert DER (.crt .cer .der) to PEM -> openssl x509 -inform der -in certificate.cer -out certificate.pem
+opensssl:  convert PEM file to DER -> openssl x509 -outform der -in certificate.pem -out certificate.der
+opensssl:  convert KCS#12 (.pfx .p12) w/ private key and certificates to PEM -> openssl pkcs12 -in keyStore.pfx -out keyStore.pem -nodes
+opensssl:  convert KCS#12 (.pfx .p12), extract keys -> openssl pkcs12 -in keyStore.pfx -out keyStore.pem -nodes -nocerts
+opensssl:  convert KCS#12 (.pfx .p12), extract certs -> openssl pkcs12 -in keyStore.pfx -out keyStore.pem -nodes -nokeys
+opensssl:  convert PEM & private key to PKCS#12 (.pfx .p12) -> openssl pkcs12 -export -out certificate.pfx -inkey privateKey.key -in certificate.crt -certfile CACert.crt
+
+
+OSX: single user login -> apple S
+OSX: reset root pasword: sh /etc/rc  then password
+OSX: pbpaste -> copy clipboard to command line, eg. pbpaste | wc -w
+OSX: pbcopy -> copy command line clipboard to , eg. pbcopy < lotsoftext.txt
+OSX: screensaver/lockscreen -> drag System->Library->Frameworks->Screensaver.framework->Versions->A->Resources->ScreenSaverEngine.app onto dock
+
+
+password: boot single user mode ( RHEL ) -> at boot screen type a; apend 'single' at end of cmd line
+password: change forgotten root passwd -> login single user mode; may need to remount / ; passwd
+password: remove -> remove 2d field from  /etc/shadow
+
+
+perl: add 1st & 2d last cols -> perl -lane 'print $F[0] + $F[-2]'
+perl: change regex delimiter ->  $testString =~ m#pattern#
+perl: change strings perl -i.old -pe 's{\boldvar\b}{newvar}g' *.[chy]
+perl: check syntax -> perl -c perlFile.pl
+perl: check syntax, with warnings -> perl -wc perl_script.pl
+perl: cmd line: autosplit on ':' ->  $ perl -an -F: -e 'if ($F[2] > 100) { print $F[0],"\n"; }' /etc/passwd
+perl: cmd line: edit file in place -> $ perl -pi -e 's/cat/dog/' file
+perl: cmd line: edit file in place, backup orig -> $ perl -pi.backExtension -e 's/cat/dog/' file
+perl: cmd line: take input as one big line -> perl -0777  ( use m after regex to match across lines )
+perl: delete first 10 lines -> perl -i.bak -ne 'print unless 1..10' filename
+perl: find palindromes -> perl -lne 'print if $_ eq reverse' /usr/dict/words
+perl: look up to x but not including x ->  (?=x)
+perl: look up to where x would be but x isn't ->  (?!x)
+perl: match double letter -> $testString =~ /(.)\1/
+perl: part of string matched before, matched, after ->  $`  $&   $'
+perl: print first 50 lines -> perl -pe 'exit if $. > 50' filename
+perl: print out a field from pipe on cmd line ->   cmd | perl -ne '@vals = split /\s+/ ; print $vals[1] . "\n" ;' 
+perl: read perl documentation -> pod2text perlModuleName
+perl: read perl documentation -> pod2usage perlModuleName
+perl: read perl documentation -> pod2html perlModuleName > /some/html/directory  or browse
+perl: rename files -> ls | perl -n -e ' chomp;  m/(.*)\.mp3/ ;  $newFile = "$1.mp3" ; system( "mv  \"$_\"  \"$newFile\"" )'
+perl: replace text inline ->  perl -pi -e 's/old_string/new_string/g' filename_pattern
+perl: reverse file line by line -> perl -e 'print reverse <>' filename
+perl: start debugger to test out some random perl code -> perl -d -e ";"
+perl: sort numerical ->  @out = sort { $a <=> $b } @in ;
+
+
+pgrep: list process ids for procs with string in cmd line: preg -lf string
+
+
+POP server: to test connection -> telnet somepopserver.domain 110
+POP server: to test connection -> Some commands: USER PASS QUIT
+
+
+postfix: current configuration -> postconf [ -n ]
+postfix: ERR_1: The error message -> /etc/postfix/virtual.db: No such file or directory
+postfix: ERR_1: fixed by running  -> postmap /etc/postfix/virtual 
+postfix: to delete mail in queue -> postsuper -d [ mailnumber | ALL ]
+postfix: to list queue -> mailq
+postfix: what if mail sent to -> /usr/sbin/sendmail -bv address
+postfix: report on delivery status -> /usr/sbin/sendmail -v address
+postfix: bottleneck analysis -> qshape
+
+
+postgress: admin tool pgAdmin III
+
+
+proc file sys: info on running process -> cat /proc/self
+proc file sys: currently open file descriptors -> /proc/self/dev/fd
+
+
+process accounting: touch /var/log/acct
+process accounting: accton /var/log/acct
+process accounting: [ translate to text from binary ]
+process accounting: [ send to remote machine ]
+process accounting: lastcomm -f accounting_file
+process lists: pstree ( shows tree of processes and parents )
+
+
+proxy: configure yum -> add proxy=http://proxy.vmware.com:3128 to  /etc/yum.conf 
+
+
+python: debugger ->  import pdb; pdb.set_trace()
+python: pipe 32 As to someProg -> python -c "print( 'A'*32)" | someProg
+python: virtual environment -> virutalenv ex ; cd ex/bin ; source activate ; <Do stuff> ; deactivate
+
