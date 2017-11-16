@@ -1,0 +1,276 @@
+ram disk 1a:  mknod -m 660 /dev/ram b 1 1
+ram disk 2a:  dd if=/dev/zero of=/dev/ram bs=1024 count=4000
+ram disk 3a:  mkdir /mnt/ramdisk
+ram disk 4a:  mount -t ext2 /dev/ram /mnt/ramdisk
+
+
+ram disk 1b:  mkdir -p /ramdisk
+ram disk 2b:  mount -t ramdisk none /ramdisk -o maxsize=65536
+ram disk 3b:  chmod 7777 /ramdisk
+
+
+ram disk 1c:  mkdir -p /ramdisk
+ram disk 2c:  mkfs -b 1024 -0 Linux -L RAMDisk -T ext2 /dev/ram0 65536
+ram disk 3c:  mount /dev/ram0 /ramdisk
+
+
+rdp: send <ctrl><alt><del> ->  <ctrl><alt><end>
+
+
+rdesktop: rdesktop -g 1152x921 -a 16 -d liveops -u dcuthbert 192.168.33.48 -r sound:remote
+
+
+redhat: edit firewall, selinux ->  system-config-securitylevel
+
+
+regex: match double letter -> (.)\1
+
+
+rpm: unpack w/o installing -> rpm2cpio newpackage-1-51.rpm | cpio -i --make-directories 
+rpm: list info -> rpm -qip newPackage.rpm
+rpm: list changes to files -> rpm -Va > changes.date  ( diff files periodically to find changes )
+rpm: install RH signature -> rpm --import /usr/share/rhn/RPM-GPG-KEY
+
+
+rsync: do test run -> rsync --dry-run from.dir to.dir
+rsync: for backups -> rsync --verbose --progress --stats --recursive -- times --perms --links --delete /dir/from /dir/to 
+rsync: mirror web site -> rsync -az -e ssh --delete some.dir some.site:'remote.dir'
+rsync: sync current & remote dir -> rsync -auz -e ssh remote:/dir . && rsync -auz . remote:/dir
+
+
+runlevels: check services ->  chkconfig --list smb 
+runlevels: enable service ->  chkconfig --level 35 smb on
+
+
+samba: find shares -> smbtree 
+samba: find shares -> findsmb
+samba: list shares -> smbclient -L windowsBox
+samba: mount -t smbfs -o fmask=666,username=dave //fromWindowsBox/DavesBackup /media/mikesMachine/ 
+samba: mount -t smbfs -o username=dave //192.168.1.18/DavesBackup /media/mikesMachine/       ( not on fedora )
+samba: mount -t cifs -o user=dcuthbert,domain=liveops.com //192.168.32.128/July4 /mnt/samba  ( mount.cifs man page )
+
+
+safari: turn on debug -> close safari; enter defaults write com.apple.Safari IncludeDebugMenu 1 in terminal
+
+
+screen: start a process, close locally, restart  -> screen  ; <run cmd> ; ctrl+a ctrl+d ; <logout> ; screen -r
+
+
+secure logs: tail -f /var/log/wtmp | nc remote_ip remote_port 
+secure logs: tail -f /home/user/.history | nc remote_ip remote_port 
+secure logs: tail -f /home/user/.bash_history | nc remote_ip remote_port 
+
+
+send a message to all users logged into a machine -> wall "some text"
+send a file/message to consol2 -> cat [message|filename] >/dev/pts/2
+
+
+SMTP server: to test connection -> telnet somemailserver.domain 25
+SMTP server: to test connection -> after the banner type: HELO yourdomain
+SMTP server: to test connection -> other commands are MAIL, RCPT, DATA, QUIT
+
+
+ssh no root access: vi /etc/ssh/sshd_config 
+ssh no root access: change '#PermitRootLogin yes' to 'PermitRootLogin no'
+ssh nologin: a@A~>  ssh-keygen -t rsa        #Create key pair
+ssh nologin: a@A~>  ssh b@B mkdir -p .ssh    #Create remote dir
+ssh nologin: a@A~>  cat .ssh/id_rsa.pub | ssh b@B 'cat >> .ssh/authorized_keys'  #Copy pub to remote
+ssh tunnel: port 80 local to port 443 remote -> ssh -g -L 80:remote.machine:443 user@remote.machine
+
+
+ssl: read certificate -> openssl x509 -in hostedcc.crt -text
+
+
+SSL/TSL problems: to test imap connection -> openssl s_client -connect ox.open-xchange.com:993 -crlf  
+SSL/TSL problems: to test http connection -> openssl s_client -connect ox.open-xchange.com:443 -crlf  
+
+
+strace: a running process -> starce -p <PID>
+strace: save strace output for a command -> strace -o output.file <command>
+
+
+sysinfo: /proc/cpuinfo  - info on cpu
+sysinfo: /proc/meminfo  - info on memory usage
+sysinfo: /proc/partions - partition table info 
+sysinfo: /proc/swaps - info on swap space
+sysinfo: /proc/version - OS version 
+
+
+tc: add qdisc to slow traffic    -> tc qdisc add dev eth0 root netem delay 100ms 10ms
+tc: change qdisc to stop traffic -> tc qdisc change dev eth0 root netem loss 99%
+tc: delete qdisc to restore eth0 -> tc qdisc delete dev eth0 root netem
+
+
+tee:  send multiple ls results to screen and to someFile -> ls -aS | tee -a someFile
+
+
+text: convert case ->  echo 'TeSt' | tr '[:lower:]' '[:upper:]'
+
+
+time: windows equivalent -> powershell Measure-Command {<command>}
+
+
+time zone: find out zone info -> tzselect
+time zone: get current time -> TZ='Place/locale' date      ( Europe/London   America/Mexico_City  Pacific/Auckland )
+
+
+top: get series of values for a process -> for i in `seq 1 10` ; do top -b -n 1 |grep proc_name ; echo ; sleep 1 ; done
+
+
+top 10 processes, memory -> ps aux | sort -n -k4 | cut -c -95 | tail -10
+top 10 processes, cpu -> ps aux | sort -n -k3 | cut -c -95 | tail -10
+
+
+touch: change the creation date for a file -> touch -t 200612100606.06 /tmp/someFile
+
+
+trace system library calls: ltrace -p process-id
+trace system calls: strace -p process-id
+trace system calls: get summary -> strace -c
+
+
+tree: display directories as a tree --> tree -d
+
+
+unzip .bz2 tarball: tar -xjvf file.tar.bz2
+
+
+url shorteners: info, stats -->  bit.do  http://bit.do/eiwE --> http://bit.do/eiwE-
+url shorteners: info, stats -->  bit.ly  https://bitly.com/1en9OdU --> https://bitly.com/1en9OdU+
+url shorteners: info, stats -->  is.gd   http://is.gd/FBrAQX  -->  http://is.gd/stats.php?url=FBrAQX
+url shorteners: info, stats -->  goo.gl  http://goo.gl/bvJGuS -->  http://goo.gl/bvJGuS+
+url shorteners: info, stats -->  goo.gl  http://goo.gl/bvJGuS -->  http://goo.gl/bvJGuS.info
+url shorteners: info, stats -->  tiny.cc  http://tiny.cc/ozfd9w  -->  http://tiny.cc/ozfd9w~
+url shorteners: info, stats -->  tinyurl.com  http://tinyurl.com/mjnt93r -->  http://preview.tinyurl.com/mjnt93r
+url shorteners: info, stats -->  v.gd    http://v.gd/yKvI5m  --> http://v.gd/stats.php?url=yKvI5m
+
+
+vim: change color of line numbers -> :highlight LineNr ctermfg=grey
+vim: delete up to but not including next 'Aa' -> d/Aa
+vim: enable new features -> add 'set nocompatible' to .exrc
+vim: enable better blocks -> add 'set virtualedit=block' to .exrc
+vim: enter block mode -> ^v
+vim: execute command stored in buffer x -> @x
+vim: go to beginning/end of block -> o 
+vim: highlight text by characers, from current pos to 'Aa' -> v /Aa
+vim: highlight text by lines, from current pos to 'Aa' -> V /Aa
+vim: increment/decrement a number -> cursor on number ^a / ^x
+vim: match parenthesis  ),],} -> cursor on one and press %
+vim: remove extra white space -> :1,$s/[ ^I]*$//g
+vim: replace from start to end of file -> :1,$s/find/replace/g
+vim: replace from start to end of file -> :%s/find/replace/g
+vim: record commands into register a -> qa [ type commands ] q
+vim: yank to buffer a all text up to  # -> "ayt#
+vim: yank and add to buffer a all text up to  # -> "Ayt#
+
+
+vmware: Add a cdrom to machine.vmx config file -> ide1:0.deviceType = "cdrom-raw"
+vmware: Add a cdrom to machine.vmx config file -> ide1:0.fileName = "/dev/hdc"
+vmware: Add a cd image to machine.vmx config file -> ide1:0.fileName = "/data/isos/EssentiallyBlank.iso"
+vmware: Add a cd image to machine.vmx config file -> ide1:0.deviceType = "cdrom-image"
+vmware: Boot order, disable anything other than cd -> bios.bootdeviceclasses = "deny: net hd fd usb"
+vmware: Boot order, disable anything other than pxe -> bios.bootdeviceclasses = "deny: cd hd fd usb"
+vmware: Boot order, force just one ( net )-> bios.bootdeviceclasses = "allow:net"
+vmware: Boot order, force just one ( cd ) -> bios.bootdeviceclasses = "allow:cd"
+vmware: Boot VM to BIOS -> bios.bootDelay = "NUM_TICKS_TO_WAIT_AT_PRESS_F2_SCREEN"
+vmware: Boot VM to BIOS -> bios.forceSetupOnce = "true"
+vmware: Change to another virtual terminal: chvt 1 ( cmd line 1-6 ) ( X 7 )
+vmware: Don't recreate swap each GOS reboot -> sched.swap.persist = "TRUE"
+vmware: Headless VM boot 1, edit .vmx to include: remoteDisplay.vnc.enabled = TRUE vmware: vmware: vmware: Headless VM boot 2, edit .vmx to include: remoteDisplay.vnc.port = 5910
+vmware: headless VM boot 3, start VM by:  /usr/lib/vmware/bin/vmware-vmx -qx /path/to/vmxFile.vmx
+vmware: dd On ThinESX:  need to add  conv=notrunc 
+vmware: Install WS in VM on Windows -> HKEY_LOCAL_MACHINE\SOFTWARE\VMware, Inc.\Misc\InstallInVM = 0
+vmware: RH filesystem remounts as ro: increase min_free_kbytes, echo "20000" > /proc/sys/vm/min_free_kbytes 
+vmware: Setup network: create a switch -> esxcfg-vswitch -a vSwitch0
+vmware: Setup network: create a portgroup -> esxcfg-vswitch -p "Service Console" vSwitch0
+vmware: Setup network: assign a NIC -> esxcfg-vswitch -L vmnic0 vSwitch0
+vmware: Setup network: config a vswif -> esxcfg-vswif -a vswif0 -p "Service Console" -i 192.xxx.xxx.xxx -n 255.xxx.xxx.xxx
+vmware: Stop annoying beep: add 'mks.noBeep = "TRUE"' to .vmx file
+vmware: Stop annoying beep, Ubuntu server: add 'blacklist pcspkr' to /etc/modprobe.d/blacklist 
+vmware: Unofficial documentation of .vmx options -> http://sanbarrow.com/vmx.html
+
+
+wall: Write a message to everyone logged into the machine
+
+
+watch: watch command output repeatedly, highlight diffs -> watch -d command
+watch: watch command output repeatedly, retain diffs -> watch -d --cumulative command
+
+
+web: fetch a webpage from the command line -> GET www.google.com
+
+
+webserver: test https connection -> openssl s_client -connect www.example.com:443
+webserver: test http connection -> telnet www.example.com 80
+webserver: test http -> GET /some/file HTTP/1.0<return><return>
+
+
+website: keyword hits/day: www.digitalpoint.com
+
+
+web test site: Cenzic (live) - http://crackme.cenzic.com/
+web test site: Watchfire (live) - http://demo.testfire.net/
+web test site: Acunetix (live) - http://testphp.acunetix.com/ http://testasp.acunetix.com http://testaspnet.acunetix.com
+web test site: WebMaven / Buggy Bank - http://www.mavensecurity.com/webmaven
+web test site: Foundstone SASS tools - http://www.foundstone.com/us/resources-free-tools.asp
+web test site: Updated HackmeBank - http://www.o2-ounceopen.com/technical-info/2008/12/8/updated-version-of-hacmebank.html
+web test site: OWASP WebGoat - http://www.owasp.org/index.php/OWASP_WebGoat_Project
+web test site: OWASP SiteGenerator - http://www.owasp.org/index.php/Owasp_SiteGenerator
+web test site: Stanford SecuriBench - http://suif.stanford.edu/~livshits/securibench/
+web test site: SecuriBench Micro - http://suif.stanford.edu/~livshits/work/securibench-micro/
+web test site: Google痴 web application training - http://jarlsberg.appspot.com/part1/ 
+web test site: OWASP TOP 10 LAB (Online) - https://www.hacking-lab.com/Remote_Sec_Lab/free-owasp-top10-lab.html
+
+
+wget: cygwin with proxy -> export http_proxy="http://proxy.vmware.com:3128"
+wget: cygwin with wget -> export ftp_proxy="http://proxy.vmware.com:3128"
+wget: cygwin with proxy -> wget --proxy-user "Wwall\JohnDoe" --proxy-passwd "SomePWD" http://prdownloads.somesite.net/file.iso
+
+
+windows: accents, caret: <ctrl><shift><^> <vowel>
+windows: accents, enyay: <ctrl><shift><~> <n>
+windows: accents, to left: <ctrl><`> <vowel>
+windows: accents, to right: <ctrl><'> <vowel>
+windows: accents, umlaut: <ctrl><shift><:> <vowel>
+windows: bounce network -> ipconfig /release ; ipconfig /renew
+windows: get MAC address: ipconfig /all | find \I "physical"
+windows: partitioning: diskpart
+windows: print screen, active item ->  alt + print screen
+windows: print screen, active application  ->  ctrl + print screen
+windows: print screen, whole screen ->  shift + print screen
+windows: put in shortcut for admin cmd.exe: runas /user:machine name\administrator cmd
+windows: restart: shutdown -r -t 01
+windows: runas in other domain: runas /user:user@domain.microsoft.com "notepad my_file.txt"
+windows: shutdown: shutdown -s -t 01
+
+
+windows 7: activate OS -> slmgr -ipk XXXXX-XXXXX-XXXXX-XXXXX-XXXXX
+windows 7: disable McAfee IPS -> boot in 'safe' mode ; disable servie ; reboot 
+windows 7: install telnet from cmd line -> pkgmgr /iu:"TelnetClient"
+windows 7: reboot from cmd line -> shutdown /r /t 0
+windows 7: run an admin cmd shell -> <run> runas /user:administrator cmd.exe 
+
+
+winxp: speedup - disable last access writes -> FSUTIL behavior set disablelastaccess 1  ( reboot )
+winxp: speedup - disable 8.3 filename compatability if no 16bit apps -> fsutil behavior set disable8dot3 1  
+
+
+xss: attack strings ->  <script>alert("XSS");</script>
+xss: attack strings ->  "searchTerm"><img src="x.x" onerror="alert('XSS')" />
+
+
+xwindows: restart server -> <ctrl><alt><backspace>
+xwindows: won't allow login: remove 0 length .xinitrc from home directory
+
+
+yum: get rid of packages post install -> yum clean packages
+yum: get all repositories ->   yum --enablerepo=* install package_name
+yum: go from FC5 to FC6 -> yum clean all
+yum: go from FC5 to FC6 -> rpm -Uhv 
+     http://download.fedora.redhat.com/pub/fedora/linux/core/6/i386/os/Fedora/RPMS/fedora-release-6-4.noarch.rpm
+     http://download.fedora.redhat.com/pub/fedora/linux/core/6/i386/os/Fedora/RPMS/fedora-release-notes-6-3.noarch.rpm 
+yum: go from FC5 to FC6 -> yum -y update. 
+
+
+zipped files: to read -> zless filename.gz
+zipped files: to pipe -> zcat filename.gz | someUtil
