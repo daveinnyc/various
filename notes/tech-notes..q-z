@@ -103,6 +103,8 @@ tc: delete qdisc to restore eth0 -> tc qdisc delete dev eth0 root netem
 
 tee:  send multiple ls results to screen and to someFile -> ls -aS | tee -a someFile
 
+telnet: connect to rdp, get telnet cmd prompt, disconnect --> telnet 10.0.0.1 3389 ; <ctrl><]> ; close 
+ 
 
 text: convert case ->  echo 'TeSt' | tr '[:lower:]' '[:upper:]'
 
