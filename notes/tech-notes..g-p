@@ -33,6 +33,9 @@ hexdump: alias hexdump=`od -Ax -tx1z -v`
 hexdump: dd if=/dev/sda1 bs=1 count=512 | od -c -v
 
 
+history: read range of 50 lines starting at 190 --> history | grep -w 190 -A 50
+
+
 http: test connection -> GET /index.htm HTTP/1.1 
 http: test connection -> host: some.host.com
 http: test connection -> <empty line>
