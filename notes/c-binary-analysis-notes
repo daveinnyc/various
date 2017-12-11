@@ -57,3 +57,7 @@ sdiff: interactively merge two files
 strings: show all strings and file locations --> strings -a -f someExe
 
 strip: remove excess non-code from binaries
+
+what is it: file unknownThing 
+what is it: strings unknownThing > strings.out
+what is it: hexdump -C unknownThing > hexdump.out
