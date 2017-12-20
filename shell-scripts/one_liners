@@ -1,0 +1,2 @@
+ # Check FILE_2 for presence of names listed in FILE_1
+ for name in $(cat FILE_1 | sort | awk -F':' '{print $1}') ; do grep ${name} FILE_2 1>/dev/null ; ret_code=$? ; if [[ $ret_code == 1 ]] ;  then echo ${name}  ; fi ; done
