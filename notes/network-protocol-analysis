@@ -37,6 +37,9 @@ nload:  quick overview of network bandwidth usage
 
 nslookup:  get A Name, CNAME, MX records -->  nslookup www.someplace.com
 
+nmap: find ip addresses on network --> nmap -sn 192.168.1.1/24
+nmap: find open services and versions --> nmap -sV 192.168.1.1/24
+
 ntop:  network monitoring
 
 ping: look up hostname -->  ping -a 192.168.1.100
@@ -71,6 +74,8 @@ tracert: windows traceroute, tries three times for each hop -->  tracert www.som
 tracert: return path -->  tracert -j <IP Target> <IP Start>
 
 vnstat: service that runs in the background keeping historical network info
+
+whois: get full info from thin server --> whois -h dom.reg.whois.serer.ip some.site.com
 
 wireshark: capture filter host  --> host 10.1.1.30
 wireshark: capture filter two hosts  --> host 10.1.1.30 and host 192.168.1.1
