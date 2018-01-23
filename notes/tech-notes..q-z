@@ -147,23 +147,24 @@ url shorteners: info, stats -->  tinyurl.com  http://tinyurl.com/mjnt93r -->  ht
 url shorteners: info, stats -->  v.gd    http://v.gd/yKvI5m  --> http://v.gd/stats.php?url=yKvI5m
 
 
-vim: change color of line numbers -> :highlight LineNr ctermfg=grey
-vim: delete up to but not including next 'Aa' -> d/Aa
-vim: enable new features -> add 'set nocompatible' to .exrc
-vim: enable better blocks -> add 'set virtualedit=block' to .exrc
-vim: enter block mode -> ^v
-vim: execute command stored in buffer x -> @x
-vim: go to beginning/end of block -> o 
-vim: highlight text by characers, from current pos to 'Aa' -> v /Aa
-vim: highlight text by lines, from current pos to 'Aa' -> V /Aa
-vim: increment/decrement a number -> cursor on number ^a / ^x
-vim: match parenthesis  ),],} -> cursor on one and press %
-vim: remove extra white space -> :1,$s/[ ^I]*$//g
-vim: replace from start to end of file -> :1,$s/find/replace/g
-vim: replace from start to end of file -> :%s/find/replace/g
-vim: record commands into register a -> qa [ type commands ] q
-vim: yank to buffer a all text up to  # -> "ayt#
-vim: yank and add to buffer a all text up to  # -> "Ayt#
+vim: change color of line numbers --> :highlight LineNr ctermfg=grey
+vim: delete up to but not including next 'Aa' --> d/Aa
+vim: delete a regex '?<tag>stuff</tag> --> :1,$ s/?.*//
+vim: enable new features --> add 'set nocompatible' to .exrc
+vim: enable better blocks --> add 'set virtualedit=block' to .exrc
+vim: enter block mode --> ^v
+vim: execute command stored in buffer x --> @x
+vim: go to beginning/end of block --> o 
+vim: highlight text by characers, from current pos to 'Aa' --> v /Aa
+vim: highlight text by lines, from current pos to 'Aa' --> V /Aa
+vim: increment/decrement a number --> cursor on number ^a / ^x
+vim: match parenthesis  ),],} --> cursor on one and press %
+vim: remove extra white space --> :1,$s/[ ^I]*$//g
+vim: replace from start to end of file --> :1,$s/find/replace/g
+vim: replace from start to end of file --> :%s/find/replace/g
+vim: record commands into register a --> qa [ type commands ] q
+vim: yank to buffer a all text up to  # --> "ayt#
+vim: yank and add to buffer a all text up to  # --> "Ayt#
 
 
 vmware: Add a cdrom to machine.vmx config file -> ide1:0.deviceType = "cdrom-raw"
