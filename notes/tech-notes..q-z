@@ -89,6 +89,9 @@ strace: a running process -> starce -p <PID>
 strace: save strace output for a command -> strace -o output.file <command>
 
 
+svn: connect to remote repo --> svn co -N  svn+ssh://username@svn.company.com/svn/trunk
+
+
 sysinfo: /proc/cpuinfo  - info on cpu
 sysinfo: /proc/meminfo  - info on memory usage
 sysinfo: /proc/partions - partition table info 
