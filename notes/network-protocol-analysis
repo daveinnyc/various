@@ -39,6 +39,7 @@ nslookup:  get A Name, CNAME, MX records -->  nslookup www.someplace.com
 
 nmap: find ip addresses on network --> nmap -sn 192.168.1.1/24
 nmap: find open services and versions --> nmap -sV 192.168.1.1/24
+nmap: find specific port in IP range (eg RDP) --> nmap -Pn -p3389 10.0.0.1-50 | grep -B1 latency
 
 ntop:  network monitoring
 
