@@ -42,7 +42,7 @@ for f in os.listdir("."):
                                                             file_number)
 
                 while os.path.isfile(new_file_name):
-                    print("COLLISION: {}".format(new_file_name))
+                    # print("COLLISION: {}".format(new_file_name))  # DEBUG
                     possible_index = int(new_file_name[-7:-4]) + 1
                     file_number = str(possible_index).zfill(3)
                     new_file_name = "{}{}-{}-{}..{}.jpg".format(file_name_base, 
@@ -50,7 +50,7 @@ for f in os.listdir("."):
                                                                 file_number)
 
                 os.rename(f, new_file_name)
-                print("{}  {}".format(f, new_file_name))
+                # print("{}  {}".format(f, new_file_name))  # DEBUG
             except Exception as e:
                 print("ERROR: processing {}  {}".format(f, str(e)))
            
