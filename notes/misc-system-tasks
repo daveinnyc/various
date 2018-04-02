@@ -12,3 +12,25 @@ pip install virtualenv --user
 cd virt_env_name
 source bin/activate
 pip install some_packages
+
+
+VIRTUALBOX: Add host only network card --> 
+    edit /etc/network/interfaces 
+    add:  auto eth0:1 
+          face eth0:1 inet static 
+          address 192.168.1.24 
+          netmask 255.255.255.0 
+          network 192.168.1.1 
+          broadcast 192.168.1.255 
+          gateway  192.168.1.1 
+    restart
+
+
+VIRTUALBOX: Change ubuntu server console size --> 
+reboot c to enter grub 
+vbeinfo for console sizes 
+edit /etc/default/grub 
+add/modify:  
+    GRUB_GFXMODE=1152x864x32 
+    GRUB_CMDLINE_LINUX_DEFAULT="nomodeset" 
+    GRUB_GFXPAYLOAD_LINUX=keep
