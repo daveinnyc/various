@@ -266,6 +266,9 @@ proc file sys: info on running process -> cat /proc/self
 proc file sys: currently open file descriptors -> /proc/self/dev/fd
 
 
+process: find logest running ->  ps -A -o etime,pid,user,args |sort
+
+
 process accounting: touch /var/log/acct
 process accounting: accton /var/log/acct
 process accounting: [ translate to text from binary ]
