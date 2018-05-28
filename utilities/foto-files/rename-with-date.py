@@ -41,18 +41,18 @@ for f in os.listdir("."):
                                                             year, month, day,
                                                             file_number)
 
-                while os.path.isfile(new_file_name):
-                    # print("COLLISION: {}".format(new_file_name))  # DEBUG
-                    possible_index = int(new_file_name[-7:-4]) + 1
-                    file_number = str(possible_index).zfill(3)
-                    new_file_name = "{}{}-{}-{}..{}.jpg".format(file_name_base, 
-                                                                year, month, day,
-                                                                file_number)
+                if f != new_file_name:
+                    while os.path.isfile(new_file_name):
+                        print("COLLISION: {}".format(new_file_name))
+                        possible_index = int(new_file_name[-7:-4]) + 1
+                        file_number = str(possible_index).zfill(3)
+                        new_file_name = "{}{}-{}-{}..{}.jpg".format(file_name_base, 
+                                                                    year, month, day,
+                                                                    file_number)
 
-                os.rename(f, new_file_name)
-                # print("{}  {}".format(f, new_file_name))  # DEBUG
+                    os.rename(f, new_file_name)
+                    print("{}  {}".format(f, new_file_name))
+                else:
+                    print("Skip {}".format(f))
             except Exception as e:
                 print("ERROR: processing {}  {}".format(f, str(e)))
-           
-           
-# TODO handle existing file with same date
