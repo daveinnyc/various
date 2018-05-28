@@ -1,14 +1,12 @@
 '''
-Compare File Contents
+Compare File Contents and remove duplicate files
 
-    take a starting directory (or directories)
-    walk down the tree
     get sha256 hash for each file found
     use dictionary to check for duplicates
-    report duplicates
+    delete duplicates
 
 Dave Cuthbert
-(C) 2016-03-25
+(C) 2016-05-28
 MIT License
 '''
 
