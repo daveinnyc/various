@@ -38,3 +38,34 @@ add/modify:
     GRUB_GFXMODE=1152x864x32 
     GRUB_CMDLINE_LINUX_DEFAULT="nomodeset" 
     GRUB_GFXPAYLOAD_LINUX=keep
+
+
+CLEAN MACHINES
+# Set priority for clearing caches (default=100)
+echo 1000 >  /proc/sys/vm/vfs_cache_pressure
+
+# view current system memory state (with 'totals' line)
+free -m -t
+
+# View use of slab memeory
+slabtop --once
+
+# Add yourself to docker group if needed
+# sudo usermod -a -G docker yourname
+
+# Docker Clean UP
+## Old containers first
+docker rm $(docker ps -qa --no-trunc --filter "status=exited")
+
+## Then orphaned images
+docker image ls --all | wc -l         # Count images
+docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
+docker image ls --all | wc -l         # Count images
+
+# Clear Caches
+# *May* be problematic for running processes
+## Clear pagecache
+sync; echo 1 > /proc/sys/vm/drop_caches
+
+## Clear dentries, inodes
+sync; echo 2 > /proc/sys/vm/drop_caches
