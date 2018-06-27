@@ -41,6 +41,9 @@ add/modify:
 
 
 CLEAN MACHINES
+# Find largest files
+du -a /var | sort -n -r | head -n 10
+
 # Set priority for clearing caches (default=100)
 echo 1000 >  /proc/sys/vm/vfs_cache_pressure
 
