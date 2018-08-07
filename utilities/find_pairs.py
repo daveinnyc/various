@@ -1,7 +1,7 @@
 
 def find_pairs_simple(candidate_array, TARGET_VALUE=10):
     """Find pairs of numbers that sum to TARGET_VALUE, e.g. 10.
-       This version runs in N^N time
+       This version runs slower than the modified one below
 
     >>> find_pairs([9])
     
@@ -38,7 +38,7 @@ def find_pairs_simple(candidate_array, TARGET_VALUE=10):
 
 def find_pairs(candidate_array, TARGET_VALUE=10):
     """Find pairs of numbers that sum to TARGET_VALUE, e.g. 10.
-       This version runs in 2N time instead of N^N time
+       
     
     >>> find_pairs([9])
     
