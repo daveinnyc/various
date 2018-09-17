@@ -9,6 +9,8 @@
     -- line numbers ascend
     -- one entry per line for a given word
 
+    Tests below highlight errors found during exploratory testing phase
+    
 '''
 
 import os
