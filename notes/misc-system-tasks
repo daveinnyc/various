@@ -10,12 +10,20 @@ GET TOTAL NUMBER OF PROCESSES
 ps -eo nlwp | tail -n +2 | awk '{ num_threads += $1 } END { print num_threads }'
 
 
-INSTALL AND USE LOCAL VIRTUAL ENV
+INSTALL AND USE LOCAL VIRTUAL ENV - LINUX
 pip install virtualenv --user
  ~/.local/bin/virtualenv virt_env_name
 cd virt_env_name
 source bin/activate
 pip install some_packages
+
+
+INSTALL AND USE LOCAL VIRTUAL ENV - WINDOWS
+C:\Programs\Python3\python.exe -m pip install --upgrade pip           # Upgrade pip
+C:\Programs\Python3\python.exe -m pip install virtualenv --user       # Install virtualenv
+C:\Programs\Python3\python.exe -m venv c:\Temp\statspy                # Create a virtualenv
+cd c:\Temp\statspy                                                    # Go there
+Scripts\activate                                                      # Start it up
 
 
 VIRTUALBOX: Add host only network card --> 

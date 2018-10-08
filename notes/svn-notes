@@ -1,0 +1,8 @@
+CHECK OUT A SINGLE FILE
+svn co svn+ssh://svn/svn/branches/svn2git/buildbot --depth empty
+cd buildbot
+svn up master.cfg
+
+
+CHECK IN A SINGLE FILE
+svn commit -m "Some comments" master.cfg

@@ -216,6 +216,7 @@ filesystem: volume id -> vol_id  /dev/hda1
 find: delete by inode number  ->  find . -inum 12345678 -exec rm -i {} \;
 find: dirs not world accessible -> find -type f ! -perm -444
 find: files not world readable -> find -type f ! -perm -444
+find: files larger than 100MB on local file system -> find / -xdev -type f -size +100000000c  -exec ls -lh {} \; 2>/dev/null
 find: files modified between 5 and 10 days ago -> find . -type f -mtime -10 -mtime +5
 find: files and search with a grep expression ->  find . -name FilesToCheck* -exec grep -il "stringToFind" {} \;
 find: files and search with a grep expression faster ->  find . -name FilesToCheck* | xargs grep -il "stringToFind" 
