@@ -23,37 +23,55 @@ def get_followers():
     except Exception as e:
         print("Other file error: {}".format(e))
     
-    '''
-    Connection types as of 2018-10-07
-        blocked_users
-        follow_requests_sent
-        followers   # accounts that follow you
-        following   # accounts that you follow
-        following_hashtags
-    '''
     followers = {}
     followers_by_date = defaultdict(list)
+    # 'connections' json structure has a 'followers' section
     for follower,join_date in connections['followers'].items():
         followers[follower] = join_date[:10]
         jd_date = dt.datetime.date(dt.datetime.strptime(
                               join_date, '%Y-%m-%dT%H:%M:%S'))
         followers_by_date[jd_date].append(follower)
+
+
+    write_csv("followers.csv", followers)    
+
+    return followers_by_date
+          
+    
+def num_followers_to_date(followers_dict):
+    num_by_date = defaultdict(list)
+    account_list = []
+    count = 0
+    for k, v in sorted(followers_dict.items()):
+        count = count + len(v)
+        account_list.extend(v)
+        num_by_date[k] = [count]
+        num_by_date[k].extend(account_list)       
         
+    write_csv("num_followers.csv", num_by_date)
+    
+    return num_by_date    
+
+
+def write_csv(filename, dictionary):        
     try:
-        with open("followers.csv", "w") as output:
+        filename = str(dt.date.today()) + "." + filename
+        with open(filename, "w") as output:
             # For dev / debugging
             # w = csv.writer(sys.stderr)
             w = csv.writer(output)
-            w.writerows(followers.items())
+            w.writerows(dictionary.items())
     except IOError as ioe:
             print("IOError: {}".format(ioe))
     except Exception as e:
-            print("SOme other error: {}".format(e))
-            
-    return followers_by_date
+            print("Some other error: {}".format(e))
 
+            
 def main():
     followers = get_followers()
+    follow_count_by_date = num_followers_to_date(followers)
+    #for a,b in sorted(follow_count_by_date.items()):
+    #    print("{}: {}".format(a, b))
     
     
 if __name__ == "__main__":
