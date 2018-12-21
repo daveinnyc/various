@@ -54,6 +54,7 @@ bash: create a function -> function funcName { f_name=${0}, arg_1=${1}, num_args
 bash: current process PID -> $$
 bash: debugging in a script: set -xv ( x print commands and args, v print input lines; +xv to end )
 bash: enter multiple characters on command line eg, xxxxx -> alt+5 x 
+bash: error handling: set -euo pipefail (-e exit on error, -u exit unset variable, -o pipefail work on piped cmds)
 bash: expand URLs -> function fullurl { wget --max-redirect=0 $1 2>&1 | grep Location | cut -d' ' -f2;}
 bash: get 1 minute load info from /proc  ->  read one five fifteen rest < /proc/loadavg ; echo $one
 bash: get a range of numbers from 1 to 10 -> seq 1 10
