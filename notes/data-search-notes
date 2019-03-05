@@ -25,3 +25,17 @@ curl -s http://google.com | hexdump -C|less
 ###### decode base64 encoded text  (and renecode it here)
  echo aGVsbG8gd29ybGQh | base64 -d | base64
 
+###### zip file info
+Source: https://trailofbits.github.io/ctf/forensics/
+unzip will often output helpful information on why a zip will not decompress.
+zipdetails -v will provide in-depth information on the values present in the various fields of the format.
+zipinfo lists information about the zip file's contents, without extracting it.
+zip -F input.zip --out output.zip and zip -FF input.zip --out output.zip attempt to repair a corrupted zip file.
+fcrackzip brute-force guesses a zip password (for passwords <7 characters or so).
+
+###### imagefiles
+jpg -- exiftool
+png -- pngcheck, pngtools
+imagemagik -- compare (two files or images, detect steganography)
+
+
