@@ -21,3 +21,7 @@ hexdump -e '90/1 "%_p" "\n"' /dev/mem | less
 
 ###### dump a dodgy website safely
 curl -s http://google.com | hexdump -C|less
+
+###### decode base64 encoded text  (and renecode it here)
+ echo aGVsbG8gd29ybGQh | base64 -d | base64
+
