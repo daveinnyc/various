@@ -1,10 +1,23 @@
+# NOTE: most of these will require authentication as either the git or root user 
+
+
 ##########################
 ### Rake console tasks ###
 ##########################
-# NOTE: most of these require either the git or root user 
-
 # Gather general debug info
 gitlab-rake gitlab:env:info
+
+# Run the git integrity checks on all repos
+gitlab-rake gitlab:git:fsck
+
+
+##########################
+### Gitlab repo upkeep ###
+##########################
+# Manually check repos following timeouts in rake method
+repos=(Edit fsck out and assign list of timed out repos to shell variable)
+start_dir="/data/git-data/repositories"
+for r in ${repos} ; do cd ${r}.git ; git fsck ; cd  ${start_dir} ; done
 
 
 ######################
@@ -19,10 +32,19 @@ gitlab-ctl tail gitlab-rails
 # Drill down to an individual file 
 gitlab-ctl tail nginx/gitlab_error.log
 
+
 ###################################
 ### Gitlab mail / notifications ###
 ###################################
 # Send test email 
 gitlab-rails console production 
 Notify.test_email('d@g.com', 'Subject', 'Test message').deliver_now
+
+
+##############################
+### Docker registry upkeep ###
+##########################3###
+# Bounce the registry [to reconnect after fixing problem with (un)attached storage]
+gitlab-ctl stop registry
+gitlab-ctl start registry
 
