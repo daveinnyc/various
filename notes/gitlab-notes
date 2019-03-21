@@ -1,0 +1,8 @@
+##########################
+### Rake console tasks ###
+##########################
+# NOTE: most of these require either the git or root user 
+
+# Gather general debug info
+gitlab-rake gitlab:env:info
+
