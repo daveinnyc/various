@@ -6,3 +6,23 @@
 # Gather general debug info
 gitlab-rake gitlab:env:info
 
+
+######################
+### Gitlab logging ###
+######################
+# Tail all logs; press Ctrl-C to exit
+gitlab-ctl tail
+
+# Drill down to a sub-directory of /var/log/gitlab 
+gitlab-ctl tail gitlab-rails
+
+# Drill down to an individual file 
+gitlab-ctl tail nginx/gitlab_error.log
+
+###################################
+### Gitlab mail / notifications ###
+###################################
+# Send test email 
+gitlab-rails console production 
+Notify.test_email('d@g.com', 'Subject', 'Test message').deliver_now
+
