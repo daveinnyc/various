@@ -4,11 +4,6 @@ git: view history --> git log --pretty=format:"%h  %an, %ar: %s"
 github: compare a branch across time ->  append '/compare' to repo url ; add @{YYYY-MM-DD} to branch name
 
 
-gitlab: Tail all logs; press Ctrl-C to exit -> sudo gitlab-ctl tail
-gitlab: Drill down to a sub-directory of /var/log/gitlab -> sudo gitlab-ctl tail gitlab-rails
-gitlab: Drill down to an individual file -> sudo gitlab-ctl tail nginx/gitlab_error.log
-gitlab: Send test email -> sudo gitlab-rails console production ; Notify.test_email('d@g.com', 'Subject', 'Test message').deliver_now
-
 gnome: remove desktop icons -> gconf-editor then unselect in  apps > nautilus > desktop
 
 
