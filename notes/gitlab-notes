@@ -19,6 +19,14 @@ repos=(Edit fsck out and assign list of timed out repos to shell variable)
 start_dir="/data/git-data/repositories"
 for r in ${repos} ; do cd ${r}.git ; git fsck ; cd  ${start_dir} ; done
 
+# Start a Rails console session
+gitlab-rails console
+
+# Start a Postgres superuser psql session
+# This will only works after the first time gitlab-ctl reconfigure ha run
+# The gitlab-psql command takes the same arguments as the regular psql command
+gitlab-psql -d database_name
+
 
 ######################
 ### Gitlab logging ###
@@ -47,4 +55,3 @@ Notify.test_email('d@g.com', 'Subject', 'Test message').deliver_now
 # Bounce the registry [to reconnect after fixing problem with (un)attached storage]
 gitlab-ctl stop registry
 gitlab-ctl start registry
-
