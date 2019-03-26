@@ -1,0 +1,32 @@
+##################
+### 2019-03-25 ###
+##################
+# INSTALLATION
+# Installed on ubuntu 
+$> lsb_release -a
+Description:    Ubuntu 18.04.2 LTS
+Codename:       bionic
+
+# Using instructions from:
+https://www.jfrog.com/confluence/display/RTF/Installing+on+Linux+Solaris+or+Mac+OS#InstallingonLinuxSolarisorMacOS-RPMorDebianInstallation
+
+# Oracle Java 8 already installed
+
+# No bionic repository. Modified instructions to use xenial instead of bionic
+# echo "deb https://jfrog.bintray.com/artifactory-debs {distribution} {components}" | sudo tee -a /etc/apt/sources.list
+$> echo "deb https://jfrog.bintray.com/artifactory-debs xenial main" | sudo tee -a /etc/apt/sources.list
+
+# Install repo key
+$> curl https://bintray.com/user/downloadSubjectPublicKey?username=jfrog | sudo apt-key add -
+
+# Update repos and install artifactory package
+# apt-get update
+# apt-get install jfrog-artifactory-oss
+
+# OPERATION
+# Ubuntu 18 used systemd so need to modify instructions to use systemctl
+# Activate artifactory
+$> systemctl start artifactory.service
+
+# Check status
+$> systemctl status artifactory.service
