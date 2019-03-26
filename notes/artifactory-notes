@@ -30,3 +30,15 @@ $> systemctl start artifactory.service
 
 # Check status
 $> systemctl status artifactory.service
+
+# Find and note ${ARTIFACTORY_HOME}
+$>  for i in $(ps -efl |grep artif) ; do echo $i ; done  |grep home
+-Dartifactory.home=/var/opt/jfrog/artifactory
+
+# Log files
+$> ls /var/opt/jfrog/artifactory/logs/       # Better
+$> ls /opt/jfrog/artifactory/tomcat/logs
+
+# Web login
+http://npm:8081/artifactory/webapp/#/home
+
