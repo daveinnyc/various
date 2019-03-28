@@ -68,6 +68,9 @@ bash: pattern match on a variable ( keep everything up to first . ) -> varName=$
 bash: pattern match on a variable ( drop everything up to last / ) -> varName=${0##*/}   
 bash: read a file into a script ( source file in script )  -> . fileName 
 bash: read a file to variable -> varName=$(< /proc/fileName)   
+bash: redirect stderr to stdout -> cmd 2>&1
+bash: redirect stderr & stdout to file -> cmd &> fileName
+bash: redirect stderr to stdout and both to file -> cmd > fileName 2>&1
 bash: reread .bashrc -> source ~/.bashrc
 bash: rename files -> for fn in `ls` ; do new="$( echo $fn | cut -c 5- )" ; mv $fn $new ; done
 bash: reset screen after binary cat -> reset
