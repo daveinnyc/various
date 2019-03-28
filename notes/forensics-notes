@@ -1,0 +1,3 @@
+# Create disk image in CD sized chunks
+$>  dd if=/dev/sda | split -b 650m 
+
