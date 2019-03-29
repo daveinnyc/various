@@ -51,7 +51,21 @@ Notify.test_email('d@g.com', 'Subject', 'Test message').deliver_now
 
 ##############################
 ### Docker registry upkeep ###
-##########################3###
+##############################
 # Bounce the registry [to reconnect after fixing problem with (un)attached storage]
 gitlab-ctl stop registry
 gitlab-ctl start registry
+
+
+#############################
+### Verify ssh key in use ###
+#############################
+# Check which key gitlab thinks it has
+https://git.yourgitlabinstance.com/admin/users/theUsersName/keys
+
+# See it the gitlab key signature matches your user's
+$> ssh-keygen -E md5 -lf your-key-file  # md5 signature
+$> ssh-keygen -lf your-key-file         # sha signature
+
+# Test the connection and get debug info
+$> ssh -Tv git@git.yourgitlabinstance.com 
