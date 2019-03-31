@@ -179,11 +179,7 @@ dbctl: get read/write access to dbase ->  dbctl -c shell --db ccconf
 dbctl: update table ->  dbctl -c copydbs -m dbbackup-mii -d ccconf -t offer
 
 
-dcfldd: improved version of dd used for forensic dd copying
-
-
-dd: kill -10 PID will print out progess so far
-dd: dd if=/dev/sda bs=1 count=512 | od -c -v
+dd: See forensics notes
 
 
 disk, partition tools: view, edit partitions --> fdisk, sfdisk, cfdisk 
