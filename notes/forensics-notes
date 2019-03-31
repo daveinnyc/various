@@ -1,8 +1,9 @@
 ######################
 ### STOPPED SYSTEM ###
 ######################
-# Create disk image in CD sized chunks
-$>  dd if=/dev/sda | split -b 650m 
+# Create a disk image          
+$> dd if=/dev/sda | split -b 650m  # Files broken into CD sized chunks
+$> dd is=/dev/hda1 of=/ofmachine-location/hda1.dd conv=noerror,sync  # Pad error blocks with 0s
 
 
 ###################
