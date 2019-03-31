@@ -1,12 +1,25 @@
+######################
+### STOPPED SYSTEM ###
+######################
 # Create disk image in CD sized chunks
 $>  dd if=/dev/sda | split -b 650m 
+
+
+###################
+### LIVE SYSTEM ###
+###################
+# Setup / use netcat              # netcat alternatives: socat, cryptcat
+$> nc -l -p 2222 > captured-data  # Setup netcat on remote system
+$> ls -l | nc 192.168.1.1 2222    # Send data to netcat on remote system
 
 # Check system date and uptime
 $> date 
 $> uptime
 
 # Check if network interface is in promiscuous mode
-$> ifconfig   # Update this for new ip command
+$> ifconfig |grep -i prom    # Older style
+$> ip a                      # New sytle, get interface name
+$> ip a show interface_name  # Check interface, e.g.: $> ip a show ens33
 
 # Record current processes
 $> ps -eaf > current-processes
