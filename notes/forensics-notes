@@ -1,3 +1,29 @@
 # Create disk image in CD sized chunks
 $>  dd if=/dev/sda | split -b 650m 
 
+# Check system date and uptime
+$> date 
+$> uptime
+
+# Check if network interface is in promiscuous mode
+$> ifconfig   # Update this for new ip command
+
+# Record current processes
+$> ps -eaf > current-processes
+
+# List processes with open files
+$> lsof +L1   # Displays files with link count less than 1 (file in memory but not on disk)
+$> lsof -i 4  # Displasy files with ipv4 connections
+
+# List network connections
+$> netstat
+
+# Who is on the system
+$> last
+$> who
+
+# User groups, UIDs, shell
+$> cp /etc/passwd current-passwords
+
+# Files with superuser set 
+$> find / -uid 0 -perm -4000 2>/dev/null
