@@ -1,9 +1,13 @@
 ######################
 ### STOPPED SYSTEM ###
 ######################
-# Create a disk image          
-$> dd if=/dev/sda | split -b 650m  # Files broken into CD sized chunks
-$> dd is=/dev/hda1 of=/ofmachine-location/hda1.dd conv=noerror,sync  # Pad error blocks with 0s
+# Create a disk image                         # dd alternatives: sdd, dcfldd
+$> dd if=/dev/sda | split -b 650m             # Files broken into CD sized chunks
+$> dd is=/dev/hda1 of=/filepath/hda1.dd conv=noerror,sync  # Pad error blocks with 0s
+$> dd if=/dev/hda | nc remote-ip 8888 -w 3    # Copy to another machine, -w is timeout value
+$> kill -10 PID                               # Print out dd progess so far
+$> dd if=/dev/sda bs=1 count=512 | od -c -v   # Hexdump of disk contents
+
 
 
 ###################
