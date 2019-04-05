@@ -31,7 +31,7 @@ $> ps -eaf > current-processes
 
 # List processes with open files
 $> lsof +L1   # Displays files with link count less than 1 (file in memory but not on disk)
-$> lsof -i 4  # Displasy files with ipv4 connections
+$> lsof -i 4  # Displays files with ipv4 connections
 
 # List network connections
 $> netstat
@@ -45,3 +45,11 @@ $> cp /etc/passwd current-passwords
 
 # Files with superuser set 
 $> find / -uid 0 -perm -4000 2>/dev/null
+
+# Find mount points and partions 
+$> cat /proc/partitions   # windows+cygwin
+
+# Gather disk usage data
+$> fs util fsinfo statistics C:   # Windows administor
+$> fs util fsinfo volumeInfo C:   # Windows administor
+$> fs util fsinfo sectorInfo C:   # Windows administor
