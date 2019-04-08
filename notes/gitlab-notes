@@ -69,3 +69,10 @@ $> ssh-keygen -lf your-key-file         # sha signature
 
 # Test the connection and get debug info
 $> ssh -Tv git@git.yourgitlabinstance.com 
+
+
+#####################################
+### Force reload of runner config ###
+#####################################
+$> killall -SIGHUP gitlab-runner    # Named signals
+$> killall -1 gitlab-runner         # Short form signals
