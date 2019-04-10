@@ -9,10 +9,14 @@ https://digital-forensics.sans.org/community/download-sift-kit/3.0
 # Using virtual box on windows requires installation of guest tools 
 https://github.com/daveinnyc/various/blob/master/notes/virtual-box-notes
 
+# Create a host only network to access vm using ssh 
+https://github.com/daveinnyc/various/blob/master/notes/virtual-box-notes
+
 # Default usr /pwd
 sansforensics / forensics
 
 
-##############
-## Run sift ##
-##############
+###########################
+## cli cache permissions ##
+###########################
+# These are not set properly
