@@ -1,0 +1,16 @@
+######################################################
+## Enable shared files: linux guest on windows host ##
+######################################################
+# Add an optical drive if not already present
+Power off -> Machine -> Settings -> Storage
+
+# Add the guest additions modules
+Power on -> Devices -> Insert Guest Additions CD image
+Run the installer
+
+# Add the shared folder
+Devices -> Shared Folders -> Shared Folder settings 
+
+# Add your user to the vboxsf group
+$> sudo usermod -G vboxsf -a SomeUserName
+
