@@ -1,0 +1,18 @@
+####################
+## General Setup  ##
+####################
+# Create an account and download .ova fiel from here
+https://digital-forensics.sans.org/community/download-sift-kit/3.0
+
+# Note: Requires newer version of VMware workstaion than 10.0.7
+
+# Using virtual box on windows requires installation of guest tools 
+https://github.com/daveinnyc/various/blob/master/notes/virtual-box-notes
+
+# Default usr /pwd
+sansforensics / forensics
+
+
+##############
+## Run sift ##
+##############
