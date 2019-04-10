@@ -1,6 +1,6 @@
-######################
-### STOPPED SYSTEM ###
-######################
+#############################
+## STOPPED SYSTEM ANALYSIS ##
+#############################
 # Create a disk image                         # dd alternatives: sdd, dcfldd
 $> dd if=/dev/sda | split -b 650m             # Files broken into CD sized chunks
 $> dd is=/dev/hda1 of=/filepath/hda1.dd conv=noerror,sync  # Pad error blocks with 0s
@@ -9,10 +9,40 @@ $> kill -10 PID                               # Print out dd progess so far
 $> dd if=/dev/sda bs=1 count=512 | od -c -v   # Hexdump of disk contents
 
 
+#####################################
+##  SLEUTH KIT FOR IMAGE ANALYSIS  ##
+#####################################
+# Find partition offsets in an image
+$> mmls  /mnt/share/image.001
 
-###################
-### LIVE SYSTEM ###
-###################
+# Find file system type using offset information
+$>  fsstat -o 2048 /mnt/share/image.001       # 2048 offset from mmls
+
+# List all files on partition
+$> fls -o 2048 -f ext2 -m "/" -r /mnt/share/image.001 > /tmp/fls-listing
+
+# List all inodes on partition 
+# NOTE: -m, -r values different than fls
+$> ils -o 2048 -f ext2 -m /mnt/share/image.001 > /tmp/ils-listing
+
+# Get metadate for an inode listed in fls
+$> grep baz.xls  /tmp/fls-listing
+0|/foo/bar/baz.xls|54321|r/rrw-rw-r--|1001|1001|43|1447436912|1447436668|1446835253|0
+$> istat -o 2048 -f ext2 /mnt/share/image.001 54321
+
+# Print out the data from the file
+$> icat -o 2048 -f ext2 /mnt/share/image.001 54321
+
+# Print out the date from a file block
+$>  blkcat -o 2048 -f ext2 /mnt/share/image.001 98762   # Find block number using istat
+
+# Find the filename given an inode
+$> ffind -o 2048 -f ext2 /mnt/share/image.001 54321
+
+
+##########################
+## LIVE SYSTEM ANALYSIS ##
+##########################
 # Setup / use netcat              # netcat alternatives: socat, cryptcat
 $> nc -l -p 2222 > captured-data  # Setup netcat on remote system
 $> ls -l | nc 192.168.1.1 2222    # Send data to netcat on remote system
