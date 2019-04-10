@@ -4,9 +4,11 @@
 # Create an account and download .ova fiel from here
 https://digital-forensics.sans.org/community/download-sift-kit/3.0
 
-# Note: Requires newer version of VMware workstaion than 10.0.7
+# Note: Requires newer version of VMware workstation than 10.0.7
 
 # Using virtual box on windows requires installation of guest tools 
+#    Guest tools will allow shared directories but don't seem to allow
+#    cut and paste. Log into the vm using ssh to get terminal cut and paste
 https://github.com/daveinnyc/various/blob/master/notes/virtual-box-notes
 
 # Create a host only network to access vm using ssh 
@@ -25,3 +27,10 @@ sansforensics / forensics
 ## cli cache permissions ##
 ###########################
 # These are not set properly
+$> sift version
+sift-cli@1.6.1-master.bde3e23
+EACCES: permission denied, mkdir '/var/cache/sift/cli'
+Error: EACCES: permission denied, mkdir '/var/cache/sift/cli'
+
+# Open permissions (possibly too open?)
+$> sudo chmod 777 /var/cache/sift/cli
