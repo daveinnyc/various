@@ -13,4 +13,4 @@ Devices -> Shared Folders -> Shared Folder settings
 
 # Add your user to the vboxsf group
 $> sudo usermod -G vboxsf -a SomeUserName
-
+$> sudo init 6   # Restart needed for some unknown reason
