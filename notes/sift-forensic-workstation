@@ -12,6 +12,11 @@ https://github.com/daveinnyc/various/blob/master/notes/virtual-box-notes
 # Create a host only network to access vm using ssh 
 https://github.com/daveinnyc/various/blob/master/notes/virtual-box-notes
 
+# Enable ssh login for sansforensics user
+$> sudo vi /etc/ssh/sshd_config
+   Add: AllowUsers sansforensics
+$> sudo systemctl restart sshd        
+
 # Default usr /pwd
 sansforensics / forensics
 
