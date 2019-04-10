@@ -76,3 +76,11 @@ $> ssh -Tv git@git.yourgitlabinstance.com
 #####################################
 $> killall -SIGHUP gitlab-runner    # Named signals
 $> killall -1 gitlab-runner         # Short form signals
+
+
+#######################################
+### Clean up old runner build files ###
+#######################################
+# Add something like this to crontab on the runner host
+$> find /home/gitlab-runner/builds -type f -ctime +14 -delete && 
+    find /home/gitlab-runner/builds -type d -empty -delete
