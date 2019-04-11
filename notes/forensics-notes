@@ -83,3 +83,17 @@ $> cat /proc/partitions   # windows+cygwin
 $> fs util fsinfo statistics C:   # Windows administor
 $> fs util fsinfo volumeInfo C:   # Windows administor
 $> fs util fsinfo sectorInfo C:   # Windows administor
+
+
+#################################
+##  DISK IMAGE INFO UTILITIES  ##
+#################################
+# Windows SMART tool
+$> wmic            # Drops into console /? for command help
+
+# Linux mount on local loopback
+$> mount -o ro,loop /path/to/image /mnt/mountedImage  # ro for read only mount
+
+# Windows equivalent to touch 
+timestomp    # http://metasploit.com/data/antiforensics/timestomp.exe
+
