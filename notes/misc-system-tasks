@@ -1,60 +1,82 @@
-FREE inodes, dentries, y wb pages
-free && sync && echo 3>/proc/sys/vm/drop_caches
+######################################
+##  GET NUMBER OF THREADS PER USER  ##
+######################################
+$> for USR in $(ps aux | awk '{print substr($1, 1, length($1)-1)}' | sort -u) ; do echo -n "${USR}  " ; ps -efT |grep "^${USR}" |wc -l ; done
 
 
-GET NUMBER OF THREADS PER USER:
-for USR in $(ps aux | awk '{print substr($1, 1, length($1)-1)}' | sort -u) ; do echo -n "${USR}  " ; ps -efT |grep "^${USR}" |wc -l ; done
+#####################################
+##  GET TOTAL NUMBER OF PROCESSES  ##
+#####################################
+$> ps -eo nlwp | tail -n +2 | awk '{ num_threads += $1 } END { print num_threads }'
 
 
-GET TOTAL NUMBER OF PROCESSES 
-ps -eo nlwp | tail -n +2 | awk '{ num_threads += $1 } END { print num_threads }'
+###################################################
+###  INSTALL AND USE LOCAL VIRTUAL ENV - LINUX  ###
+###################################################
+$> pip install virtualenv --user
+$> ~/.local/bin/virtualenv virt_env_name
+$> cd virt_env_name
+$> source bin/activate
+$virt_env_name> pip install some_packages
 
 
-INSTALL AND USE LOCAL VIRTUAL ENV - LINUX
-pip install virtualenv --user
- ~/.local/bin/virtualenv virt_env_name
-cd virt_env_name
-source bin/activate
-pip install some_packages
+###################################################
+##  INSTALL AND USE LOCAL VIRTUAL ENV - WINDOWS  ##
+###################################################
+$> C:\Programs\Python3\python.exe -m pip install --upgrade pip           # Upgrade pip
+$> C:\Programs\Python3\python.exe -m pip install virtualenv --user       # Install virtualenv
+$> C:\Programs\Python3\python.exe -m venv c:\Temp\statspy                # Create a virtualenv
+$> cd c:\Temp\statspy                                                    # Go there
+$> Scripts\activate                                                      # Start it up
 
 
-INSTALL AND USE LOCAL VIRTUAL ENV - WINDOWS
-C:\Programs\Python3\python.exe -m pip install --upgrade pip           # Upgrade pip
-C:\Programs\Python3\python.exe -m pip install virtualenv --user       # Install virtualenv
-C:\Programs\Python3\python.exe -m venv c:\Temp\statspy                # Create a virtualenv
-cd c:\Temp\statspy                                                    # Go there
-Scripts\activate                                                      # Start it up
-
-
-CLEAN MACHINES
+######################
+### CLEAN MACHINES ###
+######################
 # Find largest files
-du -a /var | sort -n -r | head -n 10
+$> du -a /var | sort -n -r | head -n 10
 
 # Set priority for clearing caches (default=100)
-echo 1000 >  /proc/sys/vm/vfs_cache_pressure
+$> echo 1000 >  /proc/sys/vm/vfs_cache_pressure
 
 # view current system memory state (with 'totals' line)
-free -m -t
+$> free -m -t
 
 # View use of slab memeory
-slabtop --once
-
-# Add yourself to docker group if needed
-# sudo usermod -a -G docker yourname
-
-# Docker Clean UP
-## Old containers first
-docker rm $(docker ps -qa --no-trunc --filter "status=exited")
-
-## Then orphaned images
-docker image ls --all | wc -l         # Count images
-docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
-docker image ls --all | wc -l         # Count images
+$> slabtop --once
 
 # Clear Caches
-# *May* be problematic for running processes
+## *May* be problematic for running processes
 ## Clear pagecache
-sync; echo 1 > /proc/sys/vm/drop_caches
+$> sync; echo 1 > /proc/sys/vm/drop_caches
 
 ## Clear dentries, inodes
-sync; echo 2 > /proc/sys/vm/drop_caches
+$> sync; echo 2 > /proc/sys/vm/drop_caches
+
+## Fre inodes, dentries, and wb pages
+free && sync && echo 3>/proc/sys/vm/drop_caches
+
+# Docker Clean UP
+## Add yourself to docker group if needed
+$> sudo usermod -a -G docker yourname
+
+## Old containers first
+$> docker rm $(docker ps -qa --no-trunc --filter "status=exited")
+
+## Then orphaned images
+$> docker image ls --all | wc -l         # Count images
+$> docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
+$> docker image ls --all | wc -l         # Count images
+
+
+###########################################
+## VMWARE WORKSTATION MOUNT SHARED DRIVE ##
+###########################################
+# After adding a shared drive windows in the UI, it isn't mounted in linux vm
+## Get share name in vm
+$> vmware-hgfsclient
+forensics..rit..502
+## Verify mount dir exists, create if needed
+$> sudo mkdir /mnt/hgfs
+## Mount drive
+$> sudo vmhgfs-fuse .host:/forensics..rit..502 /mnt/hgfs/ -o allow_other -o uid=1000
