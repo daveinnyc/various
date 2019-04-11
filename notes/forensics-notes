@@ -97,3 +97,11 @@ $> mount -o ro,loop /path/to/image /mnt/mountedImage  # ro for read only mount
 # Windows equivalent to touch 
 timestomp    # http://metasploit.com/data/antiforensics/timestomp.exe
 
+
+# Create a timeline of file activity 
+#    Gather timestamp data for timeline creation
+$> fls -f ext3 -m "/" -r imageFile > imageFile.timestamps     
+$> ils -f openbsd -m imageFile > imageFile.inode-timestamps
+
+# Sort data and create a timeline
+$> mactime -b imageFile.timestamps [time range]   # Can limit to time range of interest
