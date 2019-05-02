@@ -10,6 +10,9 @@ gitlab-rake gitlab:env:info
 # Run the git integrity checks on all repos
 gitlab-rake gitlab:git:fsck
 
+# Run check against all components
+ gitlab-rake gitlab:check > /tmp/checkoutput  # Save to file b/c lots of output
+
 
 ##########################
 ### Gitlab repo upkeep ###
