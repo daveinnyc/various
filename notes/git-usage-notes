@@ -1,7 +1,22 @@
+# Command shortcuts
+$> git commit -a -m 'made other changes'        # adds file to commit, adds comment
+$> git checkout -b newBranch                    # creats newBranch and checks it out
+
+
+# Compare two branches
+$> git show-branch –sha1-name newFeature master
+
+
+# Configuration settings
+$> git config --global pull.rebase true         # use rebase rather than merge in all repos
+
+
 # Use a different ssh key to access repo
 $> ssh-agent bash -c 'ssh-add ../other-id_rsa-key ; git push'  # Can be any git command
+
 
 # View commit history 
 $> git log --pretty=format:"%h  %an, %ar: %s"   # commit, author, relative time, subject
 $> git log --graph --pretty=format:"%h %s"      # commit graph, commit, subject
 $> git log --graph --pretty=format:"%h %ae %s"  # commit graph, commit, author email, subject
+$> git log --decorate --pretty=format:"%h %s"   # branch info, commit, subject
