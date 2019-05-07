@@ -20,3 +20,5 @@ $> git log --pretty=format:"%h  %an, %ar: %s"   # commit, author, relative time,
 $> git log --graph --pretty=format:"%h %s"      # commit graph, commit, subject
 $> git log --graph --pretty=format:"%h %ae %s"  # commit graph, commit, author email, subject
 $> git log --decorate --pretty=format:"%h %s"   # branch info, commit, subject
+$> git log -1 -p                                # print message for last commit
+$> git log -5 --oneline                         # show short summary of last 5 commits        
