@@ -1,0 +1,7 @@
+# Use a different ssh key to access repo
+$> ssh-agent bash -c 'ssh-add ../other-id_rsa-key ; git push'  # Can be any git command
+
+# View commit history 
+$> git log --pretty=format:"%h  %an, %ar: %s"   # commit, author, relative time, subject
+$> git log --graph --pretty=format:"%h %s"      # commit graph, commit, subject
+$> git log --graph --pretty=format:"%h %ae %s"  # commit graph, commit, author email, subject
