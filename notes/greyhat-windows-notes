@@ -1,0 +1,39 @@
+##############################################
+## Use alternate data streams to hide files ## 
+##############################################
+# Create a wrapper file
+C:\Temp>type con: > wrapper.txt  
+This is the wrapper file
+
+# Note file size
+C:\Temp>dir wrapper.txt
+ 
+2019-05-09  10:34 PM                26 wrapper.txt
+               1 File(s)             26 bytes
+
+# Create secret file
+C:\Temp>type con: > internal.txt
+Hidden internal file
+
+# Copy secret file into ADS in wrapper
+C:\Temp>type internal.txt > wrapper.txt:hidden.txt
+
+# Note file size
+C:\Temp>dir wrapper.txt
+2019-05-09  10:36 PM                26 wrapper.txt
+               1 File(s)             26 bytes
+
+# Note contents
+C:\Temp>type wrapper.txt
+This is the wrapper file
+
+# Display hidden contents
+C:\Temp>more < wrapper.txt:hidden.txt
+Hidden internal file
+
+# List hidden file
+C:\Temp>dir /r wrapper.txt
+2019-05-09  10:36 PM                26 wrapper.txt
+                                    22 wrapper.txt:hidden.txt:$DATA
+               1 File(s)             26 bytes
+
