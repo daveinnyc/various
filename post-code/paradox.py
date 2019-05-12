@@ -19,19 +19,33 @@
 from collections import defaultdict
 import random
 
-# num_files = 365      # Classic bday example for testing, 23 people @ 50.7%
-num_files = 764       # Number of files in the actual sample
 
-
-
-def test_samples():
+def test_samples(n_files):
     test_samples = defaultdict(lambda: 0)
 
-    for n in range(1, num_files + 2):  # max + 1 (for python) + 1 = collision
-        val = random.randint(1, num_files)  # randint include last value
+    for n in range(1, n_files + 2):  # max + 1 (for python) + 1 = collision
+        val = random.randint(1, n_files)  # randint include last value
         test_samples[val] += 1
         if test_samples[val] == 2:
             return n
+
+
+def test_n_samples(num_samples, n_files):
+    test_samples = defaultdict(lambda: 0)
+
+    for n in range(num_samples):
+        val = random.randint(1, n_files)  # randint include last value
+        test_samples[val] += 1
+
+    collision_count = 0
+    multi_crash = 0
+    for k,v in test_samples.items():
+        if v == 2:
+            collision_count += 1
+        elif v > 2:
+            multi_crash += 1
+
+    return (collision_count, multi_crash)
 
 
 def find_50_percent(num_items):
@@ -47,27 +61,46 @@ def find_50_percent(num_items):
             return i
 
 
+##########
+## Main ##
+##########
+# num_files = 365      # Classic bday example for testing, 23 people @ 50.7%
+num_files = 764        # Number of files in the actual sample
+
+# Find out how many files are needed to get to 50% likelihood of collision
 runs = find_50_percent(num_files)
 print(f"For {num_files} it takes {runs}")
 
-# According to the accepted bday paradox equation 764 files should see a
+# According to the bday paradox equation 764 files should see a
 #  repetition after 33 files, 50% of the time
 #
 # Let's test that
-
 samples = 0
-num_test_runs = 5000
+repetitions = 5000
 num_sample_groups = 100
 
 for j in range(num_sample_groups):
     runs = 0
-    for i in range(num_test_runs):
-        runs += test_samples()
-    # print(f"After {num_test_runs} runs the average is: "
-    #      f"{(runs / num_test_runs):.2f}")       
+    for i in range(repetitions):
+        runs += test_samples(num_files)
     samples += runs
 
 print(f"After {num_sample_groups} groups and "
-      f"{num_sample_groups * num_test_runs} runs "
-      f"the average is: {(samples / (num_test_runs * num_sample_groups)):.2f}")
+      f"{num_sample_groups * repetitions} runs "
+      f"the average is: {(samples / (repetitions * num_sample_groups)):.2f}")
 
+
+# Every 10 minutes there are about 70 files displayed.
+#   let's see how many collisions are expected at random
+num_samples = 70
+repetitions = 1000
+single_collisions = 0
+multi_collisions = 0
+for count in range(repetitions):
+    crashes = test_n_samples(num_samples, num_files)
+    single_collisions += crashes[0]
+    multi_collisions += crashes[1]
+
+print(f"After {repetitions} repetitions of {num_samples} files each, "
+      f"there are {single_collisions / repetitions} single and "
+      f"{multi_collisions / repetitions} multiple crashes per group")
