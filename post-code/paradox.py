@@ -8,14 +8,6 @@
 #
 # (c) 2019 Dave Cuthbert
 
-
-# Solve for 50%
-# 'How many images need to be displayed for a 50% chance of repetition?'
-
-# P(A) is the probability of a collision
-# P(A') is the probability of no collision
-# P(A) = 1 - P(A')
-
 from collections import defaultdict
 import random
 
