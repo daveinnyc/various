@@ -191,13 +191,14 @@ network: stats, change card config -> ethtool eth0
 NT password dump: ftp.samba.org/pub/samba/pwdump puts NT password dbase from registry into smbpasswd file
 
 
-opensssl:  check speed to return a page -> openssl s_time -connect remote.com:443 -www /some/page.html
-opensssl:  convert DER (.crt .cer .der) to PEM -> openssl x509 -inform der -in certificate.cer -out certificate.pem
-opensssl:  convert PEM file to DER -> openssl x509 -outform der -in certificate.pem -out certificate.der
-opensssl:  convert KCS#12 (.pfx .p12) w/ private key and certificates to PEM -> openssl pkcs12 -in keyStore.pfx -out keyStore.pem -nodes
-opensssl:  convert KCS#12 (.pfx .p12), extract keys -> openssl pkcs12 -in keyStore.pfx -out keyStore.pem -nodes -nocerts
-opensssl:  convert KCS#12 (.pfx .p12), extract certs -> openssl pkcs12 -in keyStore.pfx -out keyStore.pem -nodes -nokeys
-opensssl:  convert PEM & private key to PKCS#12 (.pfx .p12) -> openssl pkcs12 -export -out certificate.pfx -inkey privateKey.key -in certificate.crt -certfile CACert.crt
+openssl:  check speed to return a page -> openssl s_time -connect remote.com:443 -www /some/page.html
+openssl:  convert DER (.crt .cer .der) to PEM -> openssl x509 -inform der -in certificate.cer -out certificate.pem
+openssl:  convert PEM file to DER -> openssl x509 -outform der -in certificate.pem -out certificate.der
+openssl:  convert KCS#12 (.pfx .p12) w/ private key and certificates to PEM -> openssl pkcs12 -in keyStore.pfx -out keyStore.pem -nodes
+openssl:  convert KCS#12 (.pfx .p12), extract keys -> openssl pkcs12 -in keyStore.pfx -out keyStore.pem -nodes -nocerts
+openssl:  convert KCS#12 (.pfx .p12), extract certs -> openssl pkcs12 -in keyStore.pfx -out keyStore.pem -nodes -nokeys
+openssl:  convert PEM & private key to PKCS#12 (.pfx .p12) -> openssl pkcs12 -export -out certificate.pfx -inkey privateKey.key -in certificate.crt -certfile CACert.crt
+openssl:  download cert -> echo | openssl s_client -servername HOSTNAME -connect HOSTNAME:PORT | openssl x509 -text 
 
 
 OSX: single user login -> apple S
