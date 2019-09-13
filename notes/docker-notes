@@ -1,3 +1,12 @@
+# Get shell stdin, stdio from log file
+docker logs CONTID
+
+# List all containers, running and stopped
+docker ps --all
+
+# Remove a container
+docker rm CONTID 
+
 # Run single command in container and exit 
 docker exec CONTID ls -l
 
@@ -7,5 +16,12 @@ docker exec CONTID sh -c "cd X ; ls -l"
 # Run a single python script
 docker run -it --rm --name my-script -v "$PWD":/usr/src/myapp -w /usr/src/myapp python:3 python the-script.py
 
+# Start a container
+docker start CONTID 
+
+# Stop a container
+docker stop CONTID 
+
 # Work inside container
 docker exec -it CONTID /bin/bash
+
