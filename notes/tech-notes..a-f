@@ -192,11 +192,6 @@ dns: lookup -> nslookup www.fqdn.com
 dns: server used -> /etc/resolv.conf
 
 
-docker: run 1 command in container -> docker exec CONTID ls -l
-docker: run commands in container -> docker exec CONTID sh -c "cd X ; ls -l"
-docker: work inside container -> docker exec -it CONTID /bin/bash
-
-
 drac: default usr/pwd from Dell -> root / calvin
 
 
