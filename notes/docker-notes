@@ -1,0 +1,11 @@
+# Run single command in container and exit 
+docker exec CONTID ls -l
+
+# Run multiple commands in container and exit
+docker exec CONTID sh -c "cd X ; ls -l"
+
+# Run a single python script
+docker run -it --rm --name my-script -v "$PWD":/usr/src/myapp -w /usr/src/myapp python:3 python the-script.py
+
+# Work inside container
+docker exec -it CONTID /bin/bash
