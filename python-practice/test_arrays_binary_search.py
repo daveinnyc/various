@@ -62,3 +62,4 @@ def test_binary_search_not_in_list_small():
     target = -100
 
     assert arrays.binary_search(input_array, target) == -1
+

@@ -45,6 +45,11 @@ def binary_search(input_array, target):
     return guess
 
 
+
+def move_zeros(input_array):
+    return output
+    
+    
 if __name__ == "__main__":
     print("Consider running tests instead")
 
