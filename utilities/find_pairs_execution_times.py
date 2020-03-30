@@ -46,17 +46,17 @@ SIMPLE: 10
 
 
 EFFICIENT: 10
-         22 function calls in 0.003 seconds
+         22 function calls in 0.017 seconds
 
    Ordered by: standard name
 
    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
-        1    0.000    0.000    0.003    0.003 <string>:1(<module>)
-        1    0.001    0.001    0.002    0.002 collections.py:1(<module>)
-        1    0.000    0.000    0.000    0.000 collections.py:26(OrderedDict)
-        1    0.000    0.000    0.000    0.000 collections.py:390(Counter)
-        1    0.001    0.001    0.003    0.003 find_pairs.py:39(find_pairs)
-        1    0.001    0.001    0.001    0.001 heapq.py:31(<module>)
+        1    0.000    0.000    0.017    0.017 <string>:1(<module>)
+        1    0.010    0.010    0.015    0.015 collections.py:11(<module>)
+        1    0.000    0.000    0.000    0.000 collections.py:38(OrderedDict)
+        1    0.000    0.000    0.000    0.000 collections.py:407(Counter)
+        1    0.002    0.002    0.017    0.017 find_pairs.py:38(find_pairs)
+        1    0.005    0.005    0.005    0.005 heapq.py:31(<module>)
         1    0.000    0.000    0.000    0.000 keyword.py:11(<module>)
         2    0.000    0.000    0.000    0.000 {len}
        10    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
@@ -65,13 +65,13 @@ EFFICIENT: 10
 
 
 SIMPLE: 1000
-         2005 function calls in 0.038 seconds
+         2005 function calls in 0.040 seconds
 
    Ordered by: standard name
 
    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
-        1    0.000    0.000    0.038    0.038 <string>:1(<module>)
-        1    0.035    0.035    0.038    0.038 find_pairs.py:2(find_pairs_simple)
+        1    0.000    0.000    0.040    0.040 <string>:1(<module>)
+        1    0.036    0.036    0.040    0.040 find_pairs.py:2(find_pairs_simple)
      1001    0.000    0.000    0.000    0.000 {len}
         1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
      1001    0.003    0.000    0.003    0.000 {range}
@@ -84,7 +84,7 @@ EFFICIENT: 1000
 
    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
         1    0.000    0.000    0.001    0.001 <string>:1(<module>)
-        1    0.001    0.001    0.001    0.001 find_pairs.py:39(find_pairs)
+        1    0.001    0.001    0.001    0.001 find_pairs.py:38(find_pairs)
         2    0.000    0.000    0.000    0.000 {len}
      1000    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
         1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
@@ -92,28 +92,29 @@ EFFICIENT: 1000
 
 
 SIMPLE: 100000
-         200005 function calls in 371.121 seconds
+         200005 function calls in 426.075 seconds
 
    Ordered by: standard name
 
    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
-        1    0.000    0.000  371.121  371.121 <string>:1(<module>)
-        1  338.864  338.864  371.121  371.121 find_pairs.py:2(find_pairs_simple)
-   100001    0.016    0.000    0.016    0.000 {len}
+        1    0.000    0.000  426.075  426.075 <string>:1(<module>)
+        1  371.661  371.661  426.075  426.075 find_pairs.py:2(find_pairs_simple)
+   100001    0.056    0.000    0.056    0.000 {len}
         1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
-   100001   32.240    0.000   32.240    0.000 {range}
+   100001   54.357    0.001   54.357    0.001 {range}
 
 
 EFFICIENT: 100000
-         100007 function calls in 1.970 seconds
+         100007 function calls in 2.278 seconds
 
    Ordered by: standard name
 
    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
-        1    0.001    0.001    1.970    1.970 <string>:1(<module>)
-        1    1.959    1.959    1.968    1.968 find_pairs.py:39(find_pairs)
+        1    0.001    0.001    2.278    2.278 <string>:1(<module>)
+        1    2.260    2.260    2.277    2.277 find_pairs.py:38(find_pairs)
         2    0.000    0.000    0.000    0.000 {len}
-   100000    0.007    0.000    0.007    0.000 {method 'append' of 'list' objects}
+   100000    0.014    0.000    0.014    0.000 {method 'append' of 'list' objects}
         1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
-        2    0.002    0.001    0.002    0.001 {range}
+        2    0.003    0.002    0.003    0.002 {range}
+
 '''        
