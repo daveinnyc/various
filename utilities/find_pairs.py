@@ -29,7 +29,7 @@ def find_pairs_simple(candidate_array, TARGET_VALUE=10):
     13,-3
     """
     for i in range(len(candidate_array)):
-        for j in range(i, len(candidate_array)):
+        for j in range(i + 1, len(candidate_array)):
             if (TARGET_VALUE == candidate_array[i] + candidate_array[j]):
                 #print "%d,%d" % (candidate_array[i], candidate_array[j])
                 None
