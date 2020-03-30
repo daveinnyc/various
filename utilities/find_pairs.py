@@ -1,3 +1,6 @@
+# Doctests will fail unless the print lines are uncommented. Printing is commented out since 
+#   it's not needed to compare the two algorithms 
+
 
 def find_pairs_simple(candidate_array, TARGET_VALUE=10):
     """Find pairs of numbers that sum to TARGET_VALUE, e.g. 10.
