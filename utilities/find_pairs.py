@@ -1,35 +1,38 @@
+# Doctests will fail unless the print lines are uncommented. Printing is commented out since 
+#   it's not needed to compare the two algorithms 
+
 
 def find_pairs_simple(candidate_array, TARGET_VALUE=10):
     """Find pairs of numbers that sum to TARGET_VALUE, e.g. 10.
        This version runs slower than the modified one below
 
-    >>> find_pairs([9])
+    >>> find_pairs_simple([9])
     
-    >>> find_pairs([1,9])
+    >>> find_pairs_simple([1,9])
     1,9
-    >>> find_pairs([9,1])
+    >>> find_pairs_simple([9,1])
     9,1
-    >>> find_pairs([9,1,6])
+    >>> find_pairs_simple([9,1,6])
     9,1
-    >>> find_pairs([9,6,1])
+    >>> find_pairs_simple([9,6,1])
     9,1
-    >>> find_pairs([9,6,1,4,7])
+    >>> find_pairs_simple([9,6,1,4,7])
     9,1
     6,4
-    >>> find_pairs([5])
+    >>> find_pairs_simple([5])
     
-    >>> find_pairs([5,5])
+    >>> find_pairs_simple([5,5])
     5,5
-    >>> find_pairs([1,3,7,5,9])
+    >>> find_pairs_simple([1,3,7,5,9])
     1,9
     3,7
-    >>> find_pairs([1,3,7,5,9], 14)
+    >>> find_pairs_simple([1,3,7,5,9], 14)
     5,9
-    >>> find_pairs([13,-3,7,5,9])
+    >>> find_pairs_simple([13,-3,7,5,9])
     13,-3
     """
     for i in range(len(candidate_array)):
-        for j in range(i, len(candidate_array)):
+        for j in range(i + 1, len(candidate_array)):
             if (TARGET_VALUE == candidate_array[i] + candidate_array[j]):
                 #print "%d,%d" % (candidate_array[i], candidate_array[j])
                 None

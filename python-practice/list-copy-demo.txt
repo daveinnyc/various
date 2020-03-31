@@ -1,0 +1,33 @@
+# Demonstrate that list assignment is a pointer, it doesn't make a copy of a list
+
+## Create a list
+>>> a = [1,3,5,7,9,11]
+# assign it
+>>> b = a
+# copy it
+>>> c = a[:]
+
+
+## Method one - showing different values in assigned or copied lists
+>>> a.append(13)
+>>> a
+[1, 3, 5, 7, 9, 11, 13]
+>>> b
+[1, 3, 5, 7, 9, 11, 13]
+>>> c
+[1, 3, 5, 7, 9, 11]
+
+
+# Method two - using built in '==' and 'is' operators
+>>> a == b
+True
+>>> a is b 
+True
+
+
+# Recopy a onto c after append above
+>>> c = a[:]
+>>> a == c
+True
+>>> a is c
+False
