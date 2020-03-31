@@ -3,21 +3,42 @@
 import pytest
 import find_pairs_pt as fp
 
-def test_one_pair():
-    assert fp.find_pairs_simple([1,9]) == [(1,9)]
-    assert fp.find_pairs([1,9]) == [(1,9)]
 
-'''
->>> find_pairs_simple([9])
+def test_no_pairs():
+    test_array = [9]
+    response = []
+    assert fp.find_pairs_simple(test_array) == response
+    assert fp.find_pairs(test_array) == response
+
+
+def test_one_pair():
+    test_array = [1,9]
+    response = [(1,9)]
+    assert fp.find_pairs_simple(test_array) == response
+    assert fp.find_pairs(test_array) == response
     
-    >>> find_pairs_simple([1,9])
-    1,9
-    >>> find_pairs_simple([9,1])
-    9,1
-    >>> find_pairs_simple([9,1,6])
-    9,1
-    >>> find_pairs_simple([9,6,1])
-    9,1
+    # Same thing, order reversed 
+    test_array = [9,1]
+    response = [(9,1)]
+    assert fp.find_pairs_simple(test_array) == response
+    assert fp.find_pairs(test_array) == response
+    
+    
+def test_values_to_skip():
+    test_array = [9,1,6]
+    response = [(9,1)]
+    assert fp.find_pairs_simple(test_array) == response
+    assert fp.find_pairs(test_array) == response
+
+
+def test_use_both_end_values():
+    test_array = [9,6,1]
+    response = [(9,1)]
+    assert fp.find_pairs_simple(test_array) == response
+    assert fp.find_pairs(test_array) == response
+
+  
+'''
     >>> find_pairs_simple([9,6,1,4,7])
     9,1
     6,4
