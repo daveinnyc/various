@@ -1,3 +1,11 @@
+ /* Development command line shortcuts:
+ 
+  -- remove old DBs, create new one and display query results
+  rm *db ; sqlite3 -column -header example.db < database-example.sql
+*/
+
+
+
 CREATE TABLE users(
 	id INTEGER PRIMARY KEY,
 	firstname TEXT,

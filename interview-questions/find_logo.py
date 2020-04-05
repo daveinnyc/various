@@ -1,3 +1,8 @@
+'''
+  NOTE: The answer to this selenium question required examination of CSS 
+  that was referenced by an element on the rendered page.
+'''  
+  
 import re
 
 from selenium import webdriver

@@ -12,6 +12,20 @@ For Req. 3 The known account password was emailed. Update it below
 For Req. 5 #comments are explanatory for the coding challenge
            'comments are for test documentation
 
+
+  While developing the following are useful one liners. Assumes not closing 
+  firefox explicitly while working on a particular test:
+
+  -- find and kill any running firefoxes, execute all tests
+  FFS=$(ps -e |grep firefox|cut -d" " -f1) ; if [ ${#FFS} -ne 0 ] ; \
+  then killall firefox ; fi ; py.test -q -s selenium-docker-test.py
+
+
+  -- find and kill any running firefoxes, execute only 'test_login'
+  FFS=$(ps -e |grep firefox|cut -d" " -f1) ;if [ ${#FFS} -ne 0 ] ; \
+  then killall firefox ; fi ; py.test -q -s selenium-docker-test.py::test_login
+
+
 Author: Dave Cuthbert
 Copyright: 2016
 License: MIT
