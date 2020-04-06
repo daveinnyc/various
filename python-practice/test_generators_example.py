@@ -39,7 +39,7 @@ def test_fib():
     fibs = list()
     gen = ge.fib()
     for i in range(11):
-        fibs.append(gen.__next__())
+        fibs.append(next(gen))
 
     for index, first in enumerate(fibs):
         if index < (len(fibs) - 2):
