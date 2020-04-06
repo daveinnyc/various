@@ -19,5 +19,17 @@ def fib():
     second = 1
 
     while True:
+        yield first
         first, second = second, first + second
-        yield first, second
+
+
+if __name__ == '__main__':
+    fibs = list()
+    count = 0
+    for n in fib():
+        fibs.append(n) 
+        print(fibs)
+        if count == 10:
+            break
+        else:
+            count += 1        

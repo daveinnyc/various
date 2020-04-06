@@ -9,6 +9,9 @@ def test_lottery_types():
     
 
 def test_lottery_values():
+    # Putting all the asserts in 1 test to avoid regenerating the array 
+    #    multiple times
+    
     NUM_OF_NUMS = 7
     MIN_VAL = 0
     MAX_VAL_NORMAL = 40
@@ -19,7 +22,7 @@ def test_lottery_values():
     
     # Check length of returned set
     assert len(numbers) == NUM_OF_NUMS
-        
+      
     # Check size of last value
     assert type(numbers[-1]).__name__ == "int"
     assert numbers[-1] > MIN_VAL 
@@ -32,19 +35,14 @@ def test_lottery_values():
         assert numbers[i] <= MAX_VAL_NORMAL
 
 
-    
-''' 
-for n in fib(): 
-    print(n) 
-    counter += 1 
-    if counter == 10: 
-        break # fill in this function 
+def test_fib():
+    fibs = list()
+    gen = ge.fib()
+    for i in range(11):
+        fibs.append(gen.__next__())
 
-
-
-
-
-if __name__ == "__main__":   
-        
-    
-'''
+    for index, first in enumerate(fibs):
+        if index < (len(fibs) - 2):
+            second = fibs[index + 1]
+            third = fibs[index + 2]
+            assert third == first + second
