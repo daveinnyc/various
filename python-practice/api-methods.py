@@ -17,13 +17,6 @@ print(f"APPARENT_ENCODING ")
 for resp in responses:
     print(f"{resp.apparent_encoding}\n")
 
-print(f"\n\nCLOSE")
-for resp in responses:
-    print(f"{resp.close()}\n") 
-
-print(f"\n\nCONNECTION")
-for resp in responses:
-    print(f"{resp.connection}\n") 
 
 print(f"\n\nCONTENT")
 for resp in responses:
@@ -58,20 +51,6 @@ print(f"\n\nIS_REDIRECT")
 for resp in responses:
     print(f"{resp.is_redirect}\n") 
 
-print(f"\n\nITER_CONTENT")
-for resp in responses:
-    print(f"{resp.iter_content()}\n") 
-
-print(f"\n\nITER_LINES")
-for resp in responses:
-    print(f"{resp.iter_lines()}\n") 
-
-print(f"\n\nJSON")
-for resp in responses:
-    # No json on example.com, causes error with json()
-    #print(f"{resp.json()}\n") 
-    print(f"{resp.json}\n") 
-
 print(f"\n\nLINKS")
 for resp in responses:
     print(f"{resp.links}\n") 
@@ -83,14 +62,6 @@ for resp in responses:
 print(f"\n\nOK")
 for resp in responses:
     print(f"{resp.ok}\n") 
-
-print(f"\n\nRAISE_FOR_STATUS")
-for resp in responses:
-    print(f"{resp.raise_for_status}\n") 
-
-print(f"\n\nRAW")
-for resp in responses:
-    print(f"{resp.raw}\n") 
 
 print(f"\n\nREASON")
 for resp in responses:
@@ -106,10 +77,27 @@ for resp in responses:
 
 print(f"\n\nTEXT")
 for resp in responses:
-    # python.org has an encoding error converting to ascii output
+    # response is in unicode. cygwin terminal output is ascii
+    # output for python.org has an encoding error converting to ascii output
     #print(f"{resp.text}\n") 
     pass
 
 print(f"\n\nURL")
 for resp in responses:
     print(f"{resp.url}\n")
+
+
+'''
+# Methods available to work with response object
+resp.close()
+resp.iter_content()
+resp.iter_lines() 
+resp.json()
+resp.raise_for_status()
+'''
+
+'''
+# Response object components
+resp.connection
+resp.raw
+'''
