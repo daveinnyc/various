@@ -1,17 +1,21 @@
 import pytest
-import ../__init__ as init
-from selenium import webdriver
+import rename_fotos as rfapp
+
 
 LOCAL_INSTANCE =  "127.0.0.1:5000"
 
+@pytest.fixture
+def client():
+    rfapp.app.config['TESTING'] = True
 
-def test_is_running():
-    init.is_running()
+    with rfapp.app.test_client() as client:
+        with rfapp.app.app_context():
+            rfapp.init_db()
+        yield client
+     
+
+def test_is_running(client):
+    response = client.get('/')
     
-    # Firefox 
-    driver = webdriver.Firefox()
-    driver.get(LOCAl_INSTANCE)
-    
-    assert driver.body == "Flask is running"
-    
+    assert "FAIL" in response.data
     
