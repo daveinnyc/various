@@ -3,6 +3,7 @@
 
 import os
 from flask import Flask
+from flask import request 
 
 def create_app(test_config=None):
     # create and configure the app
@@ -30,4 +31,19 @@ def create_app(test_config=None):
     def hello():
         return 'Hola Mundo'
 
+
+    def shutdown_server():
+        func = request.environ.get('werkzeug.server.shutdown')
+        if func is None:
+            raise RuntimeError('Werkzeug server not running')
+        func()
+            
+        
+    @app.route('/shutdown')
+    def shutdown():
+        shutdown_server()
+        return 'Server shutting down' 
+
     return app
+    
+
