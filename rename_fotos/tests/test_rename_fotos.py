@@ -2,8 +2,6 @@ import pytest
 import rename_fotos as rfapp
 
 
-LOCAL_INSTANCE =  "127.0.0.1:5000"
-
 @pytest.fixture
 def client():
     rfapp.app.config['TESTING'] = True
