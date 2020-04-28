@@ -1,6 +1,11 @@
-import pygame
+import os
 import tkinter as tk
 from tkinter import messagebox
+
+# Suppress pygame output messages
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
+import pygame
+
 
 class cube(object):
     rows = 0
@@ -34,32 +39,49 @@ class snake(object):
         
 
 
-def draw_grid(w, rows, surface):
-    pass
+def draw_grid(width, rows, surface):
+    block_size = width // rows
+    x = 0
+    y = 0
+    
+    for line in range(rows):
+        x = x + block_size
+        y = y + block_size
+        
+        pygame.draw.line(surface, (255, 255, 255), (x, 0), (x, width))
+        pygame.draw.line(surface, (255, 255, 255), (0, y), (width, y))
 
     
 def redraw_window(surface):
-    pass
+    global rows, width, height
+    surface.fill((0, 0, 0))
+    draw_grid(width, rows, surface)
+    pygame.display.update()
 
     
 def random_snack(rows, items):
     pass    
+
     
 def message_box(subject, content):
     pass
+
     
 def main():
+    global rows, width, height    
     width = 500
     height = 500
     rows = 20
-    win = pygame.display.set_mode((width, height))
+    window = pygame.display.set_mode((width, height))
     serpent = snake((255, 0, 0), (10, 10))
     delay = True
     
+    clock = pygame.time.Clock()
     while delay:
-        pygame.time.delay(50)
-        
-    pass
+        pygame.time.delay(50) # Lower values make game faster
+        clock.tick(10)        # Lower values make game slower   
+        redraw_window(window)
+                
     
     
 if __name__ == "__main__":
