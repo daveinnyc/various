@@ -10,6 +10,7 @@
 #   TODO: Add height, width, speed parameters 
 #   TODO: Change magic numbers for colors to names
 #   TODO: Random starting point
+#   TODO: Random starting point on reset
 #   TODO: Clean up eye drawing code
 #   TODO: fix naming in random_snack, item is a snake
 #   TODO: rows, columns may not always be equal numbers
@@ -225,6 +226,9 @@ def main():
         for x in range(len(serpent.body)):
             if serpent.body[x].pos in list(map(lambda z:z.pos, serpent.body[x+1:])):
                 print(f"Score: {len(serpent.body)}")
+                message_box()
+                serpent.reset((10,10))
+                break
                 
         redraw_window(window)
                 
