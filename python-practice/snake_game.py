@@ -1,3 +1,11 @@
+# Modified version of code in https://www.youtube.com/watch?v=CD4qAhfFuLo
+#   Improve variable naming clarity
+#   Change camel case to underscores per PEP8
+#   Suppress output line from pygame library
+#   TODO: Add height, width, speed parameters 
+#   TODO; Change magic numbers for colors to names
+
+
 import os
 import tkinter as tk
 from tkinter import messagebox
