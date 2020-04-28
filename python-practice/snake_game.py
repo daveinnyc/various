@@ -18,6 +18,7 @@
 #   TODO: Check lambdas that look for collisions
 #   TODO: display current score
 #   TODO: improve score display on collision
+#   TODO: cube dimensions should not be hard coded
 
 
 import os
@@ -135,7 +136,7 @@ class snake():
         self.head = cube(pos)
         self.body = []
         self.body.append(self.head)
-        self.turns = []
+        self.turns = {}
         self.dirnx = 0
         self.dirny = 1
         
