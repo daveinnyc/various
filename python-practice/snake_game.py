@@ -1,12 +1,22 @@
-# Modified version of code in https://www.youtube.com/watch?v=CD4qAhfFuLo
-#   Improve variable naming clarity
-#   Change camel case to underscores per PEP8
-#   Suppress output line from pygame library
+#   Refactor game code for clarity, style, improved quality
+#   Original code from https://www.youtube.com/watch?v=CD4qAhfFuLo
+#
+#   - Add if __name__ section for better modularity
+#   - Improve variable naming clarity
+#   - Change camel case to underscores per PEP8
+#   - Suppress output line from pygame library
+#   - Fix variable object initialization in cube class
+#   TODO: Get rid of global variables
 #   TODO: Add height, width, speed parameters 
-#   TODO; Change magic numbers for colors to names
-
+#   TODO: Change magic numbers for colors to names
+#   TODO: Random starting point
+#   TODO: Clean up eye drawing code
+#   TODO: fix naming in random_snack, item is a snake
+#   TODO: rows, columns may not always be equal numbers
+#   TODO: should snack or snake draw first? 
 
 import os
+import random
 import tkinter as tk
 from tkinter import messagebox
 
@@ -15,35 +25,134 @@ os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
 
 
-class cube(object):
-    rows = 0
-    w = 0
+class cube():
+    rows = 20
+    width = 500
     
-    def __init__(self, start, dirnx=0, diry=0, color=(255,0,0)):
-        pass
+    def __init__(self, start, dirnx=0, dirny=0, color=(255,0,0)):
+        self.pos = start
+        self.dirnx = dirnx
+        self.dirny = dirny
+        self.color = color
         
     def move(self, dirnx, dirny):
-        pass
+        self.dirnx = dirnx
+        self.dirny = dirny
+        # Position counts in units of cubes, not in units of pixels 
+        self.pos = (self.pos[0] + self.dirnx, self.pos[1] + self.dirny)
         
     def draw(self, surface, eyes=False):
-        pass
+        dis = self.width // self.rows
+        
+        x = self.pos[0]
+        y = self.pos[1]
+        # Offsets are to preserve visibility of the grid
+        pygame.draw.rect(surface, self.color, (x * dis + 1, y * dis + 1, dis - 2, dis - 2))
+        
+        if eyes: 
+            center = dis // 2  # Cube center
+            radius = 3  # Eye radius
+            circle_middle = (x * dis + center - radius, y * dis + 8)
+            circle_middle2 = (x * dis + dis - radius * 2, y * dis + 8)
+            # TODO - take out color magic number
+            pygame.draw.circle(surface, (0,0,0), circle_middle, radius)
+            pygame.draw.circle(surface, (0,0,0), circle_middle2, radius)
+            
+        
         
     
-class snake(object):
+class snake():
+    body = []
+    turns = {}
+    
     def __init__(self, color, pos):
-        pass
+        self.color = color
+        self.head = cube(pos)
+        self.body.append(self.head)
+        self.dirnx = 0    # Possible values (-1, 0, 1)
+        self.dirny = 1    # Possible values (-1, 0, 1)
+        
     
     def move(self):
-        pass
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            
+            keys = pygame.key.get_pressed()
+
+            # ??? Seems wrong, why loop through all just to check these four? 
+            for key in keys:
+                if keys[pygame.K_LEFT]:
+                    self.dirnx = -1
+                    self.dirny = 0 
+                    # ??? Why copying list for head?
+                    self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+                    
+                elif keys[pygame.K_RIGHT]:
+                    self.dirnx = 1
+                    self.dirny = 0 
+                    # ??? Why copying list for head?
+                    self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+
+                elif keys[pygame.K_UP]:
+                    self.dirnx = 0
+                    self.dirny = -1 
+                    # ??? Why copying list for head?
+                    self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+
+                elif keys[pygame.K_DOWN]:
+                    self.dirnx = 0
+                    self.dirny = 1 
+                    # ??? Why copying list for head?
+                    self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+                    
+        for i, c in enumerate(self.body):
+            p = c.pos[:]
+            if p in self.turns:
+                turn = self.turns[p]
+                c.move(turn[0], turn[1])
+                if i == (len(self.body) - 1):
+                    self.turns.pop(p)
+            else:
+                if c.dirnx == -1 and c.pos[0] <= 0: 
+                    c.pos = (c.rows - 1, c.pos[1])            
+                elif c.dirnx == 1 and c.pos[0] >= c.rows - 1: 
+                    c.pos = (0, c.pos[1])            
+                elif c.dirny == 1 and c.pos[1] >= c.rows - 1: 
+                    c.pos = (c.pos[0], 0)            
+                elif c.dirny == -1 and c.pos[1] <= 0: 
+                    c.pos = (c.pos[0], c.rows - 1)            
+                else:
+                    c.move(c.dirnx, c.dirny)            
+        
         
     def reset(self, pos):
         pass
         
     def add_cube(self):
-        pass
+        tail = self.body[-1]
+        dx, dy = tail.drinx, tail.dirny
+        
+        # Check direction tail is moving and add new cube accordingly
+        if dx == 1 and dy == 0:
+            self.body.append(cube((tail.pos[0] - 1, tail.pos[1])))
+        elif dx == -1 and dy == 0:
+            self.body.append(cube((tail.pos[0] + 1, tail.pos[1])))
+        elif dx == 0 and dy == 1:
+            self.body.append(cube((tail.pos[0], tail.pos[1] - 1)))
+        elif dx == 0 and dy == -1:
+            self.body.append(cube((tail.pos[0], tail.pos[1] + 1)))
+        
+        self.body[-1].dirnx = dx
+        self.body[-1].dirny = dy
         
     def draw(self, surface):
-        pass
+        for i, c in enumerate(self.body):
+            if i == 0:
+                # The first cube has eyes
+                c.draw(surface, True)
+            else:
+                c.draw(surface)
         
 
 
@@ -61,14 +170,29 @@ def draw_grid(width, rows, surface):
 
     
 def redraw_window(surface):
-    global rows, width, height
+    global rows, width, height, serpent, snack
     surface.fill((0, 0, 0))
+    # TODO: should snack, snake, or grid draw first? 
+    serpent.draw(surface)
+    snack.draw(surface)
     draw_grid(width, rows, surface)
     pygame.display.update()
 
     
-def random_snack(rows, items):
-    pass    
+def random_snack(rows, item):
+    # TODO: fix naming, item is a snake
+    # TODO: rows, columns may not always be equal numbers
+    positions = item.body
+    
+    while
+        x = random.randrange(rows)
+        y = random.randrange(rows)
+        if len(list(filter(lambda z:z.pos == (x,y), positions))) > 0:
+            continue
+        else:
+            break
+            
+    return (x,y)        
 
     
 def message_box(subject, content):
@@ -76,18 +200,23 @@ def message_box(subject, content):
 
     
 def main():
-    global rows, width, height    
+    global rows, width, height, serpent    
     width = 500
     height = 500
     rows = 20
     window = pygame.display.set_mode((width, height))
     serpent = snake((255, 0, 0), (10, 10))
+    snack = cube(random_snack(rows, serpent), color=(0, 255, 0)) # Color is green
     delay = True
     
     clock = pygame.time.Clock()
     while delay:
-        pygame.time.delay(50) # Lower values make game faster
+        pygame.time.delay(75) # Lower values make game faster
         clock.tick(10)        # Lower values make game slower   
+        serpent.move()
+        if serpent.body[0].pos == snack.pos:
+            serpent.add_cube()
+            snack = cube(random_snack(rows, serpent), color=(0, 255, 0))
         redraw_window(window)
                 
     
