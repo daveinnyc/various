@@ -14,6 +14,10 @@
 #   TODO: fix naming in random_snack, item is a snake
 #   TODO: rows, columns may not always be equal numbers
 #   TODO: should snack or snake draw first? 
+#   TODO: Check lambdas that look for collisions
+#   TODO: display current score
+#   TODO: improve score display on collision
+
 
 import os
 import random
@@ -131,7 +135,7 @@ class snake():
         
     def add_cube(self):
         tail = self.body[-1]
-        dx, dy = tail.drinx, tail.dirny
+        dx, dy = tail.dirnx, tail.dirny
         
         # Check direction tail is moving and add new cube accordingly
         if dx == 1 and dy == 0:
@@ -184,7 +188,7 @@ def random_snack(rows, item):
     # TODO: rows, columns may not always be equal numbers
     positions = item.body
     
-    while
+    while True:
         x = random.randrange(rows)
         y = random.randrange(rows)
         if len(list(filter(lambda z:z.pos == (x,y), positions))) > 0:
@@ -200,7 +204,7 @@ def message_box(subject, content):
 
     
 def main():
-    global rows, width, height, serpent    
+    global rows, width, height, serpent, snack    
     width = 500
     height = 500
     rows = 20
@@ -211,12 +215,17 @@ def main():
     
     clock = pygame.time.Clock()
     while delay:
-        pygame.time.delay(75) # Lower values make game faster
-        clock.tick(10)        # Lower values make game slower   
+        pygame.time.delay(65) # Lower values make game faster
+        clock.tick(8)        # Lower values make game slower   
         serpent.move()
         if serpent.body[0].pos == snack.pos:
             serpent.add_cube()
             snack = cube(random_snack(rows, serpent), color=(0, 255, 0))
+            
+        for x in range(len(serpent.body)):
+            if serpent.body[x].pos in list(map(lambda z:z.pos, serpent.body[x+1:])):
+                print(f"Score: {len(serpent.body)}")
+                
         redraw_window(window)
                 
     
