@@ -19,6 +19,7 @@
 #   TODO: display current score
 #   TODO: improve score display on collision
 #   TODO: cube dimensions should not be hard coded
+#   TODO: Change title of pygame window
 
 
 import os
