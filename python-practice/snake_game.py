@@ -209,7 +209,7 @@ def random_snack(rows, item):
     
 def message_box(subject, content):
     root = tk.Tk()
-    root.attributes("--topmost", True)
+    root.attributes("-topmost", True)
     root.withdraw()
     messagebox.showinfo(subject, content)
     # How does this work? Is it waiting for a click to dismiss the box?
