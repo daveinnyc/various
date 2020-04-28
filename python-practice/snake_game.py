@@ -241,7 +241,7 @@ def main():
         for x in range(len(serpent.body)):
             if serpent.body[x].pos in list(map(lambda z:z.pos, serpent.body[x+1:])):
                 print(f"Score: {len(serpent.body)}")
-                message_box()
+                message_box('Game over', 'Play again?')
                 serpent.reset((10,10))
                 break
                 
