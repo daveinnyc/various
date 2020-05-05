@@ -4,24 +4,26 @@
 #   - Add if __name__ section for better modularity
 #   - Improve variable naming clarity
 #   - Change camel case to underscores per PEP8
+#   - Change class names to CapWords convention
 #   - Suppress output line from pygame library
-#   - Fix variable object initialization in cube class
+#   - Fix variable object initialization in Cube class
 #   TODO: Get rid of global variables
 #   TODO: Add height, width, speed parameters 
 #   TODO: Change magic numbers for colors to names
 #   TODO: Random starting point
 #   TODO: Random starting point on reset
 #   TODO: Clean up eye drawing code
-#   TODO: fix naming in random_snack, item is a snake
+#   TODO: fix naming in random_snack, item is a Snake
 #   TODO: rows, columns may not always be equal numbers
-#   TODO: should snack or snake draw first? 
+#   TODO: should snack or Snake draw first? 
 #   TODO: Check lambdas that look for collisions
 #   TODO: display current score
 #   TODO: improve score display on collision
-#   TODO: cube dimensions should not be hard coded
+#   TODO: Cube dimensions should not be hard coded
 #   TODO: Change title of pygame window
 
 
+import snake_constants as const
 import os
 import random
 import tkinter as tk
@@ -31,8 +33,7 @@ from tkinter import messagebox
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
 
-
-class cube():
+class Cube():
     rows = 20
     width = 500
     
@@ -45,7 +46,7 @@ class cube():
     def move(self, dirnx, dirny):
         self.dirnx = dirnx
         self.dirny = dirny
-        # Position counts in units of cubes, not in units of pixels 
+        # Position counts in units of Cubes, not in units of pixels 
         self.pos = (self.pos[0] + self.dirnx, self.pos[1] + self.dirny)
         
     def draw(self, surface, eyes=False):
@@ -68,13 +69,13 @@ class cube():
         
         
     
-class snake():
+class Snake():
     body = []
     turns = {}
     
     def __init__(self, color, pos):
         self.color = color
-        self.head = cube(pos)
+        self.head = Cube(pos)
         self.body.append(self.head)
         self.dirnx = 0    # Possible values (-1, 0, 1)
         self.dirny = 1    # Possible values (-1, 0, 1)
@@ -134,7 +135,7 @@ class snake():
         
         
     def reset(self, pos):
-        self.head = cube(pos)
+        self.head = Cube(pos)
         self.body = []
         self.body.append(self.head)
         self.turns = {}
@@ -142,19 +143,19 @@ class snake():
         self.dirny = 1
         
         
-    def add_cube(self):
+    def add_Cube(self):
         tail = self.body[-1]
         dx, dy = tail.dirnx, tail.dirny
         
-        # Check direction tail is moving and add new cube accordingly
+        # Check direction tail is moving and add new Cube accordingly
         if dx == 1 and dy == 0:
-            self.body.append(cube((tail.pos[0] - 1, tail.pos[1])))
+            self.body.append(Cube((tail.pos[0] - 1, tail.pos[1])))
         elif dx == -1 and dy == 0:
-            self.body.append(cube((tail.pos[0] + 1, tail.pos[1])))
+            self.body.append(Cube((tail.pos[0] + 1, tail.pos[1])))
         elif dx == 0 and dy == 1:
-            self.body.append(cube((tail.pos[0], tail.pos[1] - 1)))
+            self.body.append(Cube((tail.pos[0], tail.pos[1] - 1)))
         elif dx == 0 and dy == -1:
-            self.body.append(cube((tail.pos[0], tail.pos[1] + 1)))
+            self.body.append(Cube((tail.pos[0], tail.pos[1] + 1)))
         
         self.body[-1].dirnx = dx
         self.body[-1].dirny = dy
@@ -162,7 +163,7 @@ class snake():
     def draw(self, surface):
         for i, c in enumerate(self.body):
             if i == 0:
-                # The first cube has eyes
+                # The first Cube has eyes
                 c.draw(surface, True)
             else:
                 c.draw(surface)
@@ -178,14 +179,14 @@ def draw_grid(width, rows, surface):
         x = x + block_size
         y = y + block_size
         
-        pygame.draw.line(surface, (255, 255, 255), (x, 0), (x, width))
-        pygame.draw.line(surface, (255, 255, 255), (0, y), (width, y))
+        pygame.draw.line(surface, const.WHITE, (x, 0), (x, width))
+        pygame.draw.line(surface, const.WHITE, (0, y), (width, y))
 
     
 def redraw_window(surface):
     global rows, width, height, serpent, snack
     surface.fill((0, 0, 0))
-    # TODO: should snack, snake, or grid draw first? 
+    # TODO: should snack, Snake, or grid draw first? 
     serpent.draw(surface)
     snack.draw(surface)
     draw_grid(width, rows, surface)
@@ -193,7 +194,7 @@ def redraw_window(surface):
 
     
 def random_snack(rows, item):
-    # TODO: fix naming, item is a snake
+    # TODO: fix naming, item is a Snake
     # TODO: rows, columns may not always be equal numbers
     positions = item.body
     
@@ -226,8 +227,8 @@ def main():
     height = 500
     rows = 20
     window = pygame.display.set_mode((width, height))
-    serpent = snake((255, 0, 0), (10, 10))
-    snack = cube(random_snack(rows, serpent), color=(0, 255, 0)) # Color is green
+    serpent = Snake((255, 0, 0), (10, 10))
+    snack = Cube(random_snack(rows, serpent), color=(0, 255, 0)) # Color is green
     delay = True
     
     clock = pygame.time.Clock()
@@ -236,8 +237,8 @@ def main():
         clock.tick(8)        # Lower values make game slower   
         serpent.move()
         if serpent.body[0].pos == snack.pos:
-            serpent.add_cube()
-            snack = cube(random_snack(rows, serpent), color=(0, 255, 0))
+            serpent.add_Cube()
+            snack = Cube(random_snack(rows, serpent), color=(0, 255, 0))
             
         for x in range(len(serpent.body)):
             if serpent.body[x].pos in list(map(lambda z:z.pos, serpent.body[x+1:])):
