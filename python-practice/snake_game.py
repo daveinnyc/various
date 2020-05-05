@@ -1,15 +1,16 @@
 #   Refactor game code for clarity, style, improved quality
 #   Original code from https://www.youtube.com/watch?v=CD4qAhfFuLo
 #
-#   - Add if __name__ section for better modularity
-#   - Improve variable naming clarity
-#   - Change camel case to underscores per PEP8
-#   - Change class names to CapWords convention
-#   - Suppress output line from pygame library
-#   - Fix variable object initialization in Cube class
+#   ADD: if __name__ section for better modularity
+#   FIX: Improve variable naming clarity
+#   FIX: Change camel case to underscores per PEP8
+#   FIX: Change class names to CapWords convention
+#   FIX: Suppress output line from pygame library
+#   FIX: make object initialization variable in Cube class
+#   FIX: Change magic numbers for colors to names
+
 #   TODO: Get rid of global variables
 #   TODO: Add height, width, speed parameters 
-#   TODO: Change magic numbers for colors to names
 #   TODO: Random starting point
 #   TODO: Random starting point on reset
 #   TODO: Clean up eye drawing code
@@ -21,6 +22,7 @@
 #   TODO: improve score display on collision
 #   TODO: Cube dimensions should not be hard coded
 #   TODO: Change title of pygame window
+#   TODO: Add 'no' to play again dialog
 
 
 import snake_constants as const
