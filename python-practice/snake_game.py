@@ -63,8 +63,8 @@ class Cube():
             circle_middle = (x * dis + center - radius, y * dis + 8)
             circle_middle2 = (x * dis + dis - radius * 2, y * dis + 8)
             # TODO - take out color magic number
-            pygame.draw.circle(surface, (0,0,0), circle_middle, radius)
-            pygame.draw.circle(surface, (0,0,0), circle_middle2, radius)
+            pygame.draw.circle(surface, const.BLACK, circle_middle, radius)
+            pygame.draw.circle(surface, const.BLACK, circle_middle2, radius)
             
         
         
@@ -185,7 +185,7 @@ def draw_grid(width, rows, surface):
     
 def redraw_window(surface):
     global rows, width, height, serpent, snack
-    surface.fill((0, 0, 0))
+    surface.fill((const.BLACK))
     # TODO: should snack, Snake, or grid draw first? 
     serpent.draw(surface)
     snack.draw(surface)
@@ -227,8 +227,8 @@ def main():
     height = 500
     rows = 20
     window = pygame.display.set_mode((width, height))
-    serpent = Snake((255, 0, 0), (10, 10))
-    snack = Cube(random_snack(rows, serpent), color=(0, 255, 0)) # Color is green
+    serpent = Snake(const.RED, (10, 10))
+    snack = Cube(random_snack(rows, serpent), color=const.GREEN) # Color is green
     delay = True
     
     clock = pygame.time.Clock()
@@ -238,7 +238,7 @@ def main():
         serpent.move()
         if serpent.body[0].pos == snack.pos:
             serpent.add_Cube()
-            snack = Cube(random_snack(rows, serpent), color=(0, 255, 0))
+            snack = Cube(random_snack(rows, serpent), color=const.GREEN)
             
         for x in range(len(serpent.body)):
             if serpent.body[x].pos in list(map(lambda z:z.pos, serpent.body[x+1:])):
