@@ -38,9 +38,12 @@ import pygame
 
 class Cube():
     # Set default sizes
-    rows = 20
-    width = 500
-    height = 500
+    #rows = 20
+    #width = 500
+    #height = 500
+    rows = 0
+    width = 0
+    height = 0
     
     def __init__(self, start, dirnx=0, dirny=0, color=(255,0,0)):
         self.pos = start
@@ -250,12 +253,18 @@ def main(set_rows, set_width, set_height):
         redraw_window(window, rows, width, serpent, snack)
                 
     
+def set_cube_size(rows, height, width):
+    Cube.rows = rows
+    Cube.height = height
+    Cube.width = width
+    
     
 if __name__ == "__main__":
     # Rows are an integer count
     # width, height are in pixels
-    rows = 20
+    rows = 10
     screen_width = 500
     screen_height = 500
-        
+    
+    set_cube_size(rows, screen_width, screen_height)         
     main(rows, screen_width, screen_height)     
