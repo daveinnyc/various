@@ -1,27 +1,26 @@
 #   Refactor game code for clarity, style, improved quality
 #   Original code from https://www.youtube.com/watch?v=CD4qAhfFuLo
 #
-#   ADD: if __name__ section for better modularity
-#   FIX: Improve variable naming clarity
-#   FIX: Change camel case to underscores per PEP8
-#   FIX: Change class names to CapWords convention
-#   FIX: Suppress output line from pygame library
-#   FIX: make object initialization variable in Cube class
-#   FIX: Change magic numbers for colors to names
+#   ADDED: if __name__ section for better modularity
+#   ADDED: Add reasonable title to pygame window
 #
-#   TODO: Get rid of global variables
+#   FIXED: Improve variable naming clarity
+#   FIXED: Change camel case to underscores per PEP8
+#   FIXED: Change class names to CapWords convention
+#   FIXED: Suppress output line from pygame library
+#   FIXED: make object initialization variable in Cube class
+#   FIXED: Change magic numbers for colors to names
+#   FIXED: Get rid of global variables
+#   
 #   TODO: Add height, width, speed parameters 
 #   TODO: Random starting point
 #   TODO: Random starting point on reset
 #   TODO: Clean up eye drawing code
-#   TODO: fix naming in random_snack, item is a Snake
 #   TODO: rows, columns may not always be equal numbers
-#   TODO: should snack or Snake draw first? 
 #   TODO: Check lambdas that look for collisions
 #   TODO: display current score
 #   TODO: improve score display on collision
 #   TODO: Cube dimensions should not be hard coded
-#   TODO: Change title of pygame window
 #
 #   ON HOLD 
 #   TODO: Add 'no' to play again dialog --> pygame doesn't appear to have dialog boxes
@@ -64,11 +63,10 @@ class Cube():
         pygame.draw.rect(surface, self.color, (x * dis + 1, y * dis + 1, dis - 2, dis - 2))
         
         if eyes: 
-            center = dis // 2  # Cube center
-            radius = 3  # Eye radius
+            center = dis // 2     # Cube center
+            radius = 3            # Eye radius
             circle_middle = (x * dis + center - radius, y * dis + 8)
             circle_middle2 = (x * dis + dis - radius * 2, y * dis + 8)
-            # TODO - take out color magic number
             pygame.draw.circle(surface, const.BLACK, circle_middle, radius)
             pygame.draw.circle(surface, const.BLACK, circle_middle2, radius)
             
@@ -94,7 +92,6 @@ class Snake():
             
             keys = pygame.key.get_pressed()
 
-            # ??? Seems wrong, why loop through all just to check these four? 
             for key in keys:
                 if keys[pygame.K_LEFT]:
                     self.dirnx = -1
@@ -190,7 +187,6 @@ def draw_grid(width, rows, surface):
 
     
 def redraw_window(surface, rows, width, snake, snack):
-    #DEL global rows, width, height, serpent, snack
     surface.fill((const.BLACK))
     snake.draw(surface)
     snack.draw(surface)
@@ -226,11 +222,11 @@ def message_box(subject, content):
 
     
 def main(set_rows, set_width, set_height):
-    #DEL global rows, width, height, serpent, snack    
     width = set_width
     height = set_height
     rows = set_rows
     window = pygame.display.set_mode((width, height))
+    pygame.display.set_caption('Feed the snake!')
     serpent = Snake(const.RED, (10, 10))
     snack = Cube(random_snack(rows, serpent), color=const.GREEN)
     delay = True
