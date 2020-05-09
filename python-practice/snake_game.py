@@ -8,7 +8,7 @@
 #   FIX: Suppress output line from pygame library
 #   FIX: make object initialization variable in Cube class
 #   FIX: Change magic numbers for colors to names
-
+#
 #   TODO: Get rid of global variables
 #   TODO: Add height, width, speed parameters 
 #   TODO: Random starting point
@@ -22,7 +22,9 @@
 #   TODO: improve score display on collision
 #   TODO: Cube dimensions should not be hard coded
 #   TODO: Change title of pygame window
-#   TODO: Add 'no' to play again dialog
+#
+#   ON HOLD 
+#   TODO: Add 'no' to play again dialog --> pygame doesn't appear to have dialog boxes
 
 
 import snake_constants as const
@@ -36,8 +38,10 @@ os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
 
 class Cube():
+    # Set default sizes
     rows = 20
     width = 500
+    height = 500
     
     def __init__(self, start, dirnx=0, dirny=0, color=(255,0,0)):
         self.pos = start
@@ -185,20 +189,18 @@ def draw_grid(width, rows, surface):
         pygame.draw.line(surface, const.WHITE, (0, y), (width, y))
 
     
-def redraw_window(surface):
-    global rows, width, height, serpent, snack
+def redraw_window(surface, rows, width, snake, snack):
+    #DEL global rows, width, height, serpent, snack
     surface.fill((const.BLACK))
-    # TODO: should snack, Snake, or grid draw first? 
-    serpent.draw(surface)
+    snake.draw(surface)
     snack.draw(surface)
     draw_grid(width, rows, surface)
     pygame.display.update()
 
     
-def random_snack(rows, item):
-    # TODO: fix naming, item is a Snake
+def random_snack(rows, snake):
     # TODO: rows, columns may not always be equal numbers
-    positions = item.body
+    positions = snake.body
     
     while True:
         x = random.randrange(rows)
@@ -215,28 +217,28 @@ def message_box(subject, content):
     root = tk.Tk()
     root.attributes("-topmost", True)
     root.withdraw()
+    # Click to dismiss, no obvious way to convert message box to dialog box
     messagebox.showinfo(subject, content)
-    # How does this work? Is it waiting for a click to dismiss the box?
     try: 
         root.destroy()
     except:
         pass
 
     
-def main():
-    global rows, width, height, serpent, snack    
-    width = 500
-    height = 500
-    rows = 20
+def main(set_rows, set_width, set_height):
+    #DEL global rows, width, height, serpent, snack    
+    width = set_width
+    height = set_height
+    rows = set_rows
     window = pygame.display.set_mode((width, height))
     serpent = Snake(const.RED, (10, 10))
-    snack = Cube(random_snack(rows, serpent), color=const.GREEN) # Color is green
+    snack = Cube(random_snack(rows, serpent), color=const.GREEN)
     delay = True
     
     clock = pygame.time.Clock()
     while delay:
         pygame.time.delay(65) # Lower values make game faster
-        clock.tick(8)        # Lower values make game slower   
+        clock.tick(8)         # Lower values make game slower   
         serpent.move()
         if serpent.body[0].pos == snack.pos:
             serpent.add_Cube()
@@ -249,13 +251,15 @@ def main():
                 serpent.reset((10,10))
                 break
                 
-        redraw_window(window)
+        redraw_window(window, rows, width, serpent, snack)
                 
     
     
 if __name__ == "__main__":
-    rows = 0
-    w = 0
-    h = 0
+    # Rows are an integer count
+    # width, height are in pixels
+    rows = 20
+    screen_width = 500
+    screen_height = 500
         
-    main()     
+    main(rows, screen_width, screen_height)     
