@@ -11,6 +11,7 @@
 #   FIXED: make object initialization variable in Cube class
 #   FIXED: Change magic numbers for colors to names
 #   FIXED: Get rid of global variables
+#   FIXED: Cube dimensions should not be hard coded
 #   
 #   TODO: Add height, width, speed parameters 
 #   TODO: Random starting point
@@ -20,7 +21,6 @@
 #   TODO: Check lambdas that look for collisions
 #   TODO: display current score
 #   TODO: improve score display on collision
-#   TODO: Cube dimensions should not be hard coded
 #
 #   ON HOLD 
 #   TODO: Add 'no' to play again dialog --> pygame doesn't appear to have dialog boxes
@@ -37,25 +37,21 @@ os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
 
 class Cube():
-    # Set default sizes
-    #rows = 20
-    #width = 500
-    #height = 500
     rows = 0
     width = 0
     height = 0
     
-    def __init__(self, start, dirnx=0, dirny=0, color=(255,0,0)):
+    def __init__(self, start, direction_x=0, direction_y=0, color=(255,0,0)):
         self.pos = start
-        self.dirnx = dirnx
-        self.dirny = dirny
+        self.direction_x = direction_x
+        self.direction_y = direction_y
         self.color = color
         
-    def move(self, dirnx, dirny):
-        self.dirnx = dirnx
-        self.dirny = dirny
+    def move(self, direction_x, direction_y):
+        self.direction_x = direction_x
+        self.direction_y = direction_y
         # Position counts in units of Cubes, not in units of pixels 
-        self.pos = (self.pos[0] + self.dirnx, self.pos[1] + self.dirny)
+        self.pos = (self.pos[0] + self.direction_x, self.pos[1] + self.direction_y)
         
     def draw(self, surface, eyes=False):
         dis = self.width // self.rows
@@ -84,8 +80,8 @@ class Snake():
         self.color = color
         self.head = Cube(pos)
         self.body.append(self.head)
-        self.dirnx = 0    # Possible values (-1, 0, 1)
-        self.dirny = 1    # Possible values (-1, 0, 1)
+        self.direction_x = 0    # Possible values (-1, 0, 1)
+        self.direction_y = 1    # Possible values (-1, 0, 1)
         
     
     def move(self):
@@ -97,28 +93,28 @@ class Snake():
 
             for key in keys:
                 if keys[pygame.K_LEFT]:
-                    self.dirnx = -1
-                    self.dirny = 0 
+                    self.direction_x = -1
+                    self.direction_y = 0 
                     # ??? Why copying list for head?
-                    self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+                    self.turns[self.head.pos[:]] = [self.direction_x, self.direction_y]
                     
                 elif keys[pygame.K_RIGHT]:
-                    self.dirnx = 1
-                    self.dirny = 0 
+                    self.direction_x = 1
+                    self.direction_y = 0 
                     # ??? Why copying list for head?
-                    self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+                    self.turns[self.head.pos[:]] = [self.direction_x, self.direction_y]
 
                 elif keys[pygame.K_UP]:
-                    self.dirnx = 0
-                    self.dirny = -1 
+                    self.direction_x = 0
+                    self.direction_y = -1 
                     # ??? Why copying list for head?
-                    self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+                    self.turns[self.head.pos[:]] = [self.direction_x, self.direction_y]
 
                 elif keys[pygame.K_DOWN]:
-                    self.dirnx = 0
-                    self.dirny = 1 
+                    self.direction_x = 0
+                    self.direction_y = 1 
                     # ??? Why copying list for head?
-                    self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+                    self.turns[self.head.pos[:]] = [self.direction_x, self.direction_y]
                     
         for i, c in enumerate(self.body):
             p = c.pos[:]
@@ -128,16 +124,16 @@ class Snake():
                 if i == (len(self.body) - 1):
                     self.turns.pop(p)
             else:
-                if c.dirnx == -1 and c.pos[0] <= 0: 
+                if c.direction_x == -1 and c.pos[0] <= 0: 
                     c.pos = (c.rows - 1, c.pos[1])            
-                elif c.dirnx == 1 and c.pos[0] >= c.rows - 1: 
+                elif c.direction_x == 1 and c.pos[0] >= c.rows - 1: 
                     c.pos = (0, c.pos[1])            
-                elif c.dirny == 1 and c.pos[1] >= c.rows - 1: 
+                elif c.direction_y == 1 and c.pos[1] >= c.rows - 1: 
                     c.pos = (c.pos[0], 0)            
-                elif c.dirny == -1 and c.pos[1] <= 0: 
+                elif c.direction_y == -1 and c.pos[1] <= 0: 
                     c.pos = (c.pos[0], c.rows - 1)            
                 else:
-                    c.move(c.dirnx, c.dirny)            
+                    c.move(c.direction_x, c.direction_y)            
         
         
     def reset(self, pos):
@@ -145,13 +141,13 @@ class Snake():
         self.body = []
         self.body.append(self.head)
         self.turns = {}
-        self.dirnx = 0
-        self.dirny = 1
+        self.direction_x = 0
+        self.direction_y = 1
         
         
     def add_Cube(self):
         tail = self.body[-1]
-        dx, dy = tail.dirnx, tail.dirny
+        dx, dy = tail.direction_x, tail.direction_y
         
         # Check direction tail is moving and add new Cube accordingly
         if dx == 1 and dy == 0:
@@ -163,8 +159,8 @@ class Snake():
         elif dx == 0 and dy == -1:
             self.body.append(Cube((tail.pos[0], tail.pos[1] + 1)))
         
-        self.body[-1].dirnx = dx
-        self.body[-1].dirny = dy
+        self.body[-1].direction_x = dx
+        self.body[-1].direction_y = dy
         
     def draw(self, surface):
         for i, c in enumerate(self.body):
