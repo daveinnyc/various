@@ -41,7 +41,7 @@ class Cube():
     width = 0
     height = 0
     
-    def __init__(self, start, direction_x=0, direction_y=0, color=(255,0,0)):
+    def __init__(self, start, direction_x=0, direction_y=0, color=(const.RED)):
         self.pos = start
         self.direction_x = direction_x
         self.direction_y = direction_y
