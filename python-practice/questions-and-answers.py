@@ -1,6 +1,7 @@
-####################################
-### Compare use of 'is' and '==' ###
-####################################
+##########################################
+###### Compare use of 'is' and '==' ######
+##########################################
+'''
 # Create two lists
 a = [1, 2, 3]
 c = [1, 2, 3]
@@ -51,5 +52,37 @@ print("## Update the copied list, show original unchanged.")
 print(f"a: {a}")
 print(f"d: {d}")
 print("")
+'''
 
-##################################################
+########################
+###### Decorators ######
+########################
+# A function that takes another function as an argument, 
+#   does something, then executes the passed function
+
+# Sample decorator
+def decorator_function(input_function):
+    def do_something():
+        # Do something 
+        print("Inside the decorator")
+        print(f"Called: {input_fuction}")
+        
+        # Execute the original function
+        input_function()
+        
+    return do_something()
+
+# Sample functions
+def func_one():
+    print("ONE")
+    
+def func_two(input_string):
+    print(input_string)
+    
+# Use the decorator
+#@decorator_function
+func_one()
+
+#@decorator_function    
+func_two("TWO")    
+    
