@@ -149,6 +149,7 @@ print(list(map(cuadrado, lista)))
 #####################################
 ###### Remove List Duplicates  ######
 #####################################
+'''
 # If order is not important
 a = [3, 2, 1, 5, 2, 2]
 normalized_a = list(set(a))
@@ -169,5 +170,24 @@ for val in b:
 
 print(b)
 print(normalized_b)
-        
+'''
+
+##############################
+###### append v extend  ######
+##############################
+a = [1, 2, 3]
+b = [5, 6, 7]
+
+# Make a copy of a, append b
+c = a[:]
+c.append(b)
+
+# Make a copy of a, extend b
+d = a[:]
+d.extend(b)
+
+# b added as a single value
+print(c)
+# b added as individual elements
+print(d)     
     
