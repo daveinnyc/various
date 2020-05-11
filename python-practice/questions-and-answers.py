@@ -57,6 +57,7 @@ print("")
 ########################
 ###### Decorators ######
 ########################
+'''
 # A function that takes another function as an argument, 
 #   does something, then executes the passed function
 
@@ -85,4 +86,14 @@ func_one()
 
 #@decorator_function    
 func_two("TWO")    
-    
+'''
+
+############################
+###### Range Operator ######
+############################
+# Count backwards from 100 to 0 by 10s 
+#   NOTE: stop value is not included
+counts = list(range(100, -10, -10))
+print(counts)
+
+
