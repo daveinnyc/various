@@ -102,6 +102,7 @@ print(counts)
 ###############################
 ###### Class defintition ######
 ###############################
+'''
 # Define a class, instantiate it, return an instance value and a class value
 
 class Sample:
@@ -131,3 +132,14 @@ Sample.class_var = 200
 print("\n## Update class variable")
 print(f"sample_1.class_var {sample_1.class_var}")
 print(f"sample_1.class_var {sample_2.class_var}")
+'''
+
+##########################
+###### Map function ######
+##########################
+# map will apply a function to each member of an iterable
+def cuadrado(x):
+    return x * x
+    
+lista = [1, 2, 3, 4, 5]
+print(list(map(cuadrado, lista)))
