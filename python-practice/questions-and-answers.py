@@ -91,9 +91,43 @@ func_two("TWO")
 ############################
 ###### Range Operator ######
 ############################
+'''
 # Count backwards from 100 to 0 by 10s 
 #   NOTE: stop value is not included
 counts = list(range(100, -10, -10))
 print(counts)
+'''
 
 
+###############################
+###### Class defintition ######
+###############################
+# Define a class, instantiate it, return an instance value and a class value
+
+class Sample:
+    class_var = 100
+    
+    def __init__(self, a, b=10):
+        self.a = a
+        self.b = b
+        
+    def get_b(self):
+        return self.b
+        
+sample_1 = Sample(1)
+sample_2 = Sample(2, 20)
+
+print(f"sample_1.a {sample_1.a}")
+print(f"sample_2.a {sample_2.a}")
+print("")
+print(f"sample_1.b {sample_1.b}")
+print(f"sample_1.b {sample_2.b}")
+print("")
+print(f"sample_1.class_var {sample_1.class_var}")
+print(f"sample_1.class_var {sample_2.class_var}")
+
+# Update class variable
+Sample.class_var = 200
+print("\n## Update class variable")
+print(f"sample_1.class_var {sample_1.class_var}")
+print(f"sample_1.class_var {sample_2.class_var}")
