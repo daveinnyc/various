@@ -137,9 +137,37 @@ print(f"sample_1.class_var {sample_2.class_var}")
 ##########################
 ###### Map function ######
 ##########################
+'''
 # map will apply a function to each member of an iterable
 def cuadrado(x):
     return x * x
     
 lista = [1, 2, 3, 4, 5]
 print(list(map(cuadrado, lista)))
+'''
+
+#####################################
+###### Remove List Duplicates  ######
+#####################################
+# If order is not important
+a = [3, 2, 1, 5, 2, 2]
+normalized_a = list(set(a))
+print(a)
+print(normalized_a)
+print("")
+
+# If order matters
+from collections import defaultdict
+
+seen = defaultdict(lambda:0)  
+b = [3, 2, 1, 5, 2, 2]
+normalized_b = list()
+for val in b:
+    if seen[val] == 0:
+        normalized_b.append(val)
+        seen[val] += 1
+
+print(b)
+print(normalized_b)
+        
+    
