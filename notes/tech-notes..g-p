@@ -96,6 +96,9 @@ javascript: call external file form HTML -> document.write("Error message only a
 javascript: call external file form HTML -> </SCRIPT>
 
 
+json: pretty print command output -> command | python -m json.tool
+
+
 kali_linux: change screen resolution -> xrndr (to get sizes) ; xrndr -s 1400x1050    
 
 
