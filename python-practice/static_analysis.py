@@ -23,7 +23,8 @@ import tokenize
 
 class FooChecker:
     # Finds instances of foo used as a function
-    # - ignores comments, strings which use 'foo'
+    # - ignores comments, strings which use 'foo' in source
+    # - in bare text finds all instances of 'foo'
     msg = "foo found"
 
     def __init__(self):
@@ -44,7 +45,8 @@ class FooChecker:
     def report(self):
         for violation in self.violations:
             filename, line, col, src_line = violation
-            print(f"{filename}:{line},{col}: {self.msg} :: {src_line}")
+            src = src_line.strip()
+            print(f"{filename}:{line},{col}: {self.msg} :: {src}")
             
 if __name__ == "__main__":
     files = sys.argv[1:]
