@@ -2,10 +2,12 @@
 
 
 def foo():
+    print("This is a string with foo")
     return "FOO"
 
 
 def not_foo():
+    print("This is a string with bar")
     return "NOT FOO"
 
 if __name__ == "__main__":

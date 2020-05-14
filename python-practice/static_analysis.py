@@ -30,19 +30,21 @@ class FooChecker:
     def find_violations(self, filename, tokens):
         print("FINDING")
         for token_type, token, (line, col), _, _, in tokens:
-            if (token_type == tokenize.STRING and (token == "foo")):
-                self.violations.append((filename, line, col))
+            print(f"TT: {token_type}, T:{token} LC:{(line, col)}")
+            if token_type == tokenize.STRING:
+                print(f"T: {token}")
+                if token == "foo":                   
+                    self.violations.append((filename, line, col))
                 
     def check(self, files):
-        print("CHECKING")
+        # print("CHECKING")
         for filename in files:
             with tokenize.open(filename) as fd:
                 tokens = tokenize.generate_tokens(fd.readline)
                 self.find_violations(filename, tokens)
                 
     def report(self):
-        print("REPORTING")
-        print(self.violations)
+        # print("REPORTING")
         for violation in self.violations:
             filename, line, col = violation
             print(f"{filename}: {line}, {col}: {self.msg}")
@@ -56,5 +58,17 @@ if __name__ == "__main__":
     
     
                 
-            
+'''
+###############
+#### NOTES ####            
+###############
+
+# Original blog checker looked for a character: '
+# This modified function only finds strings, not function or variable names
+    def find_violations(self, filename, tokens):
+        print("FINDING")
+        for token_type, token, (line, col), _, _, in tokens:
+            if token_type == tokenize.STRING:
+                if token == "foo":                   
+                    self.violations.append((filename, line, col))
             
