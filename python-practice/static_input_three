@@ -1,0 +1,8 @@
+# TEST: foo as a string
+a = 'foo'
+
+# TEST: foo as a variable, assignment
+foo = 3
+
+# TEST: foo as a variable, use
+print(foo * a)
