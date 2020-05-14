@@ -1,13 +1,15 @@
 # Test file to find instances of foo
 
-
+# TEST: foo as function name
 def foo():
+    # TEST: foo inside a longer string
     print("This is a string with foo")
+    # TEST: foo on its own
+    print("foo")
     return "FOO"
 
-
+# TEST: foo in function name
 def not_foo():
-    print("This is a string with bar")
     return "NOT FOO"
 
 if __name__ == "__main__":
