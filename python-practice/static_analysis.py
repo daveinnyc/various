@@ -22,7 +22,7 @@ import sys
 import tokenize
 
 class FooChecker:
-    # Finds instances of foo used as a function
+    # Finds instances of foo used as a function or variable
     # - ignores comments, strings which use 'foo' in source
     # - in bare text finds all instances of 'foo'
     msg = "foo found"
