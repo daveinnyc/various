@@ -1,0 +1,15 @@
+# Test file to find instances of foo
+
+
+def foo():
+    return "FOO"
+
+
+def not_foo():
+    return "NOT FOO"
+
+if __name__ == "__main__":
+    print(foo)
+    print(not_foo)
+    print(foo())
+    print(not_foo())
