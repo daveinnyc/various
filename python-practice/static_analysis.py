@@ -31,9 +31,10 @@ class FooChecker:
         print("FINDING")
         for token_type, token, (line, col), _, _, in tokens:
             print(f"TT: {token_type}, T:{token} LC:{(line, col)}")
-            if token_type == tokenize.STRING:
+            #if token_type == tokenize.STRING:
+            if token_type == tokenize.NAME:
                 print(f"T: {token}")
-                if token == "foo":                   
+                if "foo" in token:                   
                     self.violations.append((filename, line, col))
                 
     def check(self, files):
@@ -62,6 +63,8 @@ if __name__ == "__main__":
 ###############
 #### NOTES ####            
 ###############
+# Command line invocation for debugging:
+$> python3 -m tokenize -e <input_file>
 
 # Original blog checker looked for a character: '
 # This modified function only finds strings, not function or variable names
@@ -71,4 +74,7 @@ if __name__ == "__main__":
             if token_type == tokenize.STRING:
                 if token == "foo":                   
                     self.violations.append((filename, line, col))
-            
+
+
+'''
+# EOF            
