@@ -22,31 +22,29 @@ import sys
 import tokenize
 
 class FooChecker:
+    # Finds instances of foo used as a function
+    # - ignores comments, strings which use 'foo'
     msg = "foo found"
 
     def __init__(self):
         self.violations = list()
         
     def find_violations(self, filename, tokens):
-        print("FINDING")
-        for token_type, token, (line, col), _, _, in tokens:
+        for token_type, token, (line, col), loc_end, src_line, in tokens:
             if token_type == tokenize.NAME:
-                print(f"T: {token} LN: {line}")
                 if token == "foo":                   
-                    self.violations.append((filename, line, col))
+                    self.violations.append((filename, line, col, src_line))
                 
     def check(self, files):
-        # print("CHECKING")
         for filename in files:
             with tokenize.open(filename) as fd:
                 tokens = tokenize.generate_tokens(fd.readline)
                 self.find_violations(filename, tokens)
                 
     def report(self):
-        # print("REPORTING")
         for violation in self.violations:
-            filename, line, col = violation
-            print(f"{filename}: {line}, {col}: {self.msg}")
+            filename, line, col, src_line = violation
+            print(f"{filename}:{line},{col}: {self.msg} :: {src_line}")
             
 if __name__ == "__main__":
     files = sys.argv[1:]
