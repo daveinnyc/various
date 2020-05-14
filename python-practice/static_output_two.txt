@@ -1,5 +1,29 @@
-# Command line tokenizer output for debugging. 
+#### Copy of input file (add 2 to output line numbers)
+python-practice> cat static_input_two
+# Test file to find instances of foo
 
+# TEST: foo as function name
+def foo():
+    # TEST: foo inside a longer string
+    print("This is a string with foo")
+    # TEST: foo on its own
+    print("foo")
+    return "FOO"
+
+# TEST: foo in function name
+def not_foo():
+    return "NOT FOO"
+
+if __name__ == "__main__":
+    print(foo)
+    print(not_foo)
+    print(foo())
+    print(not_foo())
+
+
+
+
+#### Command line tokenizer output for debugging. 
 python-practice> python3 -m tokenize -e static_input_two
 0,0-0,0:            ENCODING       'utf-8'
 1,0-1,36:           COMMENT        '# Test file to find instances of foo'

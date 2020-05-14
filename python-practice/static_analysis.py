@@ -30,11 +30,9 @@ class FooChecker:
     def find_violations(self, filename, tokens):
         print("FINDING")
         for token_type, token, (line, col), _, _, in tokens:
-            print(f"TT: {token_type}, T:{token} LC:{(line, col)}")
-            #if token_type == tokenize.STRING:
             if token_type == tokenize.NAME:
-                print(f"T: {token}")
-                if "foo" in token:                   
+                print(f"T: {token} LN: {line}")
+                if token == "foo":                   
                     self.violations.append((filename, line, col))
                 
     def check(self, files):
@@ -68,6 +66,7 @@ $> python3 -m tokenize -e <input_file>
 
 # Original blog checker looked for a character: '
 # This modified function only finds strings, not function or variable names
+#   doesn't find strings properly either, needs to use 'in' instead of '=='
     def find_violations(self, filename, tokens):
         print("FINDING")
         for token_type, token, (line, col), _, _, in tokens:
