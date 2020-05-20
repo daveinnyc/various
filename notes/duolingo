@@ -1,0 +1,7 @@
+##################
+### In Browser ###
+##################
+## Volume
+Change volume to 50% --> open javascript console (F12) and enter:  Howler.volume(0.5); 
+Get current volume --> open javascript console (F12) and enter:  Howler.volume(); 
+Mute volume --> open javascript console (F12) and enter:  Howler.mute(true); 
