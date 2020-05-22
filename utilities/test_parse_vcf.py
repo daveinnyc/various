@@ -4,5 +4,6 @@ import parse_vcf as pv
 
 
 def test_openfile():
-    # The real input file is called: 001.vcfmod 
-    assert pv.openfile('001.vcfmod')[0] == True
+    # There is a list of files to parse in the main script
+    #   test to make sure a file is opened and returns a list
+    assert str(type(pv.openfile(pv.VCF_FILES[0]))) == "<class 'list'>"
