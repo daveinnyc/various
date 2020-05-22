@@ -1,0 +1,7 @@
+Get git repos --> curl -i -H 'Authorization: token <auth-token>' https://api.github.com/orgs/your-repo/repos | grep "html_url"
+Get last 100 commits -->  curl -i -H 'Authorization: token <auth-token>' https://api.github.com/repos/your-repo/application/commits?per_page=100 
+Get commit activity --> curl -i -H 'Authorization: token <auth-token>' https://api.github.com/repos/your-repo/application/stats/commit_activity
+Get commit stats --> curl -i -H 'Authorization: token <auth-token>' https://api.github.com/repos/your-repo/application/stats/code_frequency
+
+Note: See pagination info (may need to get sha of last commit as marker)
+curl -i -H 'Authorization: token <auth-token>' https://api.github.com/repos/your-repo/application/commits/<commit-id>
