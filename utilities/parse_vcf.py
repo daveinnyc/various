@@ -1,5 +1,10 @@
 # Open a .vcf file and save relevant field in a .csv format
 
+# TODO: Change the list to a dictionary so the order of fields is correct
+# TODO: Add the remaining parsers
+# TODO: Add a function to print to file 
+
+
 VCF_FILES = ['001.vcfmod', '002.vcfmod']
 
 
@@ -23,7 +28,21 @@ def parse_rev(line):
     # REV:2014-07-07T02:21:17Z
     date = line[4:14]
     return date  
-    
+
+
+def parse_org(line):
+    # Lines look like this: 
+    # ORG:Aaaa;
+    # ORG:aaa - bbb;
+    # ORG:Aaa Bbb;
+    # ORG:Aaa\, 4B;
+    # ORG:Aaa;Bbb
+    # ORG:Aaa (BB & Ccc Ddd);
+    line_wo_prefix = line[4:]
+    cleaned_line = ''.join(line_wo_prefix.split(';'))
+    cleaned_line = cleaned_line.strip()
+    return cleaned_line
+
     
 def parse_raw(list_of_lines):
     records = []
@@ -54,7 +73,8 @@ def parse_raw(list_of_lines):
             elif line.startswith('item2', 0):
                 pass
             elif line.startswith('ORG:', 0):
-                pass
+                this_record.append(parse_org(line))
+                print(f"THIS: {this_record}")       
             elif line.startswith('NOTE:', 0):
                 pass
             elif line.startswith('BDAY:', 0):
@@ -62,8 +82,7 @@ def parse_raw(list_of_lines):
             elif line.startswith('X-SOCIALPROFILE', 0):            
                 pass
             elif line.startswith('REV:', 0):
-                this_record.extend(parse_rev(line))
-                print(this_record)               
+                this_record.extend(parse_rev(line))              
             elif line.startswith('BEGIN', 0):
                 # Ignore the new record toggle
                 pass    
