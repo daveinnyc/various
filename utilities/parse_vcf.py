@@ -1,6 +1,5 @@
 # Open a .vcf file and save relevant field in a .csv format
 
-# TODO: Change the list to a dictionary so the order of fields is correct
 # TODO: Add the remaining parsers
 # TODO: Add a function to print to file 
 
@@ -14,7 +13,13 @@ def get_file(file):
 
     return(raw_file)
     
+
+def get_fresh_record():
+    return {'fname':'', 'lname':'', 'tel':'', 'email':'', 'item1':'', 
+            'item2':'', 'itme3':'', 'org':'', 'note':'', 'bday':'', 
+            'rev':'', 'social':''}
     
+       
 def parse_n(line):
     # Lines look like this: 
     # N:LName;FName;;;    
@@ -56,10 +61,21 @@ def parse_bday(line):
     return date  
 
 
+def parse_email(line):
+    # Lines look like this: 
+    # EMAIL;type=INTERNET;type=WORK;type=pref:usr.name@domain.tld
+    line = line.strip()
+    *junk, email = line.split(':')
+    print(f"{line} --> {email}")
+    return email
+
+
 def parse_raw(list_of_lines):
     records = []
     new_record = False
-    this_record = []
+    # NOTE: Indivivual record elements are gathered in a dictionary so the 
+    #       order of fields will be correct later when serialized for output
+    this_record = get_fresh_record()
     unparsed_records = []
     
     for line in list_of_lines:
@@ -67,33 +83,41 @@ def parse_raw(list_of_lines):
             new_record = True
         if line.startswith('END:VCARD', 0):
             new_record = False
-            if len(this_record) > 0 :
-                records.append(this_record)
-            this_record = []
+            records.append(this_record)
+            this_record = get_fresh_record()
         
         if new_record:
             if line.startswith('N:', 0):
-                this_record.extend(parse_n(line))
-                print(this_record)
+                (first, last) = parse_n(line)
+                this_record['fname'] = first
+                this_record['lname'] = last
             elif line.startswith('TEL:', 0):
                 # Might be more than one
                 pass
             elif line.startswith('EMAIL:', 0):
-                pass
+                emails = []
+                emails.append(parse_email(line))
             elif line.startswith('item1', 0):
                 pass
             elif line.startswith('item2', 0):
                 pass
             elif line.startswith('ORG:', 0):
-                this_record.append(parse_org(line))
+                this_record['org'] = parse_org(line)
             elif line.startswith('NOTE:', 0):
                 pass
             elif line.startswith('BDAY:', 0):
-                this_record.append(parse_bday(line))
-            elif line.startswith('X-SOCIALPROFILE', 0):            
-                pass
+                this_record['bday'] = parse_bday(line)
             elif line.startswith('REV:', 0):
-                this_record.extend(parse_rev(line))              
+                this_record['rev'] = parse_rev(line)              
+            elif line.startswith('X-SOCIALPROFILE', 0): 
+                # Ignore this field
+                pass
+            elif line.startswith('VERSION', 0): 
+                # Ignore this field
+                pass
+            elif line.startswith('PRODID', 0): 
+                # Ignore this field
+                pass           
             elif line.startswith('BEGIN', 0):
                 # Ignore the new record toggle
                 pass    

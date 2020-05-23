@@ -22,7 +22,8 @@ def test_parse_raw():
 
     test_list = ['BEGIN:VCARD', 'junk', 'END:VCARD']
     (good, bad) = pv.parse_raw(test_list)
-    assert len(good) == 0
+    # There is always ate least one empty, good record
+    assert len(good) == 1
     assert len(bad) == 1
 
 
@@ -133,6 +134,13 @@ def test_parse_bday():
     test_line = 'BDAY;value=date:1972-03-26\n' 
     assert pv.parse_bday(test_line) == '1972-03-26'
 
+
+#####################
+###  parse_email()  ###
+#####################
+def test_parse_email():
+    test_line = 'EMAIL;type=INTERNET;type=WORK;type=pref:usr.name@domain.tld\n' 
+    assert pv.parse_email(test_line) == 'usr.name@domain.tld'
 
 #########################
 def parse_bday(line):
