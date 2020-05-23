@@ -101,7 +101,7 @@ def test_parse_org():
     test_line = 'ORG:Aaaa;\n' 
     assert pv.parse_org(test_line) == 'Aaaa'
 
-    test_line = 'ORG:Aaaa;\n' 
+    test_line = 'ORG:Aaaa;' 
     assert pv.parse_org(test_line) == 'Aaaa'
 
     test_line = 'ORG:aaa - bbb;' 
@@ -110,10 +110,10 @@ def test_parse_org():
     test_line = 'ORG:Aaa Bbb;' 
     assert pv.parse_org(test_line) == 'Aaa Bbb'
 
-    #test_line = 'ORG:Aaa\ Bbb;'
-    #assert pv.parse_org(test_line) == 'Aaa\ Bbb'
+    test_line = r'ORG:Aaa\ Bbb;'
+    assert pv.parse_org(test_line) == r'Aaa\ Bbb'
 
-    test_line = 'ORG:Aaa\\, Bbb;'
+    test_line = r'ORG:Aaa\\, Bbb;'
     assert pv.parse_org(test_line) == 'Aaa  Bbb'
 
     test_line = 'ORG:Aaa;Bbb' 
@@ -128,15 +128,3 @@ def test_parse_org():
 
 
 #########################
-def parse_org(line):
-    # Lines look like this: 
-    # ORG:Aaaa;
-    # ORG:aaa - bbb;
-    # ORG:Aaa Bbb;
-    # ORG:Aaa\, 4B;
-    # ORG:Aaa;Bbb
-    # ORG:Aaa (BB & Ccc Ddd);
-    line_wo_prefix = line[4:]
-    cleaned_line = ''.join(line_wo_prefix.split(';'))
-    cleaned_line = cleaned_line.strip()
-    return cleaned_line

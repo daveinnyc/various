@@ -45,7 +45,7 @@ def parse_org(line):
     cleaned_line = ' '.join(line_wo_prefix.split(';'))
     cleaned_line = cleaned_line.strip()
     cleaned_line = cleaned_line.replace(',', ' ')
-    cleaned_line = cleaned_line.replace('\\', '')
+    cleaned_line = cleaned_line.replace(r'\\', '')
     return cleaned_line
 
     
