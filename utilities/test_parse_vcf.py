@@ -48,7 +48,7 @@ def test_parse_n_both_with_spaces():
 
 
 def test_parse_n_no_fname():
-    test_line = 'N:Lname;;;;'
+    test_line = 'N:LName;;;;'
     results = pv.parse_n(test_line)
     assert results[0] == ''
     assert results[1] == 'LName'    
@@ -69,7 +69,7 @@ def test_parse_n_no_names():
 
 
 def test_parse_n_too_many_fields():
-    test_line = 'N:;ManyFields;Too;;;;;;'
+    test_line = 'N:ManyFields;Too;;;;;;;'
     results = pv.parse_n(test_line)
     assert results[0] == 'Too'
     assert results[1] == 'ManyFields'    
