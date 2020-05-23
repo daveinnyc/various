@@ -113,7 +113,7 @@ def test_parse_org():
     test_line = r'ORG:Aaa\ Bbb;'
     assert pv.parse_org(test_line) == r'Aaa\ Bbb'
 
-    test_line = r'ORG:Aaa\\, Bbb;'
+    test_line = r'ORG:Aaa\, Bbb;'
     assert pv.parse_org(test_line) == 'Aaa  Bbb'
 
     test_line = 'ORG:Aaa;Bbb' 

@@ -36,7 +36,7 @@ def parse_org(line):
     # ORG:aaa - bbb;
     # ORG:Aaa Bbb;
     # ORG:Aaa \ Bbb;
-    # ORG:Aaa\\, Bbb;
+    # ORG:Aaa\, Bbb;
     # ORG:Aaa;Bbb
     # ORG:Aaa,Bbb
     # ORG:Aaa;Bbb;
@@ -44,8 +44,8 @@ def parse_org(line):
     line_wo_prefix = line[4:]
     cleaned_line = ' '.join(line_wo_prefix.split(';'))
     cleaned_line = cleaned_line.strip()
+    cleaned_line = cleaned_line.replace(r'\,', ' ')
     cleaned_line = cleaned_line.replace(',', ' ')
-    cleaned_line = cleaned_line.replace(r'\\', '')
     return cleaned_line
 
     
@@ -79,7 +79,6 @@ def parse_raw(list_of_lines):
                 pass
             elif line.startswith('ORG:', 0):
                 this_record.append(parse_org(line))
-                print(f"THIS: {this_record}")       
             elif line.startswith('NOTE:', 0):
                 pass
             elif line.startswith('BDAY:', 0):
