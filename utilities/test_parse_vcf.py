@@ -62,7 +62,7 @@ def test_parse_n_no_lname():
 
 
 def test_parse_n_no_names():
-    test_line = 'N:;;;;', 'END:VCARD'
+    test_line = 'N:;;;;'
     results = pv.parse_n(test_line)
     assert results[0] == ''
     assert results[1] == ''    
