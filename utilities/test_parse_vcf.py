@@ -35,24 +35,45 @@ def test_parse_n_lname_with_space():
                                     
 def test_parse_n_fname_with_space():
     test_line = 'N:LName;FName WSpace;;;'
-    '''
-                  ['BEGIN:VCARD', 'N:LName WSpace;FName WSpace;;;', 'END:VCARD'],
-                  ['BEGIN:VCARD', 'N:Lname;;;;', 'END:VCARD'],
-                  ['BEGIN:VCARD', 'N:;FName;;;', 'END:VCARD'],
-                  ['BEGIN:VCARD', 'N:;;;;', 'END:VCARD'],
-                  ['BEGIN:VCARD', 'N:;Too;ManyFields;;;;;;', 'END:VCARD']]
-    '''              
     results = pv.parse_n(test_line)
     assert results[0] == 'FName WSpace'
     assert results[1] == 'LName'
 
+    
+def test_parse_n_both_with_spaces():
+    test_line = 'N:LName WSpace;FName WSpace;;;'
+    results = pv.parse_n(test_line)
+    assert results[0] == 'FName WSpace'
+    assert results[1] == 'LName WSpace'    
+
+
+def test_parse_n_no_fname():
+    test_line = 'N:Lname;;;;'
+    results = pv.parse_n(test_line)
+    assert results[0] == ''
+    assert results[1] == 'LName'    
+
+
+def test_parse_n_no_lname():
+    test_line = 'N:;FName;;;'
+    results = pv.parse_n(test_line)
+    assert results[0] == 'FName'
+    assert results[1] == ''    
+
+
+def test_parse_n_no_names():
+    test_line = 'N:;;;;', 'END:VCARD'
+    results = pv.parse_n(test_line)
+    assert results[0] == ''
+    assert results[1] == ''    
+
+
+def test_parse_n_too_many_fields():
+    test_line = 'N:;ManyFields;Too;;;;;;'
+    results = pv.parse_n(test_line)
+    assert results[0] == 'Too'
+    assert results[1] == 'ManyFields'    
+
+
 
 #########################
-def parse_n(line):
-    # Lines look like this: 
-    #  N:LName;FName;;; 
-    
-    lname, fname, *other_elements = line[2:].split(';')
-    return [fname, lname]
-
-
