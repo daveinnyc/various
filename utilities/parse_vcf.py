@@ -9,7 +9,16 @@ def get_file(file):
 
     return(raw_file)
     
-
+    
+def parse_n(line):
+    # Lines look like this: 
+    #  N:LName;FName;;; 
+    
+    line_wo_prefix = line[2:]
+    lname, fname, *other_elements = line_wo_prefix.split(';')
+    return [fname, lname]
+    
+    
 def parse_raw(list_of_lines):
     records = []
     new_record = False
@@ -21,10 +30,14 @@ def parse_raw(list_of_lines):
             new_record = True
         if line.startswith('END:VCARD', 0):
             new_record = False
+            if len(this_record) > 0 :
+                records.append(this_record)
+            this_record = []
         
         if new_record:
             if line.startswith('N:', 0):
-                pass
+                this_record.extend(parse_n(line))
+                print(this_record)
             elif line.startswith('TEL:', 0):
                 # Might be more than one
                 pass
@@ -62,7 +75,6 @@ def main():
             output.extend(records[0])
             unparsed_output.extend(records[1])
     
-    print(unparsed_output)    
     return (len(output), len(unparsed_output))
     
     
