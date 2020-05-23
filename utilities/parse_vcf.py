@@ -49,6 +49,13 @@ def parse_org(line):
     return cleaned_line
 
     
+def parse_bday(line):
+    # Lines look like this: 
+    # BDAY;value=date:1972-03-26
+    date = line[16:26]
+    return date  
+
+
 def parse_raw(list_of_lines):
     records = []
     new_record = False
@@ -82,7 +89,7 @@ def parse_raw(list_of_lines):
             elif line.startswith('NOTE:', 0):
                 pass
             elif line.startswith('BDAY:', 0):
-                pass
+                this_record.append(parse_bday(line))
             elif line.startswith('X-SOCIALPROFILE', 0):            
                 pass
             elif line.startswith('REV:', 0):

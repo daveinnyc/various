@@ -126,5 +126,17 @@ def test_parse_org():
     assert pv.parse_org(test_line) == 'Aaa (BB & Ccc Ddd)'
 
 
+#####################
+###  parse_bday()  ###
+#####################
+def test_parse_bday():
+    test_line = 'BDAY;value=date:1972-03-26\n' 
+    assert pv.parse_bday(test_line) == '1972-03-26'
+
 
 #########################
+def parse_bday(line):
+    # Lines look like this: 
+    # BDAY;value=date:1972-03-26
+    date = line[17:27]
+    return date  
