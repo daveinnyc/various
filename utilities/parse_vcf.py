@@ -12,11 +12,17 @@ def get_file(file):
     
 def parse_n(line):
     # Lines look like this: 
-    #  N:LName;FName;;; 
-    
+    # N:LName;FName;;;    
     line_wo_prefix = line[2:]
     lname, fname, *other_elements = line_wo_prefix.split(';')
     return [fname, lname]
+    
+
+def parse_rev(line):
+    # Lines look like this: 
+    # REV:2014-07-07T02:21:17Z
+    date = line[4:14]
+    return date  
     
     
 def parse_raw(list_of_lines):
@@ -43,8 +49,6 @@ def parse_raw(list_of_lines):
                 pass
             elif line.startswith('EMAIL:', 0):
                 pass
-            elif line.startswith('REV:', 0):
-                pass
             elif line.startswith('item1', 0):
                 pass
             elif line.startswith('item2', 0):
@@ -55,8 +59,11 @@ def parse_raw(list_of_lines):
                 pass
             elif line.startswith('BDAY:', 0):
                 pass
-            elif line.startswith('X-SOCIALPROFILE', 0):
+            elif line.startswith('X-SOCIALPROFILE', 0):            
                 pass
+            elif line.startswith('REV:', 0):
+                this_record.extend(parse_rev(line))
+                print(this_record)               
             elif line.startswith('BEGIN', 0):
                 # Ignore the new record toggle
                 pass    

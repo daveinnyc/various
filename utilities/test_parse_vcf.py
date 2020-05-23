@@ -3,12 +3,19 @@ import parse_vcf as pv
 
 
 
+####################
+###  get_file()  ###
+####################
 def test_get_file():
     # There is a list of files to parse in the main script
     #   test to make sure a file is opened and returns a list
+    # Doesn't test any error handling, there isn't any
     assert str(type(pv.get_file(pv.VCF_FILES[0]))) == "<class 'list'>"
 
 
+#####################
+###  parse_raw()  ###
+#####################
 def test_parse_raw():
     # Don't check any of the sub parses, just that there is parsing 
     #   and that junk gets caught
@@ -19,6 +26,9 @@ def test_parse_raw():
     assert len(bad) == 1
 
 
+###################
+###  parse_n()  ###
+###################
 def test_parse_n():
     test_line = 'N:LName;FName;;;'
     results = pv.parse_n(test_line)
@@ -75,5 +85,18 @@ def test_parse_n_too_many_fields():
     assert results[1] == 'ManyFields'    
 
 
+#####################
+###  parse_rev()  ###
+#####################
+def test_parse_rev():
+    test_line = 'REV:2014-07-07T02:21:17Z'
+    assert pv.parse_rev(test_line) == '2014-07-07'
+
+
 
 #########################
+def parse_rev(line):
+    # Lines look like this: 
+    # REV:2014-07-07T02:21:17Z
+    date = line[4:15]
+    return [date]  
