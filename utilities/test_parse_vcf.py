@@ -13,18 +13,9 @@ def test_parse_raw():
     test_list = ['BEGIN:VCARD', 'junk', 'END:VCARD']
     (good, bad) = pv.parse_raw(test_list)
     
+    # Don't check any of the sub parses, just that there is parsing 
+    #   and that junk gets caught
     assert len(good) == 0
     assert len(bad) == 1
 
 
-def parse_raw(list_of_lines):
-    records = []
-    new_record = False
-    this_record = []
-    unparsed_records = []
-    
-    for line in list_of_lines:
-        if line.startswith('BEGIN:VCARD', 0):
-            new_record = True
-        if line.startswith('END:VCARD', 0):
-            new_record = False
