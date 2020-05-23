@@ -35,12 +35,17 @@ def parse_org(line):
     # ORG:Aaaa;
     # ORG:aaa - bbb;
     # ORG:Aaa Bbb;
-    # ORG:Aaa\, 4B;
+    # ORG:Aaa \ Bbb;
+    # ORG:Aaa\\, Bbb;
     # ORG:Aaa;Bbb
+    # ORG:Aaa,Bbb
+    # ORG:Aaa;Bbb;
     # ORG:Aaa (BB & Ccc Ddd);
     line_wo_prefix = line[4:]
-    cleaned_line = ''.join(line_wo_prefix.split(';'))
+    cleaned_line = ' '.join(line_wo_prefix.split(';'))
     cleaned_line = cleaned_line.strip()
+    cleaned_line = cleaned_line.replace(',', ' ')
+    cleaned_line = cleaned_line.replace('\\', '')
     return cleaned_line
 
     

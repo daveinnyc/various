@@ -93,10 +93,50 @@ def test_parse_rev():
     assert pv.parse_rev(test_line) == '2014-07-07'
 
 
+#####################
+###  parse_org()  ###
+#####################
+def test_parse_org():
+    # Lots of variation in the fields, only some stripped out
+    test_line = 'ORG:Aaaa;\n' 
+    assert pv.parse_org(test_line) == 'Aaaa'
+
+    test_line = 'ORG:Aaaa;\n' 
+    assert pv.parse_org(test_line) == 'Aaaa'
+
+    test_line = 'ORG:aaa - bbb;' 
+    assert pv.parse_org(test_line) == 'aaa - bbb'
+
+    test_line = 'ORG:Aaa Bbb;' 
+    assert pv.parse_org(test_line) == 'Aaa Bbb'
+
+    #test_line = 'ORG:Aaa\ Bbb;'
+    #assert pv.parse_org(test_line) == 'Aaa\ Bbb'
+
+    test_line = 'ORG:Aaa\\, Bbb;'
+    assert pv.parse_org(test_line) == 'Aaa  Bbb'
+
+    test_line = 'ORG:Aaa;Bbb' 
+    assert pv.parse_org(test_line) == 'Aaa Bbb'
+    
+    test_line = 'ORG:Aaa, Bbb' 
+    assert pv.parse_org(test_line) == 'Aaa  Bbb'
+
+    test_line = 'ORG:Aaa (BB & Ccc Ddd);' 
+    assert pv.parse_org(test_line) == 'Aaa (BB & Ccc Ddd)'
+
+
 
 #########################
-def parse_rev(line):
+def parse_org(line):
     # Lines look like this: 
-    # REV:2014-07-07T02:21:17Z
-    date = line[4:15]
-    return [date]  
+    # ORG:Aaaa;
+    # ORG:aaa - bbb;
+    # ORG:Aaa Bbb;
+    # ORG:Aaa\, 4B;
+    # ORG:Aaa;Bbb
+    # ORG:Aaa (BB & Ccc Ddd);
+    line_wo_prefix = line[4:]
+    cleaned_line = ''.join(line_wo_prefix.split(';'))
+    cleaned_line = cleaned_line.strip()
+    return cleaned_line
