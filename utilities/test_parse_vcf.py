@@ -27,10 +27,11 @@ def test_parse_raw():
     assert len(bad) == 1
 
 
-def test_parse_raw_item1():
+def test_parse_raw_item():
     # There's logic in parse_raw outside the parse_item1 function
     test_line = 'item1.X-ABLabel:England home'
-    assert pv.parse_item1_xlabel(test_line)== 'England home'
+    throw_away = pv.parse_raw('item1.TEL')
+    assert pv.parse_item_xlabel(test_line) == 'England home'
 
 
 ###################
@@ -150,26 +151,26 @@ def test_parse_email():
 
 
 #######################
-###  parse_item1()  ###
+###  parse_item()  ###
 #######################
 def test_parse_item1_email():
         test_line = 'item1.EMAIL;type=INTERNET;type=pref:julia.dadiomov@venafi.com'
-        assert pv.parse_item1(test_line) == 'julia.dadiomov@venafi.com'
+        assert pv.parse_item(test_line) == 'julia.dadiomov@venafi.com'
 
 
 def test_parse_item1_address():
         test_line = 'item1.ADR;type=HOME;type=pref:;;Am Heistersiek 12;Spenge;Nordrhein-Westfale'
-        assert pv.parse_item1(test_line) == 'Am Heistersiek 12 Spenge Nordrhein-Westfale'
+        assert pv.parse_item(test_line) == 'Am Heistersiek 12 Spenge Nordrhein-Westfale'
 
         test_line = r'item1.ADR;type=WORK;type=pref:;;530 Lytton Ave\, 2nd Floor\nSuite 202\n\n;Palo Alto;CA;94301;United States'
-        assert pv.parse_item1(test_line) == '530 Lytton Ave  2nd Floor Suite 202   Palo Alto CA 94301 United States'
+        assert pv.parse_item(test_line) == '530 Lytton Ave  2nd Floor Suite 202   Palo Alto CA 94301 United States'
 
 
 def test_parse_item1_telephone_tel():
         test_line = 'item1.TEL;type=pref:+441277202041'
-        assert pv.parse_item1(test_line)== '+441277202041'
+        assert pv.parse_item(test_line)== '+441277202041'
 
 
 def test_parse_item1_telephone_ablabel():
         test_line = 'item1.X-ABLabel:England home'
-        assert pv.parse_item1_xlabel(test_line)== 'England home'
+        assert pv.parse_item_xlabel(test_line)== 'England home'

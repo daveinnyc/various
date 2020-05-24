@@ -70,7 +70,7 @@ def parse_email(line):
     return email
 
 
-def parse_item1(line):
+def parse_item(line):
     # Multiple formats; many are broken probably by , \n etc. in original
     # Lines of interest look like this: 
     # item1.EMAIL;type=INTERNET;type=pref:julia.dadiomov@venafi.com
@@ -98,14 +98,13 @@ def parse_item1(line):
     return target_value
         
 
-def parse_item1_xlabel(line):
+def parse_item_xlabel(line):
     # Lines look like this:
     # item1.X-ABLabel:England home
     line = line.strip()
     target_value = ''
     
     *junk, target_value = line.split(':')       
-    print(target_value)    
     return target_value
     
 
@@ -113,7 +112,7 @@ def parse_item1_xlabel(line):
 def parse_raw(list_of_lines):
     records = []
     new_record = False
-    # NOTE: Indivivual record elements are gathered in a dictionary so the 
+    # NOTE: Individual record elements are gathered in a dictionary so the 
     #       order of fields will be correct later when serialized for output
     this_record = get_fresh_record()
     unparsed_records = []
@@ -142,13 +141,34 @@ def parse_raw(list_of_lines):
             elif line.startswith('item1', 0):
                 items = []
                 if 'TEL' in line:
-                    telephone_flag = True
-                    items.append(parse_item1(line))
+                    item1_telephone_flag = True
+                    items.append(parse_item(line))
+                if 'EMAIL' in line:
+                    items.append(parse_item(line))   
                 if 'X-ABLabel' in line and item1_telephone_flag == True:
-                    items.append(parse_item1_xlabel(line))
-                    telephone_flag = False
+                    items.append(parse_item_xlabel(line))
+                    item1_telephone_flag = False
+                    this_record['item1'] = items
             elif line.startswith('item2', 0):
-                pass
+                if 'TEL' in line:
+                    item2_telephone_flag = True
+                    items.append(parse_item(line))
+                if 'EMAIL' in line:
+                    items.append(parse_item(line))   
+                if 'X-ABLabel' in line and item2_telephone_flag == True:
+                    items.append(parse_item_xlabel(line))
+                    telephone_flag = False
+                    this_record['item2'] = items
+            elif line.startswith('item3', 0):
+                if 'TEL' in line:
+                    item3_telephone_flag = True                    
+                    items.append(parse_item(line))
+                if 'EMAIL' in line:
+                    items.append(parse_item(line))   
+                if 'X-ABLabel' in line and item3_telephone_flag == True:
+                    items.append(parse_item_xlabel(line))
+                    telephone_flag = False
+                    this_record['item3'] = items                    
             elif line.startswith('ORG:', 0):
                 this_record['org'] = parse_org(line)
             elif line.startswith('NOTE:', 0):
