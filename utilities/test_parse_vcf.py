@@ -146,16 +146,16 @@ def test_parse_email():
 #######################
 ###  parse_item1()  ###
 #######################
-def test_parse_item1_email(line):
+def test_parse_item1_email():
         test_line = 'item1.EMAIL;type=INTERNET;type=pref:julia.dadiomov@venafi.com'
         assert pv.parse_item1(test_line) == 'julia.dadiomov@venafi.com'
 
-def test_parse_item1_address(line):
+def test_parse_item1_address():
         # item1.ADR;type=WORK;type=pref:;;530 Lytton Ave\, 2nd Floor\nSuite 202\n\n;Palo Alto;CA;94301;United States
         test_line = 'item1.ADR;type=HOME;type=pref:;;Am Heistersiek 12;Spenge;Nordrhein-Westfale'
         assert pv.parse_item1(test_line) == 'Am Heistersiek 12 Spenge Nordrhein-Westfale'
 
-def test_parse_item1_telephone(line):
+def test_parse_item1_telephone():
         test_lines = ['item1.TEL;type=pref:+441277202041', 'item1.X-ABLabel:England home']
         assert pv.parse_item1(test_line) == '+441277202041 England home'
 
