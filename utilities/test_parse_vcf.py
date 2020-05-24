@@ -22,7 +22,7 @@ def test_parse_raw():
 
     test_list = ['BEGIN:VCARD', 'junk', 'END:VCARD']
     (good, bad) = pv.parse_raw(test_list)
-    # There is always ate least one empty, good record
+    # There is always at least one empty, good record
     assert len(good) == 1
     assert len(bad) == 1
 

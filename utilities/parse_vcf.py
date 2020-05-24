@@ -191,6 +191,7 @@ def parse_raw(list_of_lines):
                 pass    
             else:
                 unparsed_records.append(line)           
+        records.append(this_record)        
     
     return (records, unparsed_records)
     
@@ -204,6 +205,9 @@ def main():
             output.extend(records[0])
             unparsed_output.extend(records[1])
     
+    for l in output:
+        print(f"{l}")
+            
     return (len(output), len(unparsed_output))
     
     
