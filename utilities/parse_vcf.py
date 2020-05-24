@@ -70,6 +70,20 @@ def parse_email(line):
     return email
 
 
+def parse_item1(line):
+        # Multiple formats; many are broken probably by , \n etc. in original
+        # Lines of interest look like this: 
+        # item1.EMAIL;type=INTERNET;type=pref:julia.dadiomov@venafi.com
+        # item1.ADR;type=HOME;type=pref:;;Am Heistersiek 12;Spenge;Nordrhein-Westfale
+        # item1.ADR;type=WORK;type=pref:;;530 Lytton Ave\, 2nd Floor\nSuite 202\n\n;Palo Alto;CA;94301;United States
+        # item1.TEL;type=pref:+441277202041
+        # item1.X-ABLabel:England home
+        # X-ABLabel sometimes follows TEL tag
+        pass
+
+
+
+
 def parse_raw(list_of_lines):
     records = []
     new_record = False
@@ -98,7 +112,8 @@ def parse_raw(list_of_lines):
                 emails = []
                 emails.append(parse_email(line))
             elif line.startswith('item1', 0):
-                pass
+                items = []
+                items.append(parse_item1(line))
             elif line.startswith('item2', 0):
                 pass
             elif line.startswith('ORG:', 0):
