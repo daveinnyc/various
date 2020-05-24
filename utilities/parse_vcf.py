@@ -80,10 +80,16 @@ def parse_item1(line):
     # item1.X-ABLabel:England home
     # X-ABLabel sometimes follows TEL tag
     line = line.strip()
+    target_value = ''
     
     if 'EMAIL' in line:
-            *junk, target_value = line.split(':')
-            
+        *junk, target_value = line.split(':')
+    elif 'ADR' in line:
+        *junk, target_value = line.split('type=pref')
+        target_value = target_value[3:]
+        target_value = target_value.replace(';', ' ')
+    else:
+        pass
     print(f"{line} --> {target_value}")
     return target_value
         
