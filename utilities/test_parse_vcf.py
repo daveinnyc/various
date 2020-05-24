@@ -159,12 +159,14 @@ def test_parse_item1_address():
         assert pv.parse_item1(test_line) == '530 Lytton Ave  2nd Floor Suite 202   Palo Alto CA 94301 United States'
 
 
-def test_parse_item1_telephone():
-        intermediate_result = ''
-        test_lines = ['item1.TEL;type=pref:+441277202041', 'item1.X-ABLabel:England home']
-        for line in test_lines:
-            intermediate_result += pv.parse_item1(test_lines)
-        assert intermediate_result == '+441277202041 England home'
+def test_parse_item1_telephone_tel():
+        test_line = 'item1.TEL;type=pref:+441277202041'
+        assert pv.parse_item1(test_lines)== '+441277202041'
+
+
+def test_parse_item1_telephone_ablabel():
+        test_line = 'item1.X-ABLabel:England home'
+        assert pv.parse_item1(test_lines)== 'England home'
 
 
 #########################

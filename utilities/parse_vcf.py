@@ -90,7 +90,8 @@ def parse_item1(line):
         target_value = target_value.replace(';', ' ')
         target_value = target_value.replace(r'\,', ' ')
         target_value = target_value.replace(r'\n', ' ')
-        print(target_value)
+    elif 'TEL' in line:
+        *junk, target_value = line.split('type=pref:')        
     else:
         pass
 
@@ -117,6 +118,7 @@ def parse_raw(list_of_lines):
             this_record = get_fresh_record()
         
         if new_record:
+            telephone_flag = False
             if line.startswith('N:', 0):
                 (first, last) = parse_n(line)
                 this_record['fname'] = first
@@ -129,6 +131,10 @@ def parse_raw(list_of_lines):
                 emails.append(parse_email(line))
             elif line.startswith('item1', 0):
                 items = []
+                if 'TEL' in line:
+                    telephone_flag = True
+                if 'X-ABLabel' in line and telephone_flag == False:
+                    break
                 items.append(parse_item1(line))
             elif line.startswith('item2', 0):
                 pass
