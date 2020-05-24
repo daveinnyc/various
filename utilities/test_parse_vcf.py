@@ -27,6 +27,12 @@ def test_parse_raw():
     assert len(bad) == 1
 
 
+def test_parse_raw_item1():
+    # There's logic in parse_raw outside the parse_item1 function
+    test_line = 'item1.X-ABLabel:England home'
+    assert pv.parse_item1_xlabel(test_line)== 'England home'
+
+
 ###################
 ###  parse_n()  ###
 ###################
