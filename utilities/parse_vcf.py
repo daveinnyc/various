@@ -88,9 +88,12 @@ def parse_item1(line):
         *junk, target_value = line.split('type=pref')
         target_value = target_value[3:]
         target_value = target_value.replace(';', ' ')
+        target_value = target_value.replace(r'\,', ' ')
+        target_value = target_value.replace(r'\n', ' ')
+        print(target_value)
     else:
         pass
-    print(f"{line} --> {target_value}")
+
     return target_value
         
 

@@ -150,14 +150,22 @@ def test_parse_item1_email():
         test_line = 'item1.EMAIL;type=INTERNET;type=pref:julia.dadiomov@venafi.com'
         assert pv.parse_item1(test_line) == 'julia.dadiomov@venafi.com'
 
+
 def test_parse_item1_address():
-        # item1.ADR;type=WORK;type=pref:;;530 Lytton Ave\, 2nd Floor\nSuite 202\n\n;Palo Alto;CA;94301;United States
         test_line = 'item1.ADR;type=HOME;type=pref:;;Am Heistersiek 12;Spenge;Nordrhein-Westfale'
         assert pv.parse_item1(test_line) == 'Am Heistersiek 12 Spenge Nordrhein-Westfale'
 
+        test_line = r'item1.ADR;type=WORK;type=pref:;;530 Lytton Ave\, 2nd Floor\nSuite 202\n\n;Palo Alto;CA;94301;United States'
+        assert pv.parse_item1(test_line) == '530 Lytton Ave  2nd Floor Suite 202   Palo Alto CA 94301 United States'
+
+
 def test_parse_item1_telephone():
+        intermediate_result = ''
         test_lines = ['item1.TEL;type=pref:+441277202041', 'item1.X-ABLabel:England home']
-        assert pv.parse_item1(test_line) == '+441277202041 England home'
+        for line in test_lines:
+            intermediate_result += pv.parse_item1(test_lines)
+        assert intermediate_result == '+441277202041 England home'
+
 
 #########################
 def parse_item1(line):
