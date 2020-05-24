@@ -98,7 +98,16 @@ def parse_item1(line):
     return target_value
         
 
-
+def parse_item1_xlabel(line):
+    # Lines look like this:
+    # item1.X-ABLabel:England home
+    line = line.strip()
+    target_value = ''
+    
+    *junk, target_value = line.split(':')       
+    print(target_value)    
+    return target_value
+    
 
 
 def parse_raw(list_of_lines):
@@ -112,13 +121,14 @@ def parse_raw(list_of_lines):
     for line in list_of_lines:
         if line.startswith('BEGIN:VCARD', 0):
             new_record = True
+            item1_telephone_flag = False
+            item2_telephone_flag = False
+            item3_telephone_flag = False
         if line.startswith('END:VCARD', 0):
             new_record = False
             records.append(this_record)
-            this_record = get_fresh_record()
         
         if new_record:
-            telephone_flag = False
             if line.startswith('N:', 0):
                 (first, last) = parse_n(line)
                 this_record['fname'] = first
@@ -133,9 +143,10 @@ def parse_raw(list_of_lines):
                 items = []
                 if 'TEL' in line:
                     telephone_flag = True
-                if 'X-ABLabel' in line and telephone_flag == False:
-                    break
-                items.append(parse_item1(line))
+                    items.append(parse_item1(line))
+                if 'X-ABLabel' in line and item1_telephone_flag == True:
+                    items.append(parse_item1_xlabel(line))
+                    telephone_flag = False
             elif line.startswith('item2', 0):
                 pass
             elif line.startswith('ORG:', 0):

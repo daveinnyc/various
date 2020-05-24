@@ -161,21 +161,9 @@ def test_parse_item1_address():
 
 def test_parse_item1_telephone_tel():
         test_line = 'item1.TEL;type=pref:+441277202041'
-        assert pv.parse_item1(test_lines)== '+441277202041'
+        assert pv.parse_item1(test_line)== '+441277202041'
 
 
 def test_parse_item1_telephone_ablabel():
         test_line = 'item1.X-ABLabel:England home'
-        assert pv.parse_item1(test_lines)== 'England home'
-
-
-#########################
-def parse_item1(line):
-        # Multiple formats; many are broken probably by , \n etc. in original
-        # Lines of interest look like this: 
-        # item1.EMAIL;type=INTERNET;type=pref:julia.dadiomov@venafi.com
-        # item1.ADR;type=HOME;type=pref:;;Am Heistersiek 12;Spenge;Nordrhein-Westfale
-        # item1.TEL;type=pref:+441277202041
-        # item1.X-ABLabel:England home
-        # X-ABLabel sometimes follows TEL tag
-        pass
+        assert pv.parse_item1_xlabel(test_line)== 'England home'
