@@ -66,7 +66,6 @@ def parse_email(line):
     # EMAIL;type=INTERNET;type=WORK;type=pref:usr.name@domain.tld
     line = line.strip()
     *junk, email = line.split(':')
-    print(f"{line} --> {email}")
     return email
 
 
@@ -171,12 +170,13 @@ def parse_raw(list_of_lines):
                     this_record['item3'] = items                    
             elif line.startswith('ORG:', 0):
                 this_record['org'] = parse_org(line)
-            elif line.startswith('NOTE:', 0):
-                pass
             elif line.startswith('BDAY:', 0):
                 this_record['bday'] = parse_bday(line)
             elif line.startswith('REV:', 0):
                 this_record['rev'] = parse_rev(line)              
+            elif line.startswith('NOTE:', 0):
+                # Ignore this field
+                pass
             elif line.startswith('X-SOCIALPROFILE', 0): 
                 # Ignore this field
                 pass
@@ -191,8 +191,7 @@ def parse_raw(list_of_lines):
                 pass    
             else:
                 unparsed_records.append(line)           
-        records.append(this_record)        
-    
+        
     return (records, unparsed_records)
     
     
@@ -206,7 +205,7 @@ def main():
             unparsed_output.extend(records[1])
     
     for l in output:
-        print(f"{l}")
+        print(f"OUT: {l}")
             
     return (len(output), len(unparsed_output))
     
