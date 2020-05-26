@@ -135,7 +135,6 @@ def parse_tel(line):
             # Explicitly ignore these for now
             pass            
         else:
-            print(f"PT: {phone_type}")
             pass
 
     return (phone_number, phone_type)    
@@ -166,9 +165,8 @@ def parse_raw(list_of_lines):
                 this_record['fname'] = first
                 this_record['lname'] = last
             elif line.startswith('TEL', 0):
-                # TEL records deliminated with ; instead of :
                 this_record['tel'] = parse_tel(line)
-            elif line.startswith('EMAIL:', 0):
+            elif line.startswith('EMAIL', 0):
                 emails = []
                 emails.append(parse_email(line))
             elif line.startswith('item1', 0):
@@ -202,11 +200,11 @@ def parse_raw(list_of_lines):
                     items.append(parse_item_xlabel(line))
                     telephone_flag = False
                     this_record['item3'] = items                    
-            elif line.startswith('ORG:', 0):
+            elif line.startswith('ORG', 0):
                 this_record['org'] = parse_org(line)
-            elif line.startswith('BDAY:', 0):
+            elif line.startswith('BDAY', 0):
                 this_record['bday'] = parse_bday(line)
-            elif line.startswith('REV:', 0):
+            elif line.startswith('REV', 0):
                 this_record['rev'] = parse_rev(line)                            
             elif line.startswith('FN:', 0):
                 # Ignore this field, get names from N lines
@@ -242,8 +240,8 @@ def main():
             output.extend(records[0])
             unparsed_output.extend(records[1])
     
-    #for l in unparsed_output:
-    #    print(f"OUT: {l}")
+    for l in unparsed_output:
+        print(f"OUT: {l}")
             
     return (len(output), len(unparsed_output))
     
