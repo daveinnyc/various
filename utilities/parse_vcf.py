@@ -16,7 +16,7 @@ def get_file(file):
 
 def get_fresh_record():
     return {'fname':'', 'lname':'', 'tel':'', 'email':'', 'item1':'', 
-            'item2':'', 'itme3':'', 'org':'', 'note':'', 'bday':'', 
+            'item2':'', 'item3':'', 'org':'', 'bday':'', 
             'rev':'', 'social':''}
     
        

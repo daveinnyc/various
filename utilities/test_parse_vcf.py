@@ -13,11 +13,12 @@ def test_get_file():
     assert str(type(pv.get_file(pv.VCF_FILES[0]))) == "<class 'list'>"
 
 
+
+
 #####################
 ###  parse_raw()  ###
 #####################
 def test_parse_raw():
-
     # Don't check any of the sub parses, just that there is parsing 
     #   and that junk gets caught
 
@@ -28,6 +29,28 @@ def test_parse_raw():
     assert len(bad) == 1
 
 
+def test_parse_raw_case_statement():
+    list_of_lines = ['BEGIN:VCARD',
+                     'N:LName;FName;;;'
+                     'TEL;type=CELL;type=VOICE;type=pref:(123) 456-9876',
+                     'EMAIL;type=INTERNET;type=WORK;type=pref:usr.name@domain.tld',
+                     'item1.EMAIL;type=INTERNET;type=pref:julia.dadiomov@venafi.com',
+                     'item2.ADR;type=HOME;type=pref:;;Am Heistersiek 12;Spenge;Nordrhein-Westfale',
+                     'item3.X-ABLabel:England home',
+                     'ORG:Aaaa;\n',
+                     'BDAY;value=date:1972-03-26\n',
+                     'REV:2014-07-07T02:21:17Z',
+                     'FN: and more stuff',
+                     'NOTE: and more stuff',
+                     'X-SOCIALPROFILE and more stuff',
+                     'VERSION and more stuff',
+                     'PRODID and more stuff',
+                     'Some unknown string',
+                     'END:VCARD']
+    records, unparsed_records = pv.parse_raw(list_of_lines)
+    print(f"R: {records},  UP: {unparsed_records}")
+    assert False == True
+    
 def test_parse_raw_item():
     # There's logic in parse_raw outside the parse_item1 function
     test_line = 'item1.X-ABLabel:England home'
