@@ -64,7 +64,6 @@ def parse_bday(line):
 def parse_email(line):
     # Lines look like this: 
     # EMAIL;type=INTERNET;type=WORK;type=pref:usr.name@domain.tld
-    line = line.strip()
     *junk, email = line.split(':')
     return email
 
@@ -78,7 +77,6 @@ def parse_item(line):
     # item1.TEL;type=pref:+441277202041
     # item1.X-ABLabel:England home
     # X-ABLabel sometimes follows TEL tag
-    line = line.strip()
     target_value = ''
     
     if 'EMAIL' in line:
@@ -100,12 +98,44 @@ def parse_item(line):
 def parse_item_xlabel(line):
     # Lines look like this:
     # item1.X-ABLabel:England home
-    line = line.strip()
     target_value = ''
     
     *junk, target_value = line.split(':')       
     return target_value
+
+
+def parse_tel(line):    
+    # Lines look like this:
+    # TEL;type=CELL;type=VOICE;type=pref:CharacterString
+    # TEL;type=HOME;type=VOICE:1234567891011
+    # TEL;type=CELL;type=VOICE;type=pref:(123) 456-9876
+    # TEL;type=CELL;type=VOICE;type=pref:1-555-321-8765
+    phone_number = ''
+    phone_type = ''
     
+    if any(char.isdigit() for char in line):
+        pass
+    else:
+        *phone_type, phone_number = line.split(':')       
+        if phone_number:
+            phone_number = phone_number.replace('(', '')
+            phone_number = phone_number.replace(')', ' ')
+            phone_number = phone_number.replace('-', ' ')
+            phone_number = phone_number.replace('  ', ' ')
+        if 'HOME' in phone_type:
+            phone_type = 'home'
+        elif 'WORK' in phone_type:
+            # Some phones are WORK and CELL, record as WORK
+            phone_type = 'work'
+        elif 'CELL' in phone_type:
+            phone_type = 'cell'
+        else:
+            # Two records like these end up here:
+            # 'TEL;type=CELL;type=VOICE;type=pref'
+            # unclear why all other CELL records match above
+            pass
+            
+    return (phone_type, phone_number)    
 
 
 def parse_raw(list_of_lines):
@@ -117,6 +147,7 @@ def parse_raw(list_of_lines):
     unparsed_records = []
     
     for line in list_of_lines:
+        line = line.strip()
         if line.startswith('BEGIN:VCARD', 0):
             new_record = True
             item1_telephone_flag = False
@@ -131,9 +162,9 @@ def parse_raw(list_of_lines):
                 (first, last) = parse_n(line)
                 this_record['fname'] = first
                 this_record['lname'] = last
-            elif line.startswith('TEL:', 0):
-                # Might be more than one
-                pass
+            elif line.startswith('TEL', 0):
+                # TEL records deliminated with ; instead of :
+                this_record['tel'] = parse_tel(line)
             elif line.startswith('EMAIL:', 0):
                 emails = []
                 emails.append(parse_email(line))
@@ -173,7 +204,11 @@ def parse_raw(list_of_lines):
             elif line.startswith('BDAY:', 0):
                 this_record['bday'] = parse_bday(line)
             elif line.startswith('REV:', 0):
-                this_record['rev'] = parse_rev(line)              
+                this_record['rev'] = parse_rev(line)                            
+            elif line.startswith('FN:', 0):
+                # Ignore this field, get names from N lines
+                pass
+                
             elif line.startswith('NOTE:', 0):
                 # Ignore this field
                 pass
@@ -187,7 +222,7 @@ def parse_raw(list_of_lines):
                 # Ignore this field
                 pass           
             elif line.startswith('BEGIN', 0):
-                # Ignore the new record toggle
+                # Ignore the new record toggle once flipped
                 pass    
             else:
                 unparsed_records.append(line)           
@@ -204,8 +239,8 @@ def main():
             output.extend(records[0])
             unparsed_output.extend(records[1])
     
-    for l in output:
-        print(f"OUT: {l}")
+    #for l in unparsed_output:
+    #    print(f"OUT: {l}")
             
     return (len(output), len(unparsed_output))
     
