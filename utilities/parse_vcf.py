@@ -17,7 +17,7 @@ def get_file(file):
 def get_fresh_record():
     return {'fname':'', 'lname':'', 'tel':'', 'email':'', 'item1':'', 
             'item2':'', 'item3':'', 'org':'', 'bday':'', 
-            'rev':'', 'social':''}
+            'rev':''}
     
        
 def parse_n(line):

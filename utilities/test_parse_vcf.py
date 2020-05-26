@@ -15,6 +15,16 @@ def test_get_file():
 
 
 
+############################
+###  get_fresh_record()  ###
+############################
+def test_get_fresh_record():
+    new_record = pv.get_fresh_record()
+    assert new_record == {'fname':'', 'lname':'', 'tel':'', 'email':'', 'item1':'', 
+            'item2':'', 'item3':'', 'org':'', 'bday':'', 
+            'rev':''}
+            
+            
 #####################
 ###  parse_raw()  ###
 #####################
