@@ -114,14 +114,13 @@ def parse_tel(line):
     phone_type = ''
     
     if any(char.isdigit() for char in line):
-        pass
-    else:
         *phone_type, phone_number = line.split(':')       
         if phone_number:
             phone_number = phone_number.replace('(', '')
             phone_number = phone_number.replace(')', ' ')
             phone_number = phone_number.replace('-', ' ')
             phone_number = phone_number.replace('  ', ' ')
+        phone_type = str(phone_type)    
         if 'HOME' in phone_type:
             phone_type = 'home'
         elif 'WORK' in phone_type:
@@ -129,13 +128,16 @@ def parse_tel(line):
             phone_type = 'work'
         elif 'CELL' in phone_type:
             phone_type = 'cell'
+        elif 'OTHER' in phone_type:
+            # Explicitly ignore these for now
+            pass
+        elif 'MAIN' in phone_type:
+            # Explicitly ignore these for now
+            pass            
         else:
-            # Two records like these end up here:
-            # 'TEL;type=CELL;type=VOICE;type=pref'
-            # unclear why all other CELL records match above
+            print(f"PT: {phone_type}")
             pass
 
-    print(f"PN: {phone_number}   PT: {phone_type}")            
     return (phone_number, phone_type)    
 
 
