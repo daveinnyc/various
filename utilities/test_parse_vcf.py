@@ -105,8 +105,8 @@ def test_parse_rev():
 #####################
 ###  parse_org()  ###
 #####################
+# Lots of variation in the fields, only some chars stripped out
 def test_parse_org():
-    # Lots of variation in the fields, only some stripped out
     test_line = 'ORG:Aaaa;\n' 
     assert pv.parse_org(test_line) == 'Aaaa'
 
@@ -151,9 +151,9 @@ def test_parse_email():
     assert pv.parse_email(test_line) == 'usr.name@domain.tld'
 
 
-#######################
+######################
 ###  parse_item()  ###
-#######################
+######################
 def test_parse_item1_email():
         test_line = 'item1.EMAIL;type=INTERNET;type=pref:julia.dadiomov@venafi.com'
         assert pv.parse_item(test_line) == 'julia.dadiomov@venafi.com'
@@ -175,3 +175,41 @@ def test_parse_item1_telephone_tel():
 def test_parse_item1_telephone_ablabel():
         test_line = 'item1.X-ABLabel:England home'
         assert pv.parse_item_xlabel(test_line)== 'England home'
+
+
+#####################
+###  parse_tel()  ###
+#####################
+def test_parse_tel_char_string():    
+    test_line = 'TEL;type=CELL;type=VOICE;type=pref:CharacterString'
+    phone_number, phone_type = pv.parse_tel(test_line)
+    assert phone_number == ''
+    assert phone_type == ''
+    
+    
+def test_parse_tel_home_type():    
+    test_line = 'TEL;type=HOME;type=VOICE:1234567891011'
+    phone_number, phone_type = pv.parse_tel(test_line)
+    assert phone_number == '1234567891011'
+    assert phone_type == 'home'    
+        
+    
+def test_parse_tel_remove_parens():    
+    test_line = 'TEL;type=CELL;type=VOICE;type=pref:(123) 456-9876'
+    phone_number, phone_type = pv.parse_tel(test_line)
+    assert phone_number == '123 456 9876'
+    assert phone_type == 'cell'    
+    
+    
+def test_parse_tel_remove_dashes():    
+    test_line = 'TEL;type=CELL;type=VOICE;type=pref:1-555-321-8765'
+    phone_number, phone_type = pv.parse_tel(test_line)
+    assert phone_number == '1 555 321 8765'
+    assert phone_type == 'cell'        
+
+    
+def test_parse_tel_cell_and_work_types():    
+    test_line = 'TEL;type=CELL;type=WORK;type=pref:1-555-321-8765'
+    phone_number, phone_type = pv.parse_tel(test_line)
+    assert phone_number == '1 555 321 8765'
+    assert phone_type == 'work'            
