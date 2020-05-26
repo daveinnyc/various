@@ -147,7 +147,7 @@ def test_parse_bday():
 ###  parse_email()  ###
 #######################
 def test_parse_email():
-    test_line = 'EMAIL;type=INTERNET;type=WORK;type=pref:usr.name@domain.tld\n' 
+    test_line = 'EMAIL;type=INTERNET;type=WORK;type=pref:usr.name@domain.tld' 
     assert pv.parse_email(test_line) == 'usr.name@domain.tld'
 
 
@@ -182,14 +182,14 @@ def test_parse_item1_telephone_ablabel():
 #####################
 def test_parse_tel_char_string():    
     test_line = 'TEL;type=CELL;type=VOICE;type=pref:CharacterString'
-    phone_number, phone_type = pv.parse_tel(test_line)
+    (phone_number, phone_type) = pv.parse_tel(test_line)
     assert phone_number == ''
     assert phone_type == ''
     
     
 def test_parse_tel_home_type():    
     test_line = 'TEL;type=HOME;type=VOICE:1234567891011'
-    phone_number, phone_type = pv.parse_tel(test_line)
+    (phone_number, phone_type) = pv.parse_tel(test_line)
     assert phone_number == '1234567891011'
     assert phone_type == 'home'    
         

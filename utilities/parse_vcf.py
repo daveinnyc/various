@@ -134,8 +134,9 @@ def parse_tel(line):
             # 'TEL;type=CELL;type=VOICE;type=pref'
             # unclear why all other CELL records match above
             pass
-            
-    return (phone_type, phone_number)    
+
+    print(f"PN: {phone_number}   PT: {phone_type}")            
+    return (phone_number, phone_type)    
 
 
 def parse_raw(list_of_lines):
