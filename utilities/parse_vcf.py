@@ -129,11 +129,9 @@ def parse_tel(line):
         elif 'CELL' in phone_type:
             phone_type = 'cell'
         elif 'OTHER' in phone_type:
-            # Explicitly ignore these for now
-            pass
+            phone_type = ''
         elif 'MAIN' in phone_type:
-            # Explicitly ignore these for now
-            pass            
+            phone_type = ''            
         else:
             pass
     return (phone_number, phone_type)    
