@@ -41,7 +41,7 @@ def test_parse_raw():
 
 def test_parse_raw_case_statement():
     list_of_lines = ['BEGIN:VCARD',
-                     'N:LName;FName;;;'
+                     'N:LName;FName;;;',
                      'TEL;type=CELL;type=VOICE;type=pref:(123) 456-9876',
                      'EMAIL;type=INTERNET;type=WORK;type=pref:usr.name@domain.tld',
                      'item1.EMAIL;type=INTERNET;type=pref:julia.dadiomov@venafi.com',
@@ -59,7 +59,8 @@ def test_parse_raw_case_statement():
                      'Some unknown string',
                      'END:VCARD']
     records, unparsed_records = pv.parse_raw(list_of_lines)
-    print(f"R: {records},  UP: {unparsed_records}")
+    print(f"R: {records}")
+    print(f"UP: {unparsed_records}")
     assert False
     
     
