@@ -57,10 +57,21 @@ def test_parse_raw_case_statement():
                      'VERSION and more stuff',
                      'PRODID and more stuff',
                      'Some unknown string',
+                     'Some other unknown string',
                      'END:VCARD']
     records, unparsed_records = pv.parse_raw(list_of_lines)
-    assert False
-    
+    assert len(unparsed_records) == 2
+    assert records[0]['bday']  == '1972-03-26'
+    assert records[0]['email'] == ['usr.name@domain.tld']
+    assert records[0]['fname'] == 'FName'
+    assert records[0]['lname'] == 'LName'
+    assert records[0]['org'] == 'Aaaa'
+    assert records[0]['rev'] == '2014-07-07'
+    assert records[0]['tel'] == ('123 456 9876', 'cell')
+    assert records[0]['item1'] == ['julia.dadiomov@venafi.com']
+    assert records[0]['item2'] == ['Am Heistersiek 12 Spenge Nordrhein-Westfale']
+    assert records[0]['item3'] == ['+441277202041', 'England home']
+   
     
 def test_parse_raw_xable_precondition():
     # There X-ABLabel call needs a setup toggle

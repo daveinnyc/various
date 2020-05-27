@@ -188,10 +188,8 @@ def parse_raw(list_of_lines):
                 if 'TEL' in line:
                     item2_telephone_flag = True
                     items2.append(parse_item(line))
-                    print(f"IT2-TEL {items2}")                
                 elif 'EMAIL' in line:
                     items2.append(parse_item(line))   
-                    print(f"IT2-EMAIL {items2}")                
                 elif 'ADR' in line:
                     items2.append(parse_item(line))   
                 elif 'X-ABLabel' in line and item2_telephone_flag == True:
@@ -250,13 +248,13 @@ def main():
             output.extend(records[0])
             unparsed_output.extend(records[1])
     
-    for l in unparsed_output:
-        print(f"OUT: {l}")
-            
-    return (len(output), len(unparsed_output))
+    return (output, unparsed_output)
     
     
 if __name__ == "__main__":
     (good, bad) = main()
-    print(f"GOOD: {good}  BAD: {bad}")
+    for b in bad:
+        print(f"UNPARSED: {b}")
+            
+    print(f"GOOD: {len(good)}  BAD: {len(bad)}")
 
