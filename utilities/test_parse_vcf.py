@@ -303,5 +303,6 @@ def test_print_csv_record():
                   '+441277202041 England home,' + \
                   'Aaaa,' + \
                   '1972-03-26,' + \
-                  '2014-07-07'            
+                  '2014-07-07' + \
+                  '\n'                  
     assert pv.print_csv_record(test_record) == test_result                                               

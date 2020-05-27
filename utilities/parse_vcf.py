@@ -250,11 +250,11 @@ def print_csv_record(record):
     items1 = ' '.join(record['item1'])
     items2 = ' '.join(record['item2'])
     items3 = ' '.join(record['item3'])
+    telephone = ','.join(record['tel'])
     output_fields = [record['fname'],  
                      record['lname'], 
                      emails, 
-                     record['tel'][0],
-                     record['tel'][1],
+                     telephone,
                      items1, 
                      items2, 
                      items3, 
@@ -262,7 +262,9 @@ def print_csv_record(record):
                      record['bday'],
                      record['rev']]
     
-    return ','.join(output_fields)    
+    record =  ','.join(output_fields)    
+    record += '\n'
+    return record
     
     
 def main():
@@ -286,8 +288,8 @@ if __name__ == "__main__":
             
     print(f"GOOD: {len(good)}  BAD: {len(bad)}")
     '''
-    for vcf_file in VCF_FILES:
-        records = parse_raw(get_file(vcf_file))
-        for record in records[0]:
-            #print(print_csv_record(record))
-            print(record)
+    with open('converted_vcf.csv', 'w') as outfile:
+        for vcf_file in VCF_FILES:
+            records = parse_raw(get_file(vcf_file))
+            for record in records[0]:
+                outfile.write(print_csv_record(record))
