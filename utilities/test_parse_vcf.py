@@ -277,3 +277,31 @@ def test_parse_tel_cell_and_work_types():
     phone_number, phone_type = pv.parse_tel(test_line)
     assert phone_number == '1 555 321 8765'
     assert phone_type == 'work'            
+    
+
+############################
+###  print_csv_record()  ###
+############################
+def test_print_csv_record():
+    test_record = {'bday':'1972-03-26',
+                   'email':['usr.name@domain.tld'],
+                   'fname':'FName',
+                   'lname':'LName',
+                   'org':'Aaaa',
+                   'rev':'2014-07-07',
+                   'tel':('123 456 9876', 'cell'),
+                   'item1':['julia.dadiomov@venafi.com'],
+                   'item2':['Am Heistersiek 12 Spenge Nordrhein-Westfale'],
+                   'item3':['+441277202041', 'England home'] }
+    test_result = 'FName,' + \
+                  'LName,' + \
+                  'usr.name@domain.tld,' + \
+                  '123 456 9876,' + \
+                  'cell,' + \
+                  'julia.dadiomov@venafi.com,' + \
+                  'Am Heistersiek 12 Spenge Nordrhein-Westfale,' + \
+                  '+441277202041 England home,' + \
+                  'Aaaa,' + \
+                  '1972-03-26,' + \
+                  '2014-07-07'            
+    assert pv.print_csv_record(test_record) == test_result                                               

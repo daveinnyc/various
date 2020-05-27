@@ -144,13 +144,14 @@ def parse_raw(list_of_lines):
     new_record = False
     # NOTE: Individual record elements are gathered in a dictionary so the 
     #       order of fields will be correct later when serialized for output
-    this_record = get_fresh_record()
     unparsed_records = []
     
     for line in list_of_lines:
         line = line.strip()
         if line.startswith('BEGIN:VCARD', 0):
             new_record = True
+            this_record = get_fresh_record()
+            emails = []
             items1 = []
             items2 = []
             items3 = []
@@ -216,8 +217,7 @@ def parse_raw(list_of_lines):
                 this_record['rev'] = parse_rev(line)                            
             elif line.startswith('FN:', 0):
                 # Ignore this field, get names from N lines
-                pass
-                
+                pass              
             elif line.startswith('NOTE:', 0):
                 # Ignore this field
                 pass
@@ -243,6 +243,26 @@ def parse_raw(list_of_lines):
                 unparsed_records.append(line)           
         
     return (records, unparsed_records)
+
+
+def print_csv_record(record):
+    emails = ' '.join(record['email'])
+    items1 = ' '.join(record['item1'])
+    items2 = ' '.join(record['item2'])
+    items3 = ' '.join(record['item3'])
+    output_fields = [record['fname'],  
+                     record['lname'], 
+                     emails, 
+                     record['tel'][0],
+                     record['tel'][1],
+                     items1, 
+                     items2, 
+                     items3, 
+                     record['org'],
+                     record['bday'],
+                     record['rev']]
+    
+    return ','.join(output_fields)    
     
     
 def main():
@@ -258,9 +278,16 @@ def main():
     
     
 if __name__ == "__main__":
+    '''
+    # Used to discover fields and line formats
     (good, bad) = main()
     for b in bad:
         print(f"UNPARSED: {b}")
             
     print(f"GOOD: {len(good)}  BAD: {len(bad)}")
-
+    '''
+    for vcf_file in VCF_FILES:
+        records = parse_raw(get_file(vcf_file))
+        for record in records[0]:
+            #print(print_csv_record(record))
+            print(record)
