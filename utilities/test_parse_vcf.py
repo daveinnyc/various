@@ -20,7 +20,7 @@ def test_get_file():
 ############################
 def test_get_fresh_record():
     new_record = pv.get_fresh_record()
-    assert new_record == {'fname':'', 'lname':'', 'tel':'', 'email':'', 'item1':'', 
+    assert new_record == {'fname':'', 'lname':'', 'tel':'', 'email':[], 'item1':'', 
             'item2':'', 'item3':'', 'org':'', 'bday':'', 
             'rev':''}
             
@@ -59,8 +59,6 @@ def test_parse_raw_case_statement():
                      'Some unknown string',
                      'END:VCARD']
     records, unparsed_records = pv.parse_raw(list_of_lines)
-    print(f"R: {records}")
-    print(f"UP: {unparsed_records}")
     assert False
     
     

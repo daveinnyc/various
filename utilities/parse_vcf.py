@@ -15,7 +15,7 @@ def get_file(file):
     
 
 def get_fresh_record():
-    return {'fname':'', 'lname':'', 'tel':'', 'email':'', 'item1':'', 
+    return {'fname':'', 'lname':'', 'tel':'', 'email':[], 'item1':'', 
             'item2':'', 'item3':'', 'org':'', 'bday':'', 
             'rev':''}
     
@@ -113,7 +113,6 @@ def parse_tel(line):
     phone_number = ''
     phone_type = ''
     
-    print(f"LN: {line}")
     if any(char.isdigit() for char in line):
         *phone_type, phone_number = line.split(':')       
         if phone_number:
@@ -137,7 +136,6 @@ def parse_tel(line):
             pass            
         else:
             pass
-    print(f"N: {phone_number},  T: {phone_type}")
     return (phone_number, phone_type)    
 
 
@@ -164,18 +162,14 @@ def parse_raw(list_of_lines):
             records.append(this_record)
         
         if new_record:
-            if line.startswith('TEL', 0):
-                print(f"LN-0: {line}")
             if line.startswith('N:', 0):
                 (first, last) = parse_n(line)
                 this_record['fname'] = first
                 this_record['lname'] = last
             elif line.startswith('TEL', 0):
-                print(f"LN-1: {line}")
                 this_record['tel'] = parse_tel(line)
-            elif line.startswith('EMAIL', 0):
-                emails = []
-                emails.append(parse_email(line))
+            elif line.startswith('EMAIL', 0):              
+                this_record['email'].append(parse_email(line))
             elif line.startswith('item1', 0):
                 if 'TEL' in line:
                     item1_telephone_flag = True
