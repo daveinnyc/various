@@ -47,6 +47,7 @@ def test_parse_raw_case_statement():
                      'item1.EMAIL;type=INTERNET;type=pref:julia.dadiomov@venafi.com',
                      'item2.ADR;type=HOME;type=pref:;;Am Heistersiek 12;Spenge;Nordrhein-Westfale',
                      'item3.TEL;type=pref:+441277202041',
+                     'item3.X-ABLabel:England home',                  
                      'ORG:Aaaa;\n',
                      'BDAY;value=date:1972-03-26\n',
                      'REV:2014-07-07T02:21:17Z',
@@ -62,12 +63,15 @@ def test_parse_raw_case_statement():
     assert False
     
     
-def test_parse_raw_item():
-    # There's logic in parse_raw outside the parse_item1 function
-    test_line = 'item1.X-ABLabel:England home'
-    throw_away = pv.parse_raw('item1.TEL')
-    assert pv.parse_item_xlabel(test_line) == 'England home'
-
+def test_parse_raw_xable_precondition():
+    # There X-ABLabel call needs a setup toggle
+    list_of_lines = ['BEGIN:VCARD',
+                     'item3.TEL;type=pref:+441277202041',
+                     'item3.X-ABLabel:England home',                  
+                     'END:VCARD']
+    records, unparsed_records = pv.parse_raw(list_of_lines)
+    assert records[0]['item3'] == ['+441277202041', 'England home']
+    
 
 ###################
 ###  parse_n()  ###

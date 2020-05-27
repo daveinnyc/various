@@ -203,7 +203,6 @@ def parse_raw(list_of_lines):
                     pass
                 this_record['item2'] = items2
             elif line.startswith('item3', 0):
-                print(f"ITEM3 {line}")                
                 if 'TEL' in line:
                     item3_telephone_flag = True                    
                     items3.append(parse_item(line))
@@ -213,8 +212,6 @@ def parse_raw(list_of_lines):
                     items3.append(parse_item_xlabel(line))
                     telephone_flag = False
                 this_record['item3'] = items3   
-                print(f"IT3-RECORD {this_record['item3']}") 
-    
             elif line.startswith('ORG', 0):
                 this_record['org'] = parse_org(line)
             elif line.startswith('BDAY', 0):
