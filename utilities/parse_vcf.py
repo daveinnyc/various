@@ -294,3 +294,20 @@ if __name__ == "__main__":
             records = parse_raw(get_file(vcf_file))
             for record in records[0]:
                 outfile.write(print_csv_record(record))
+
+
+
+###################################
+####  Sanity check on records  ####
+###################################
+'''
+-rwxrwxr-x+ 1 dave None  9725 May 26 23:57 002.vcfmod
+-rwxrwxr-x+ 1 dave None 44599 May 27 00:04 001.vcfmod
+-rwxrwxr-x+ 1 dave None 10454 May 27 12:24 test_parse_vcf.py
+-rwxrwxr-x+ 1 dave None 10197 May 27 12:37 parse_vcf.py
+-rwxrwxr-x+ 1 dave None 19941 May 27 12:37 converted_vcf.csv
+utilities> wc -l converted_vcf.csv
+305 converted_vcf.csv
+utilities> grep FN *vcfmod | wc -l
+305
+'''
