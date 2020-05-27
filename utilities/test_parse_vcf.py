@@ -46,7 +46,7 @@ def test_parse_raw_case_statement():
                      'EMAIL;type=INTERNET;type=WORK;type=pref:usr.name@domain.tld',
                      'item1.EMAIL;type=INTERNET;type=pref:julia.dadiomov@venafi.com',
                      'item2.ADR;type=HOME;type=pref:;;Am Heistersiek 12;Spenge;Nordrhein-Westfale',
-                     'item3.X-ABLabel:England home',
+                     'item3.TEL;type=pref:+441277202041',
                      'ORG:Aaaa;\n',
                      'BDAY;value=date:1972-03-26\n',
                      'REV:2014-07-07T02:21:17Z',
