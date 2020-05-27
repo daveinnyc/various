@@ -152,6 +152,9 @@ def parse_raw(list_of_lines):
         line = line.strip()
         if line.startswith('BEGIN:VCARD', 0):
             new_record = True
+            items1 = []
+            items2 = []
+            items3 = []
             item1_telephone_flag = False
             item2_telephone_flag = False
             item3_telephone_flag = False
@@ -170,36 +173,47 @@ def parse_raw(list_of_lines):
                 emails = []
                 emails.append(parse_email(line))
             elif line.startswith('item1', 0):
-                items = []
                 if 'TEL' in line:
                     item1_telephone_flag = True
-                    items.append(parse_item(line))
-                if 'EMAIL' in line:
-                    items.append(parse_item(line))   
-                if 'X-ABLabel' in line and item1_telephone_flag == True:
-                    items.append(parse_item_xlabel(line))
+                    items1.append(parse_item(line))
+                elif 'EMAIL' in line:
+                    items1.append(parse_item(line))   
+                elif 'ADR' in line:
+                    items1.append(parse_item(line))   
+                elif 'X-ABLabel' in line and item1_telephone_flag == True:
+                    items1.append(parse_item_xlabel(line))
                     item1_telephone_flag = False
-                    this_record['item1'] = items
+                else:
+                    pass
+                this_record['item1'] = items1
             elif line.startswith('item2', 0):
+                print(f"IT2 {line}")                
                 if 'TEL' in line:
                     item2_telephone_flag = True
-                    items.append(parse_item(line))
-                if 'EMAIL' in line:
-                    items.append(parse_item(line))   
-                if 'X-ABLabel' in line and item2_telephone_flag == True:
-                    items.append(parse_item_xlabel(line))
+                    items2.append(parse_item(line))
+                    print(f"IT2-TEL {items2}")                
+                elif 'EMAIL' in line:
+                    items2.append(parse_item(line))   
+                    print(f"IT2-EMAIL {items2}")                
+                elif 'ADR' in line:
+                    items2.append(parse_item(line))   
+                elif 'X-ABLabel' in line and item2_telephone_flag == True:
+                    items2.append(parse_item_xlabel(line))
                     telephone_flag = False
-                    this_record['item2'] = items
+                else:
+                    pass
+                this_record['item2'] = items2
+                print(f"IT2-RECORD {this_record['item2']}") 
             elif line.startswith('item3', 0):
                 if 'TEL' in line:
                     item3_telephone_flag = True                    
-                    items.append(parse_item(line))
+                    items3.append(parse_item(line))
                 if 'EMAIL' in line:
-                    items.append(parse_item(line))   
+                    items3.append(parse_item(line))   
                 if 'X-ABLabel' in line and item3_telephone_flag == True:
-                    items.append(parse_item_xlabel(line))
+                    items3.append(parse_item_xlabel(line))
                     telephone_flag = False
-                    this_record['item3'] = items                    
+                this_record['item3'] = items3   
             elif line.startswith('ORG', 0):
                 this_record['org'] = parse_org(line)
             elif line.startswith('BDAY', 0):

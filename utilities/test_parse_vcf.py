@@ -59,7 +59,8 @@ def test_parse_raw_case_statement():
                      'END:VCARD']
     records, unparsed_records = pv.parse_raw(list_of_lines)
     print(f"R: {records},  UP: {unparsed_records}")
-    assert False == True
+    assert False
+    
     
 def test_parse_raw_item():
     # There's logic in parse_raw outside the parse_item1 function
