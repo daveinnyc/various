@@ -154,31 +154,47 @@ def test_parse_rev():
 ###  parse_org()  ###
 #####################
 # Lots of variation in the fields, only some chars stripped out
-def test_parse_org():
+def test_parse_org_new_line():
     test_line = 'ORG:Aaaa;\n' 
     assert pv.parse_org(test_line) == 'Aaaa'
 
+
+def test_parse_org_prefix_only():
     test_line = 'ORG:Aaaa;' 
     assert pv.parse_org(test_line) == 'Aaaa'
 
+
+def test_parse_org_with_dashes():
     test_line = 'ORG:aaa - bbb;' 
     assert pv.parse_org(test_line) == 'aaa - bbb'
 
+
+def test_parse_org_with_spaces():
     test_line = 'ORG:Aaa Bbb;' 
     assert pv.parse_org(test_line) == 'Aaa Bbb'
 
+
+def test_parse_org_with_escape_sign():
     test_line = r'ORG:Aaa\ Bbb;'
     assert pv.parse_org(test_line) == r'Aaa\ Bbb'
 
+
+def test_parse_org_with_escape_sign_and_comma():
     test_line = r'ORG:Aaa\, Bbb;'
     assert pv.parse_org(test_line) == 'Aaa  Bbb'
 
+
+def test_parse_org_with_semi_colon():
     test_line = 'ORG:Aaa;Bbb' 
     assert pv.parse_org(test_line) == 'Aaa Bbb'
-    
+
+
+def test_parse_org():    
     test_line = 'ORG:Aaa, Bbb' 
     assert pv.parse_org(test_line) == 'Aaa  Bbb'
 
+
+def test_parse_org():
     test_line = 'ORG:Aaa (BB & Ccc Ddd);' 
     assert pv.parse_org(test_line) == 'Aaa (BB & Ccc Ddd)'
 

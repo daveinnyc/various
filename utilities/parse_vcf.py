@@ -224,6 +224,12 @@ def parse_raw(list_of_lines):
             elif line.startswith('X-SOCIALPROFILE', 0): 
                 # Ignore this field
                 pass
+            elif line.startswith('TITLE', 0): 
+                # Ignore this field
+                pass
+            elif line.startswith('IMPP', 0): 
+                # Ignore this field
+                pass
             elif line.startswith('VERSION', 0): 
                 # Ignore this field
                 pass
