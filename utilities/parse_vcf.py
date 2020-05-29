@@ -75,20 +75,22 @@ def parse_item(line):
     # item1.ADR;type=HOME;type=pref:;;Am Heistersiek 12;Spenge;Nordrhein-Westfale
     # item1.ADR;type=WORK;type=pref:;;530 Lytton Ave\, 2nd Floor\nSuite 202\n\n;Palo Alto;CA;94301;United States
     # item1.TEL;type=pref:+441277202041
+    # item2.TEL:011 49 157 72592658
     # item1.X-ABLabel:England home
+    # item1.X-ABADR:us
     # X-ABLabel sometimes follows TEL tag
     target_value = ''
     
     if 'EMAIL' in line:
         *junk, target_value = line.split(':')
-    elif 'ADR' in line:
+    elif '.ADR;' in line:
         *junk, target_value = line.split('type=pref')
         target_value = target_value[3:]
         target_value = target_value.replace(';', ' ')
         target_value = target_value.replace(r'\,', ' ')
         target_value = target_value.replace(r'\n', ' ')
     elif 'TEL' in line:
-        *junk, target_value = line.split('type=pref:')        
+        *junk, target_value = line.split(':')        
     else:
         pass
 
