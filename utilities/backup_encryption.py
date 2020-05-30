@@ -1,12 +1,10 @@
 ### A collection of utlities for encrypting files and saving them to gdrive
-
 from cryptography.fernet import Fernet
 from datetime import datetime
 
 
-def create_key():
+def create_key(now = datetime.now()):
     key = Fernet.generate_key()
-    now = datetime.now()
     timestamp = now.strftime("%Y-%m-%d-%H%M%S")
     keyfile = "backup_file_encryption.." + timestamp + ".key"
     with open(keyfile, "wb") as key_file:
@@ -16,8 +14,18 @@ def create_key():
     
         
 def load_key(key="development.key"):
-    return open(development.key, "rb").read()
+    return open(key, "rb").read()
     
+
+def encrypt_file(filename, key):
+    encrypter = Fernet(key)
+    
+    with open(filename, "rb") as file:
+        file_data = file.read()
+    encrypted_data = encrypter.encrypt(file_data)
+
+    return encrypted_data
+   
     
 if __name__ == "__main__":
    # Be careful not too lose or overwrite the key as that will render 
