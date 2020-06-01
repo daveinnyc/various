@@ -26,7 +26,6 @@ def test_load_key():
         print(f"ERR: Unknown exception {e}")
         assert "Passed Test" == False
     
-    
 
 def test_encrypt_file():
     test_file_contents = '''A short test file'''
@@ -36,14 +35,37 @@ def test_encrypt_file():
         tf.write(test_file_contents)
         
     try: 
-        (key, key_file) = be.create_key()
-        be.encrypt_file(test_file, key_file)     
+        key = be.load_key(key="development.key") 
+        encrypted_data = be.encrypt_file(test_file, key)     
     except IOError:
         print(f"ERR: Cannot open {test_file}") 
     except EOFError:
         print(f"ERR: Unexpected EOF in {test_file}")        
     except Exception as e:
         print(f"ERR: Unknown exception {e}")
-        
-    assert True == False    
+    finally: 
+        os.remove(test_file)
 
+    assert encrypted_data = False    
+
+###############################
+'''
+# Need to figure out how to verify file was encrypted
+tests> cat > testfile
+This is a string
+
+tests> gpg -c testfile
+tests> md5sum testfile.gpg
+7ecc8b905e76d913680539da5ee92f6c *testfile.gpg
+
+tests> rm testfile.gpg
+tests> gpg -c testfile
+tests> md5sum testfile.gpg
+62b96de01c7a294982a333a10ec37034 *testfile.gpg
+'''
+
+'''
+https://cryptography.io/en/latest/fernet/
+
+Returns bytes:	A secure message that cannot be read or altered without the key. It is URL-safe base64-encoded. This is referred to as a “Fernet token”.
+'''
