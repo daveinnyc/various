@@ -1,32 +1,49 @@
 import backup_encryption as be
+import hashlib
+import os
+
 from datetime import datetime
 
 
 def test_create_key():
-    # Key should look like this
-    # key =  b'5jApZKjlxj4SjH5FU05tHx4abfUkzHxgYc3LxFmf4HM='
-    (key, keyfile) = be.create_key()
+    # Results should look like this
+    #   key:  b'5jApZKjlxj4SjH5FU05tHx4abfUkzHxgYc3LxFmf4HM='
+    #   keyfile: 'backup_file_encryption..2020-05-31-122543.key'
+    (key, key_file) = be.create_key()
     assert len(key) == 44
-    assert len(keyfile) == 45
+    assert type(key) is bytes
+    assert len(key_file) == 45
+        
         
 def test_load_key():
-    assert be.load_key(key="development.key") == False
+    (generated_key, key_file) = be.create_key()
+    loaded_key = be.load_key(key=key_file) 
+    
+    try: 
+        os.remove(key_file)
+        assert loaded_key == generated_key
+    except Exception as e:
+        print(f"ERR: Unknown exception {e}")
+        assert "Passed Test" == False
+    
     
 
 def test_encrypt_file():
-    assert be.encrypt_file(filename, key) == False
+    test_file_contents = '''A short test file'''
+    test_file = 'TEST_FILE'
     
-#######################
-'''
-b'PrZBGII55Gs4sVpogQpddmOJ83rJEnVCaCixpdPF3zc='
-b'5jApZKjlxj4SjH5FU05tHx4abfUkzHxgYc3LxFmf4HM='
-b'PiW6myoHpzRkLuLIhe2Vd4sQ6wj7hri0PnFFN1ButCM='
-b'CIFiBtvSJt04DAWgz-e6hRN9boJLnJrA7YkjcVjLQH8='
-b'QKWJH8F4_VuRpY3fwO3NLZRVPU0szpfXN4q6LsJO6nM='
-b'e9L6IPkG1TZOVgqQ5et-OgUGPPWJQA4aDztDea1sTdo='
-b'cP2HOftDBubRBaRxAoCbXJnKR5Khu3bcbmEPptyiqPI='
-b'BVMNNs97mlGdf72iv93RDlw7IDJbup4LryUPE1pIYzE='
-b'nhPOmGjoteRIclQYnW0Az8n1EN-DIhYbmzktFQW-tdc='
-b'NjLVQo0xARjQFM1Lobw1CBpE3KPxnUCHAGeEMoUdvJY='
-b'bHgyYfPDKVZ1j7gjZhoRqaLzwKpra1XB7sGmn0vQ_Ps='
-'''
+    with open(test_file, "w") as tf:
+        tf.write(test_file_contents)
+        
+    try: 
+        (key, key_file) = be.create_key()
+        be.encrypt_file(test_file, key_file)     
+    except IOError:
+        print(f"ERR: Cannot open {test_file}") 
+    except EOFError:
+        print(f"ERR: Unexpected EOF in {test_file}")        
+    except Exception as e:
+        print(f"ERR: Unknown exception {e}")
+        
+    assert True == False    
+
