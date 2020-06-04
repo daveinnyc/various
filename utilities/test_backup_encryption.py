@@ -1,5 +1,5 @@
 import backup_encryption as be
-import hashlib
+import base64 as b64
 import os
 
 from datetime import datetime
@@ -46,27 +46,10 @@ def test_encrypt_file():
     finally: 
         os.remove(test_file)
 
+    # https://cryptography.io/en/latest/fernet/
+    # Encrypted data is in bytes and URL-safe base64-encoded
     assert str(type(encrypted_data)) == "<class 'bytes'>"
+    assert b64.urlsafe_b64encode(b64.urlsafe_b64decode(encrypted_data)) == encrypted_data
     
-
+    
 ###############################
-'''
-# Need to figure out how to verify file was encrypted
-tests> cat > testfile
-This is a string
-
-tests> gpg -c testfile
-tests> md5sum testfile.gpg
-7ecc8b905e76d913680539da5ee92f6c *testfile.gpg
-
-tests> rm testfile.gpg
-tests> gpg -c testfile
-tests> md5sum testfile.gpg
-62b96de01c7a294982a333a10ec37034 *testfile.gpg
-'''
-
-'''
-https://cryptography.io/en/latest/fernet/
-
-Returns bytes:	A secure message that cannot be read or altered without the key. It is URL-safe base64-encoded. This is referred to as a “Fernet token”.
-'''
