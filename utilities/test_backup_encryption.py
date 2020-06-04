@@ -99,6 +99,7 @@ def test_decrypt_file():
         print(f"ERR: Unknown exception {e}")
     finally: 
         os.remove(test_file)
+        os.remove(test_file + '.enc')
 
     assert decrypted_data == test_file_contents
     
