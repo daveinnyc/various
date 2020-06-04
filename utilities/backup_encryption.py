@@ -26,6 +26,25 @@ def encrypt_file(filename, key):
     encrypted_data = encrypter.encrypt(file_data)
 
     return encrypted_data
+
+
+def write_encrypted_file(filename, encrypted_data):
+    filename = filename + '.enc'
+    
+    with open(filename, "wb") as file:
+        file.write(encrypted_data)
+
+    return filename
+
+    
+def decrypt_file(filename, key):
+    decrypter = Fernet(key)
+    
+    with open(filename, 'rb') as file:
+        encrypted_data = file.read()
+    decrypted_data = decrypter.decrypt(encrypted_data)
+
+    return str(decrypted_data.decode())
    
     
 if __name__ == "__main__":

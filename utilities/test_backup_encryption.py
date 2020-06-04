@@ -5,6 +5,11 @@ import os
 from datetime import datetime
 
 
+### SETUP NOTES
+#   Many tests require existence of 'development.key' file
+
+
+### TESTS
 def test_create_key():
     # Results should look like this
     #   key:  b'5jApZKjlxj4SjH5FU05tHx4abfUkzHxgYc3LxFmf4HM='
@@ -46,10 +51,30 @@ def test_encrypt_file():
     finally: 
         os.remove(test_file)
 
-    # https://cryptography.io/en/latest/fernet/
+    # Data format specified in https://cryptography.io/en/latest/fernet/
     # Encrypted data is in bytes and URL-safe base64-encoded
     assert str(type(encrypted_data)) == "<class 'bytes'>"
     assert b64.urlsafe_b64encode(b64.urlsafe_b64decode(encrypted_data)) == encrypted_data
+    
+
+def test_decrypt_file():
+    test_file_contents = 'A short test file'
+    test_file = 'TEST_FILE'
+    
+    with open(test_file, "w") as tf:
+        tf.write(test_file_contents)
+        
+    try: 
+        key = be.load_key(key="development.key") 
+        encrypted_data = be.encrypt_file(test_file, key)     
+        encrypted_file = be.write_encrypted_file(test_file, encrypted_data)     
+        decrypted_data = be.decrypt_file(encrypted_file, key)
+    except Exception as e:
+        print(f"ERR: Unknown exception {e}")
+    finally: 
+        os.remove(test_file)
+
+    assert decrypted_data == test_file_contents
     
     
 ###############################
