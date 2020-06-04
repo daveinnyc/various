@@ -42,8 +42,8 @@ def test_encrypt_file():
     try: 
         key = be.load_key(key="development.key") 
         encrypted_data = be.encrypt_file(test_file, key)     
-    except IOError:
-        print(f"ERR: Cannot open {test_file}") 
+    except IOError as ioe:
+        print(f"ERR: IO problem {ioe}") 
     except EOFError:
         print(f"ERR: Unexpected EOF in {test_file}")        
     except Exception as e:
@@ -57,6 +57,32 @@ def test_encrypt_file():
     assert b64.urlsafe_b64encode(b64.urlsafe_b64decode(encrypted_data)) == encrypted_data
     
 
+def test_write_encrypted_file():
+    test_file_contents = '''A short test file'''
+    test_file = 'TEST_FILE'
+   
+    with open(test_file, "w") as tf:
+        tf.write(test_file_contents)
+        
+    try: 
+        key = be.load_key(key="development.key") 
+        encrypted_data = be.encrypt_file(test_file, key)
+        file_name = be.write_encrypted_file(test_file, encrypted_data)
+        file_size = os.path.getsize(file_name)
+    except IOError as ioe:
+        print(f"ERR: IO problem {ioe}") 
+    except EOFError:
+        print(f"ERR: Unexpected EOF in {test_file}")        
+    except Exception as e:
+        print(f"ERR: Unknown exception {e}")
+    finally: 
+        os.remove(test_file)
+        os.remove(test_file + '.enc')
+
+    assert file_name == test_file + '.enc'
+    assert file_size > 0
+    
+    
 def test_decrypt_file():
     test_file_contents = 'A short test file'
     test_file = 'TEST_FILE'
@@ -78,3 +104,4 @@ def test_decrypt_file():
     
     
 ###############################
+# Testing the write encrypted file function
