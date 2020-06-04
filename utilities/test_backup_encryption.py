@@ -46,7 +46,8 @@ def test_encrypt_file():
     finally: 
         os.remove(test_file)
 
-    assert encrypted_data = False    
+    assert str(type(encrypted_data)) == "<class 'bytes'>"
+    
 
 ###############################
 '''
