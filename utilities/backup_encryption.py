@@ -26,17 +26,22 @@ def load_key(key="development.key"):
     Read in a previously generated key. Defaults to the dev key
     """
     secret_key = 'Not yet loaded'
-    
+
     try:
         loaded = open(key, "rb")
         secret_key = loaded.read()
     except IOError as ioe:
         print(f"ERR: IO Error {ioe}")
-    
+
     return secret_key
 
 
 def encrypt_file(filename, key):
+    """
+    Read file and encrpyt the data
+
+    Return an encrypted bytestring
+    """
     encrypter = Fernet(key)
 
     with open(filename, "rb") as file:
@@ -47,6 +52,9 @@ def encrypt_file(filename, key):
 
 
 def write_encrypted_file(filename, encrypted_data):
+    """
+    Write an encrypted bytestring to file
+    """
     filename = filename + '.enc'
 
     with open(filename, "wb") as file:
@@ -56,6 +64,11 @@ def write_encrypted_file(filename, encrypted_data):
 
 
 def decrypt_file(filename, key):
+    """
+    Read an encrypted file and decrpyt the data
+
+    Return an decrypted string
+    """
     decrypter = Fernet(key)
 
     with open(filename, 'rb') as file:
