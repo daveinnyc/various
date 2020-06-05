@@ -28,8 +28,7 @@ def load_key(key="development.key"):
     secret_key = 'Not yet loaded'
     
     try:
-        #loaded = open(key, "rb")
-        loaded = open("THIS_WILL_FAIL", "rb")
+        loaded = open(key, "rb")
         secret_key = loaded.read()
     except IOError as ioe:
         print(f"ERR: IO Error {ioe}")
