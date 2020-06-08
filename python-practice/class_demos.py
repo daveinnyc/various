@@ -33,9 +33,16 @@ class SampleWithProperties():
    
     @name.setter
     def name(self, value):
+        # Often has some ort of validation or transformation code
         self.__name = value
         
 
+    @number.setter
+    def number(self, value):
+        # Often has some ort of validation or transformation code
+        self.__number = value % 2
+        
+        
 if __name__ == "__main__":
     '''
     # Demo Sample()
@@ -48,10 +55,23 @@ if __name__ == "__main__":
     
     # Demo SampleWithProperties()
     instance_with_props = SampleWithProperties("fred", 3)   
-    print(f"Access name field, getter: {instance_with_props.name}")
-    print(f"Access name field, getter: {instance_with_props.double_name}")
-    # Next line fails
-    # print(f"Access name field, direct: {instance_with_props.__name}")
+    # Directly accessing values
+    #    Next line fails
+    #    print(f"Access name field, direct: {instance_with_props.__name}")
     # Python rewrites value names with intial __ to protect namespace
     #    not really a private value, but less likely to be accessed
     print(f"Access name field, direct: {instance_with_props._SampleWithProperties__name}")
+    # Using getter to access values, looks like direct access but isn't
+    #    name field
+    print(f"Access name field, getter: {instance_with_props.name}")
+    print(f"Access name field, getter: {instance_with_props.double_name}")
+    instance_with_props.name = "Barney"
+    print(f"Access name field, after setter: {instance_with_props.name}")
+    #    number field
+    print(f"Access number field, before setter: {instance_with_props.number}")    
+    instance_with_props.number = 4
+    print(f"Access number field, after setter: {instance_with_props.number}")
+    instance_with_props.number = 3
+    print(f"Access number field, after setter: {instance_with_props.number}")
+    
+    
