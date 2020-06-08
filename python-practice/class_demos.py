@@ -11,8 +11,8 @@ class Sample():
 
 class SampleWithProperties():
     def __init__(self, name, number):
-        self.__name = name
-        self.__number = number
+        self.name = name
+        self.number = number
         
     @property
     def name(self):
@@ -42,33 +42,6 @@ class SampleWithProperties():
         self.__number = value % 2
         
 
-class MoreProperties():
-    def __init__(self, name):
-        self.name = name
-        
-    @property
-    def name(self):
-        return self.__name
-      
-    @name.setter
-    def name(self, value):
-        self.__name = value
-        
-
-class SWPropertiesTwo():
-    def __init__(self, name):
-        self.name = name
-        
-    @property
-    def name(self):
-        return self.__name
-    
-    @name.setter
-    def name(self, value):
-        self.__name = value
-        
-
-        
 if __name__ == "__main__":
     '''
     # Demo Sample()
@@ -79,7 +52,7 @@ if __name__ == "__main__":
     print(f"Access number field directly: {instance.number}")
     '''
 
-    '''    
+    
     # Demo SampleWithProperties()
     instance_with_props = SampleWithProperties("fred", 3)   
     # Directly accessing values
@@ -100,13 +73,4 @@ if __name__ == "__main__":
     print(f"Access number field, after setter: {instance_with_props.number}")
     instance_with_props.number = 3
     print(f"Access number field, after setter: {instance_with_props.number}")
-    '''
     
-    # Demo MoreProperties()
-    #    Figure out why self.value doesn't work and self.__value does in class with properties
-    #  Works ok in MoreProperties 
-    instance = MoreProperties("Betty")
-    print(f"Initial value: {instance.name}")
-    instance2 = SWPropertiesTwo("Veronica")
-    print(f"Initial value: {instance2.name}")
-
