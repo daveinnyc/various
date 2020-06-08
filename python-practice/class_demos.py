@@ -1,6 +1,4 @@
 # Notes on classes
-
-
 class Sample():
     def __init__(self, name, number):
         self.name = name
@@ -30,33 +28,46 @@ class SampleWithProperties():
     @property
     def number(self):
         return self.__number
+
    
     @name.setter
     def name(self, value):
-        # Often has some ort of validation or transformation code
+        # Often has some sort of validation or transformation code
         self.__name = value
         
 
     @number.setter
     def number(self, value):
-        # Often has some ort of validation or transformation code
+        # Often has some sort of validation or transformation code
         self.__number = value % 2
         
 
 class MoreProperties():
-    def __init__(self, nname):
-        self.name = nname
+    def __init__(self, name):
+        self.name = name
         
     @property
     def name(self):
-        # double underscore is to tell future devs to avoid variable
         return self.__name
       
     @name.setter
     def name(self, value):
-        # Often has some ort of validation or transformation code
         self.__name = value
         
+
+class SWPropertiesTwo():
+    def __init__(self, name):
+        self.name = name
+        
+    @property
+    def name(self):
+        return self.__name
+    
+    @name.setter
+    def name(self, value):
+        self.__name = value
+        
+
         
 if __name__ == "__main__":
     '''
@@ -92,4 +103,10 @@ if __name__ == "__main__":
     '''
     
     # Demo MoreProperties()
-    #    Figure out why self.value doesn't work and self.__value does in prior examples
+    #    Figure out why self.value doesn't work and self.__value does in class with properties
+    #  Works ok in MoreProperties 
+    instance = MoreProperties("Betty")
+    print(f"Initial value: {instance.name}")
+    instance2 = SWPropertiesTwo("Veronica")
+    print(f"Initial value: {instance2.name}")
+
