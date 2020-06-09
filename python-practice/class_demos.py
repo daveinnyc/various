@@ -45,15 +45,16 @@ class SuperClass():
         self.name = name
          
     def speak(self):
-        print(f"Hola {self.name}")        
+        print(f"Hey, ho {self.name}")        
 
 
 class SubClass(SuperClass):
     def __init__(self, name, location):
         super().__init__(name)
-         
+        self.location = location
+        
     def shout_out(self):
-        print(f"{self.name} is where it's at")        
+        print(f"{self.location} is where it's at")        
 
 
 
@@ -91,5 +92,14 @@ if __name__ == "__main__":
     '''
     
     # Demo inheritance 
+    # Show super class functions
     instance_super = SuperClass("Johnny")
     print(f"Name, super: {instance_super.name}")
+    print("")
+    # Show sub inherits name, methods, and has it's own methods
+    instance_sub = SubClass("Joey", "Lower East Side")
+    print(f"Name, super: {instance_sub.name}")
+    print(f"Method from super: ", end="")
+    instance_sub.speak()
+    print(f"Method from sub: ", end="")
+    instance_sub.shout_out()
