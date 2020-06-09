@@ -24,23 +24,38 @@ class SampleWithProperties():
         # Can return calculated or other values besides fields
         return 2 * self.__name
 
-
     @property
     def number(self):
         return self.__number
-
-   
+  
     @name.setter
     def name(self, value):
         # Often has some sort of validation or transformation code
         self.__name = value
         
-
     @number.setter
     def number(self, value):
         # Often has some sort of validation or transformation code
         self.__number = value % 2
         
+
+
+class SuperClass():
+    def __init__(self, name):
+        self.name = name
+         
+    def speak(self):
+        print(f"Hola {self.name}")        
+
+
+class SubClass(SuperClass):
+    def __init__(self, name, location):
+        super().__init__(name)
+         
+    def shout_out(self):
+        print(f"{self.name} is where it's at")        
+
+
 
 if __name__ == "__main__":
     '''
@@ -52,7 +67,7 @@ if __name__ == "__main__":
     print(f"Access number field directly: {instance.number}")
     '''
 
-    
+    '''    
     # Demo SampleWithProperties()
     instance_with_props = SampleWithProperties("fred", 3)   
     # Directly accessing values
@@ -73,4 +88,8 @@ if __name__ == "__main__":
     print(f"Access number field, after setter: {instance_with_props.number}")
     instance_with_props.number = 3
     print(f"Access number field, after setter: {instance_with_props.number}")
+    '''
     
+    # Demo inheritance 
+    instance_super = SuperClass("Johnny")
+    print(f"Name, super: {instance_super.name}")
