@@ -1,6 +1,0 @@
-packers: common indicators  -->  PE file onnly has LoadLibrary, GetProcAddress
-packers: common ID strings  -->  UPX0, UPX1, aspack, adata, NSP0, NSP1, WinRAR, SFX, PEC2 PECompact2, Themida, Orean.sys, NTkrnl, Secure Suite
-packers: tools  -->  PEiD, LordPE, python peutils
-
-
-strings: reveal strings in binary  -->  strings filename
