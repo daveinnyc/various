@@ -1,0 +1,3 @@
+jvm: garbage collection, get heap stats  --> -XX:+PrintHeapAtGC
+jvm: garbage collection, get tenuring stats  --> -XX:+PrintTenuringDistribution  (Size should quickly decline across ages)
+jvm: memory footprint  --> use:  -verbosegc  check values in: [Full GC $before->$after($total), $time secs] 
