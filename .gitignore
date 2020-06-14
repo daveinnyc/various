@@ -6,3 +6,4 @@ __pycache__/
 *.key
 **/venv/
 /java/hfj/hfjava/target/
+/java/hfj/BookNotes/BookNotes/target/
