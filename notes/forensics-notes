@@ -1,3 +1,47 @@
+dstat --> general system monitoring tool, also network info
+
+
+free  --> dislpay memory usage
+
+
+host  -->  map IP to host:  host www.google.com
+
+
+hostname  -->  give current machine name
+
+
+iostat  --> dispaly ave. cpu load, disk I/O
+
+
+lsof  -->  lists of open files
+
+
+mpstat  -->  multiple CPU usage date:  mpstat -P ALL
+
+
+pmap  -->  process memory usage (not summaryon last line):  pmap -d PID
+
+
+ps switches, threads by process  -->  ps -AlLm
+ps switches, process trees -->  ps -ejH   or   ps axjf
+ps switches, security info -->  ps -eM   or   ps axZ  
+
+
+ss  -->  socket level network statistics
+
+
+strace  -->  trace system calls
+
+
+uptime  -->  display system uptime
+
+
+vmstat  -->  historical info for systems
+
+
+w, who, whois --> users logged in
+
+
 #############################
 ## STOPPED SYSTEM ANALYSIS ##
 #############################
