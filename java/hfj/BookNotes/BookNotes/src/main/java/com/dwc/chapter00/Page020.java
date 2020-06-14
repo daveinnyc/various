@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.dwc.booknotes;
+package com.dwc.chapter00;
 
 /**
  *
  * @author dave
  */
-public class ProblemOne {
+public class Page020 {
     public static void main(String[] args) {
         int x = 3;
         if (x == 3){

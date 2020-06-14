@@ -3,20 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.dwc.booknotes;
+package com.dwc.chapter00;
 
 /**
  *
  * @author dave
  */
-public class ProblemC {
-    // Original missing main method
+public class Page021B {
+    // Missing classname
     public static void main(String[] arg){
-        int x =5;
-        while (x > 1 ){
-            x = x -1;
+        int x = 5;
+        while ( x > 1 ){
+            x = x - 1;
             if ( x < 3 ){
-                System.out.println("Small x");
+                System.out.println("Small X");
             }
         }
     }

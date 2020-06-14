@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.dwc.booknotes;
+package com.dwc.chapter00;
 
 /**
  *
  * @author dave
  */
-public class ProblemA {
+public class Page021A {
     public static void main(String[] arg){
         /* Orig had no decrement in loop, 
          * only ran below print threshold
@@ -19,7 +19,7 @@ public class ProblemA {
             if (x > 3){
                 System.out.println("Big X");
             }
-        x -= 1    
+        x -= 1;
         }
     }
     

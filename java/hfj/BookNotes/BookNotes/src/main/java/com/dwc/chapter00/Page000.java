@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.dwc.booknotes;
+package com.dwc.chapter00;
 
 /**
  *
  * @author dave
  */
-public class Intro {
+public class Page000 {
     public static void main(String[] args) {
         System.out.println("Prints to system out");
         
@@ -24,5 +24,5 @@ public class Intro {
             System.out.print(n);
             System.out.print("\n");
         }
-        
+    }
 }
