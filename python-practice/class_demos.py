@@ -56,6 +56,12 @@ class SubClass(SuperClass):
     def shout_out(self):
         print(f"{self.location} is where it's at")        
 
+    def speak(self):
+        # Need to explicitly over ride parent methods
+        #   calling it here, eg,  super().speak()
+        #   just calls it. If super.method() is not
+        #   called, then only this code would run
+        print(f"{self.location}, let's go! ")        
 
 
 if __name__ == "__main__":
@@ -96,10 +102,14 @@ if __name__ == "__main__":
     instance_super = SuperClass("Johnny")
     print(f"Name, super: {instance_super.name}")
     print("")
-    # Show sub inherits name, methods, and has it's own methods
+    # Show sub inherits name, methods
     instance_sub = SubClass("Joey", "Lower East Side")
     print(f"Name, super: {instance_sub.name}")
     print(f"Method from super: ", end="")
+    instance_sub.super().speak()
+    print("")
+    # Show sub can override parent
+    print(f"Overide from super: ", end="")
     instance_sub.speak()
-    print(f"Method from sub: ", end="")
-    instance_sub.shout_out()
+    # Figure out how to call the super method from the instance rather than from the class definition
+    
