@@ -1,9 +1,30 @@
+# Python ignores 
 __pycache__/
 *.py[cod]
 *.swp
 *.o
+**/venv/
+
+
+# Misc ignores
 *.csv
 *.key
-**/venv/
-/java/hfj/hfjava/target/
-/java/hfj/BookNotes/BookNotes/target/
+*.log
+*.zip
+*.tar.gz
+*.tgz
+/log
+/target
+
+
+# Java ignores
+*.class
+*.jar
+*.war
+**/bin
+
+
+# Eclipse
+.classpath
+.project
+.settings/
