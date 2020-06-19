@@ -22,9 +22,11 @@ __pycache__/
 *.jar
 *.war
 **/bin
+**/target
 
 
 # Eclipse
 .classpath
 .project
 .settings/
+.metadata
