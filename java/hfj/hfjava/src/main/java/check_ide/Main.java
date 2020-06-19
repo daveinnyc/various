@@ -1,7 +1,7 @@
 /*
  * netbeans HelloWorld
  */
-package com.dwc.hfjava;
+package check_ide;
 
 /**
  *
