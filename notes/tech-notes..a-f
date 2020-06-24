@@ -149,6 +149,9 @@ cron: >/dev/null 2>/&1 will stop mail messages being sent after execution
 
 
 curl: get cookies ->  curl -c - --output /dev/null -vvv https://www.example.com  2>&1 |grep -i cookie
+curl: get cookies ->  curl -I http://site.address.com 
+curl: get cookies, save to file ->  curl -I http://site.address.com  --cookie-jar mycookies
+curl: get cookies on stdout ->  curl -I http://site.address.com --cookie-jar -
 curl: post to a form -> curl -X POST -F "name=user" -F "password=test" http://URL/example.php
 curl: post with data -> curl -d "data=example1&data2=example2" http://URL/example.cgi
 curl: post with file -> curl -X POST -F "image=@/path/example.gif" http://URL/uploadform.cgi
