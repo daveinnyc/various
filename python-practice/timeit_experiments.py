@@ -13,13 +13,14 @@ def multiply(num, reps):
         
 
 if __name__ == "__main__":
-    NUM = 5
-    REPS = 10
+    NUM = [5, 50, 500]
+    REPS = [10, 1000, 10000000]
 
-    print(f"ADD: {NUM} {REPS}")
-    # Can't pass a function directly. Timeit needs a callable thing so use lambda
-    # number defaults to 3 repetitions, left at default to show syntax
-    print(min(timeit.repeat(lambda: add(NUM, REPS), number=50)))
-    print()
-    print(f"MULTIPLY: {NUM} {REPS}")
-    print(min(timeit.repeat(lambda: multiply(NUM, REPS), number=50)))
+    for (n,r) in zip(NUM, REPS):
+        # Can't pass a function directly. Timeit needs a callable thing so use lambda
+        # number defaults to 3 repetitions, left at default to show syntax
+        print(f"ADD: {n} {r}  -> ", end="")
+        print(min(timeit.repeat(lambda: add(n, r), number=50)))
+        print(f"MULTIPLY: {n} {r}  -> ", end="")
+        print(min(timeit.repeat(lambda: multiply(n, r), number=50)))
+        print()
