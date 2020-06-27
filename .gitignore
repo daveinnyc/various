@@ -4,6 +4,7 @@ __pycache__/
 *.swp
 *.o
 **/venv/
+*exe
 
 
 # Misc ignores
