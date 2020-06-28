@@ -6,7 +6,7 @@ public class Player {
 	private String name; 
 	private int lowGuess;
 	private int highGuess;
-	private int lastGuess;
+	private int currentGuess;
 	private int numGuesses;
 	
 	
@@ -14,35 +14,37 @@ public class Player {
 		this.name = name; 
 		this.lowGuess = 0;
 		this.highGuess = 1000;
-		this.lastGuess = (int) (Math.random() * 1000);
+		this.currentGuess = (int) (Math.random() * 1000);
 		this.numGuesses = 0;
 			
 	}
 	
 	public void setName(String str) {
-		name = str;
+		this.name = str;
 	}
 	
 	public String getName() {
-		return name ;
+		return this.name ;
 	}
 	
 	public int getGuess() {
-		return lastGuess ;
+		return this.currentGuess ;
 	}
 	
 	public void setGuess(String highLow) {
-		int high;
-		int low;
-		
 		if (highLow == "high"){
-		    high = lastGuess;
-		    low = lowGuess;		
+			// Guess was higher than the target
+			this.highGuess = this.currentGuess;
+			this.currentGuess = this.lowGuess + (int)((this.currentGuess - this.lowGuess) / 2) ;
+		} else if (highLow == "low"){		
+			// Guess was lower than the target
+		    this.lowGuess = this.currentGuess;
+			this.currentGuess = this.lowGuess + (int)((this.highGuess - this.lowGuess) / 2) ;		
 		} else {
-			high = highGuess;
-		    low = lastGuess;
+			System.out.println("ERROR: needs 'high' or 'low'");
 		}
-		lastGuess = (int)((high - low) / 2);		
+		
+		
 	}
 
 	public int getNumGuesses() {

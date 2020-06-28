@@ -7,11 +7,10 @@ import java.util.*;
 
 public class GuessingGame {
 	// Maybe make this configurable at runtime later
-	int numPlayers = 3;
+	int numPlayers = 5;
 	Player[] playerList = new Player[numPlayers]; 
 	
 	public void startGame() {
-		System.out.println("Starting");
 		// Create Players
 		for(int p = 0; p < numPlayers ; p++) {
 			Player newPlayer = new Player("Player" + Integer.toString(p));
@@ -20,26 +19,28 @@ public class GuessingGame {
 		
 		// Define target number
 		int targetNumber = (int) (Math.random() * 1000);
-		System.out.println("TARGET: " + Integer.toString(targetNumber));
+        int winningPlayer = -1;
+        int currentGuess = -1;
         boolean numberHasntBeenGuessedYet = true; 
         
-		// TODO Start guessing
 		while(numberHasntBeenGuessedYet) {
 			for( int i = 0; i < numPlayers ; i++) {
-                int currentGuess = playerList[i].getGuess();
-                // is guess == actual
-                 // if low
-                 // if high
-               System.out.println(currentGuess); 
-			}
-			
-			
-			System.out.println("Ending");
-			numberHasntBeenGuessedYet = false;
+                currentGuess = playerList[i].getGuess();
+                if (targetNumber == currentGuess) {
+                	winningPlayer = i;
+        			numberHasntBeenGuessedYet = false;
+                } else if (targetNumber > currentGuess) {
+                	playerList[i].setGuess("low");
+                } else {
+                	playerList[i].setGuess("high");
+                }
+			}	
 		}
-		// TODO Check if winner
 		
-		// TODO Report score
+		// Report who won
+    	System.out.println("Game Over");
+    	System.out.print(playerList[winningPlayer].getName() + " guessed ");
+    	System.out.println(Integer.toString(currentGuess));
 	}
 
 }
