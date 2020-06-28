@@ -23,6 +23,7 @@ public class GuessingGame {
         int currentGuess = -1;
         boolean numberHasntBeenGuessedYet = true; 
         
+        System.out.println("TARGET: " + Integer.toString(targetNumber));
 		while(numberHasntBeenGuessedYet) {
 			for( int i = 0; i < numPlayers ; i++) {
 				playerList[i].incrementNumGuesses();
@@ -39,9 +40,8 @@ public class GuessingGame {
 		}
 		
 		// Report who won
-    	System.out.println("Game Over");
     	System.out.print(playerList[winningPlayer].getName() + " guessed ");
-    	System.out.print(Integer.toString(currentGuess));
+    	System.out.print(Integer.toString(playerList[winningPlayer].getGuess()));
     	System.out.print(" after "); 
     	System.out.print(Integer.toString(playerList[winningPlayer].getNumGuesses()));
     	System.out.println(" tries."); 
