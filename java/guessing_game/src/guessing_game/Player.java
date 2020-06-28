@@ -51,7 +51,7 @@ public class Player {
 		return numGuesses ;
 	}
 	
-	public void setNumGuesses() {
+	public void incrementNumGuesses() {
 		numGuesses += 1;
 	}
 
