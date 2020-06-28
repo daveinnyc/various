@@ -4,10 +4,20 @@ package guessing_game;
 
 public class Player {
 	private String name; 
-	private int lowGuess = 0;
-	private int highGuess = 1000;
-	private int lastGuess = (int) Math.random() * 1000;
-	private int numGuesses = 0;
+	private int lowGuess;
+	private int highGuess;
+	private int lastGuess;
+	private int numGuesses;
+	
+	
+	public Player(String name){
+		this.name = name; 
+		this.lowGuess = 0;
+		this.highGuess = 1000;
+		this.lastGuess = (int) (Math.random() * 1000);
+		this.numGuesses = 0;
+			
+	}
 	
 	public void setName(String str) {
 		name = str;
