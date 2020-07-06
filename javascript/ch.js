@@ -14,6 +14,8 @@ function testPrint(){
     print();
     print("oneString", " twoString");
     print(["a", "b", "c"]);
+    // String() adds commas between internal list items
+    print(["a", "b", "c"], ["d", "e"]);
     print(1, 2, 3);
     print(1, " x ", 2, " y");
 }
