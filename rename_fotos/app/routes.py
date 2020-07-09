@@ -1,19 +1,32 @@
+import os
+
 from flask import request
+from flask import render_template
 from app import app
 
 
 # Test page
 @app.route('/holamundo')
 def holamundo():
-    return 'Hola Mundo'
+    return "Hola Mundo"
 
 
 # Landing page
 @app.route('/')
 @app.route('/index')
 def index():
-    return "Renamer"
+    working_dir = os.getcwd()
+    return working_dir
     
+
+# Landing page - template
+# @app.route('/')
+@app.route('/home')
+def home():
+    return render_template('home.html',
+                            title="Rename Fotos",
+                            description="Utility to help organize")
+
 
 # Shutdown the server       
 @app.route('/shutdown')
@@ -23,6 +36,6 @@ def shutdown():
         raise RuntimeError('Werkzeug server not running')
     func()
 
-    return 'Server shutting down' 
+    return "Server shutting down" 
 
     
