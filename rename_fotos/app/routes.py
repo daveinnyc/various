@@ -14,18 +14,13 @@ def holamundo():
 # Landing page
 @app.route('/')
 @app.route('/index')
+@app.route('/home')
 def index():
     working_dir = os.getcwd()
-    return working_dir
-    
-
-# Landing page - template
-# @app.route('/')
-@app.route('/home')
-def home():
     return render_template('home.html',
                             title="Rename Fotos",
-                            description="Utility to help organize fotos")
+                            description="Utility to help organize fotos",
+                            location=working_dir)
 
 
 # Shutdown the server       
