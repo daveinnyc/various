@@ -25,7 +25,7 @@ def index():
 def home():
     return render_template('home.html',
                             title="Rename Fotos",
-                            description="Utility to help organize")
+                            description="Utility to help organize fotos")
 
 
 # Shutdown the server       

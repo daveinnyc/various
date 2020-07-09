@@ -5,12 +5,12 @@
     <meta charset="utf-8">
     <meta name="description" content={{description}}>
     <link rel="shortcut icon" href="/static/favicon.ico">
+    {% block css %}{% endblock %}
   </head>
 
   <body>
     {% include 'navigation.html' %}
-    {% block content %}
-    {% endblock %}
+    {% block content %}{% endblock %}
   </body>
 
 </html>

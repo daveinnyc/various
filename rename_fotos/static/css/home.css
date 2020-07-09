@@ -1,0 +1,17 @@
+nav {height: 25px;
+     width: 400px;
+     background-color: lightcyan;
+     text-align: center;
+}    
+    
+h1 {color: red; 
+    font-size: 20px;  
+}  
+
+p {color: black;  
+   font-size: 12px;
+}  
+
+a {color: grey;
+   font-size: 12px;
+}   
