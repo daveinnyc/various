@@ -1,4 +1,5 @@
 # Some code to use with pdb
+# Use with: python3 -m pdb debugger.py
 
 def adder(number):
     plus_one = number + 1
