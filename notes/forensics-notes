@@ -30,7 +30,7 @@ ps switches, security info -->  ps -eM   or   ps axZ
 ss  -->  socket level network statistics
 
 
-strace  -->  trace system calls
+strace  -->  trace system calls (linux; see also ktrace [bsd], trace [solaris])
 
 
 uptime  -->  display system uptime
@@ -149,3 +149,13 @@ $> ils -f openbsd -m imageFile > imageFile.inode-timestamps
 
 # Sort data and create a timeline
 $> mactime -b imageFile.timestamps [time range]   # Can limit to time range of interest
+
+
+##################################
+## INFO N OPEN FILES, PROCESSES ##
+##################################
+# windows
+netstat -aon | find /i "listening"   ## Note: use " not ' around string
+netstat -aon | findstr /i "listening"   ## Note: use " not ' around string
+tasklist | findstr <pid>
+
