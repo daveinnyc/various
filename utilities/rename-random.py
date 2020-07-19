@@ -7,15 +7,34 @@ Change file names regularly to provide more variety
 '''
 
 import os
+import platform
 import re
 import random
 import shutil
 import sys
 
 
-WORKING = "fotos"
-WORKING_ROOT = "c:\Temp\screen-saver-active"
 
+def set_working_root():
+    # Handle windows and cygwin paths 
+    system_os = platform.system()
+    root = ""
+    
+    if system_os == "Windows":
+       root = "c:\Temp\screen-saver-active"
+    elif system_os[0:9] == "CYGWIN_NT":    
+       root = "/cygdrive/c/TEMP/screen-saver-active"
+
+    return root 
+
+
+WORKING = "fotos"
+WORKING_ROOT = set_working_root()
+
+print(WORKING_ROOT)
+
+
+sys.exit()
 random.seed()
 new_names = set()
 original_files = []
@@ -51,7 +70,7 @@ for of in original_files:
 
 
 # Remove the old working dir and files
-fotos_dir = os.path.join(os.getcwd(), WORKING)
+fotos_dir = os.path.join(WORKING_ROOT, WORKING)
 try: 
     os.chdir(fotos_dir)
     for f in os.listdir():
@@ -67,7 +86,8 @@ except Exception as outer_e:
 
 # Create a new working directory
 try: 
-    os.mkdir(WORKING)
+    fotos_dir = os.path.join(WORKING_ROOT, WORKING)
+    os.mkdir(fotos_dir)
 except OSError as e:
     print(f"Can't create directory: {WORKING} error: {e}")   
     sys.exit()
