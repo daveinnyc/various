@@ -100,11 +100,10 @@ def create_new_set():
                 
 
 if __name__ == "__main__":
-    WORKING_ROOT = set_working_root()
-    print(f"DEBUG: {WORKING_ROOT}")  
-    WORKING = "fotos"
+    WORKING = "fotos"   
     random.seed()
-    
-    change_directories(WORKING_ROOT)
 
+    WORKING_ROOT = set_working_root()
+    change_directories(WORKING_ROOT)
+    rename_files()
     
