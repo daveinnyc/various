@@ -10,6 +10,7 @@ if len(sys.argv) != 2:
 
 prefix = sys.argv[1]
 files = glob.glob("Screen Shot*png")
+files = sorted(files)
 current_date = ''
 for f in files:
    foto_date = f[12:22]
