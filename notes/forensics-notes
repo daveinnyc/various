@@ -159,3 +159,11 @@ netstat -aon | find /i "listening"   ## Note: use " not ' around string
 netstat -aon | findstr /i "listening"   ## Note: use " not ' around string
 tasklist | findstr <pid>
 
+
+#######################
+###  PROJECTS, MISC ###
+#######################
+osquery - event dbase
+dark web projects - tor, freenet, i2p, opennet
+dcfldd - alternate to dd
+Netwitness -- pcap analysis
