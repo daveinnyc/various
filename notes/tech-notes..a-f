@@ -73,6 +73,7 @@ bash: redirect stderr & stdout to file -> cmd &> fileName
 bash: redirect stderr to stdout and both to file -> cmd > fileName 2>&1
 bash: reread .bashrc -> source ~/.bashrc
 bash: rename files -> for fn in `ls` ; do new="$( echo $fn | cut -c 5- )" ; mv $fn $new ; done
+bash: rename files -> for d in $(ls) ; do  mv "${d}" "${d/..20/..xxx..20}" ; done 
 bash: reset screen after binary cat -> reset
 bash: reset screen after binary cat -> echo <ctrl><v> <esc><c> <enter>
 bash: variables -> current process id num -> $$
