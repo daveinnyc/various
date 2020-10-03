@@ -29,65 +29,6 @@ backup: rename a file -> cp filename filename$( date +%F )
 bad superblock: fix  ->  use SystemRecoveryCD  ; newfs -N /dev/ada ; fsck -b[next superblock]
 
 
-bash: close a hung remote session: [enter] ~ .
-bash: command history, list -> history 
-bash: command history, execute cmd n -> !n
-bash: command history, execute last cmd  -> !!
-bash: command history, execute nth last cmd  -> !-n
-bash: command history, execute cmd starting with string -> !string
-bash: command history, go to the directory in last command -> cd !!:h 
-bash: command history, edit 'filename' used in last command -> vi !!:t
-bash: command history, !* -> all the arguments from the last command
-bash: command history, ^error^fixed -> fix typos in last cmd entered
-bash: command history, the 0th word ( command ) -> !:0 
-bash: command history, the nth word -> !:n 
-bash: command history, the first argument -> !^ 
-bash: command history, the last argument -> !$ 
-bash: ctrl-A move to beginning of line
-bash: ctrl-E move to end of line
-bash: ctrl-K delete to end of line
-bash: ctrl-M-Y paste last command argument
-bash: ctrl-R search cmd history for string
-bash: ctrl-W delete to beginning of line
-bash: ctrl-Y paste ctrl-K/ctrl-W deletions
-bash: create a function -> function funcName { f_name=${0}, arg_1=${1}, num_args=${#}, ret_code=${?} };
-bash: current process PID -> $$
-bash: debugging in a script: set -xv ( x print commands and args, v print input lines; +xv to end )
-bash: enter multiple characters on command line eg, xxxxx -> alt+5 x 
-bash: error handling: set -euo pipefail (-e exit on error, -u exit unset variable, -o pipefail work on piped cmds)
-bash: expand URLs -> function fullurl { wget --max-redirect=0 $1 2>&1 | grep Location | cut -d' ' -f2;}
-bash: get 1 minute load info from /proc  ->  read one five fifteen rest < /proc/loadavg ; echo $one
-bash: get a range of numbers from 1 to 10 -> seq 1 10
-bash: get information about a file -> whatis fileName
-bash: get information about a file location -> whereis fileName
-bash: get memory information -> free
-bash: infinite loop as TRUE -> while :
-bash: math, convert bases -> echo 'obase=16; ibase=10; 255' | bc
-bash: math, evaluate expr -> echo $(( 3 + 4 ))
-bash: pattern match on a variable ( keep everything up to first . ) -> varName=${ varName%%.* }   
-bash: pattern match on a variable ( drop everything up to last / ) -> varName=${0##*/}   
-bash: read a file into a script ( source file in script )  -> . fileName 
-bash: read a file to variable -> varName=$(< /proc/fileName)   
-bash: redirect stderr to stdout -> cmd 2>&1
-bash: redirect stderr & stdout to file -> cmd &> fileName
-bash: redirect stderr to stdout and both to file -> cmd > fileName 2>&1
-bash: reread .bashrc -> source ~/.bashrc
-bash: rename files -> for fn in `ls` ; do new="$( echo $fn | cut -c 5- )" ; mv $fn $new ; done
-bash: rename files -> for d in $(ls) ; do  mv "${d}" "${d/..20/..xxx..20}" ; done 
-bash: reset screen after binary cat -> reset
-bash: reset screen after binary cat -> echo <ctrl><v> <esc><c> <enter>
-bash: variables -> current process id num -> $$
-bash: variables -> last return value -> $?
-bash: variables -> list of execution vars -> $-
-bash: variables -> list of shell args -> $* 
-bash: variables -> list shell variables -> printenv ( export for currently exported variables )
-bash: variables -> number of arguments -> $# 
-bash: variables, enable warnings -> set -u  
-bash: variables, disable warnings -> set +u 
-bash: while loop on command line -> while [ 1 ] ; do someStuff ; done
-bash: work in a subshell, switch dir, do stuff, come back to orig dir: ( cd /tmp && doSomething )
-
-
 .bashrc: See aliases above
 .bashrc: append new lines instead of overwriting history file: shopt -s histappend  
 .bashrc: don't double up history entries ->  export HISTCONTROL=ignoredups
