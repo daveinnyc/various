@@ -21,16 +21,20 @@ bash: ctrl-W delete to beginning of line
 bash: ctrl-Y paste ctrl-K/ctrl-W deletions
 bash: create a function -> function funcName { f_name=${0}, arg_1=${1}, num_args=${#}, ret_code=${?} };
 bash: current process PID -> $$
+bash: cut beginning of a variable  ->  var=“aaa bbb” ; echo ${var#aaa}
+bash: cut end of a variable -> var=“aaa bbb” ; echo ${var%bbb}
 bash: debugging in a script: set -xv ( x print commands and args, v print input lines; +xv to end )
 bash: enter multiple characters on command line eg, xxxxx -> alt+5 x 
 bash: error handling: set -euo pipefail (-e exit on error, -u exit unset variable, -o pipefail work on piped cmds)
 bash: expand URLs -> function fullurl { wget --max-redirect=0 $1 2>&1 | grep Location | cut -d' ' -f2;}
 bash: get 1 minute load info from /proc  ->  read one five fifteen rest < /proc/loadavg ; echo $one
 bash: get a range of numbers from 1 to 10 -> seq 1 10
+bash: get a range of values -> echo {m..a..2}  ==>  m k i g ...
 bash: get information about a file -> whatis fileName
 bash: get information about a file location -> whereis fileName
 bash: get memory information -> free
 bash: infinite loop as TRUE -> while :
+bash initialize array -> letter_combos=({a..z}{a..z})
 bash: math, convert bases -> echo 'obase=16; ibase=10; 255' | bc
 bash: math, evaluate expr -> echo $(( 3 + 4 ))
 bash: pattern match on a variable ( keep everything up to first . ) -> varName=${ varName%%.* }   
@@ -45,6 +49,7 @@ bash: rename files -> for fn in `ls` ; do new="$( echo $fn | cut -c 5- )" ; mv $
 bash: rename files -> for d in $(ls) ; do  mv "${d}" "${d/..20/..xxx..20}" ; done 
 bash: reset screen after binary cat -> reset
 bash: reset screen after binary cat -> echo <ctrl><v> <esc><c> <enter>
+bash: select, copy & rename multiple files -> for i in aaa?[XY]?? ; do cp $i bbb${i#aaa} ; done
 bash: variables -> current process id num -> $$
 bash: variables -> last return value -> $?
 bash: variables -> list of execution vars -> $-
