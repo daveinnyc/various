@@ -23,4 +23,7 @@ for security in securities:
    table_row = soup.select('table td')
    open = float(table_row[3].text)
    
-   print(f"{symbol:>6}: {open:<6}  {price:<6}  {sell_price:<6}  {sell_price - price:<6.3f}")
+   print(f"{symbol:>6}:  {open:<6}  {price:<6}  "
+         f"{sell_price:<6}  {sell_price - price:<6.3f}  "
+         f"{(sell_price - price) / sell_price :<6.2f}"
+         )
