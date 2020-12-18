@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup 
 
 URL = 'https://finance.yahoo.com/quote/'
-CONF_FILE = "ticker-updates.conf"
+CONF_FILE = r"G:\system\ticker-updates.conf"
 
 
 def get_securities_list():
