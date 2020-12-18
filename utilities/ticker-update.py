@@ -2,8 +2,12 @@ import requests
 from bs4 import BeautifulSoup 
 
 URL = 'https://finance.yahoo.com/quote/'
-securities = ['bgcp', 'cvx', 'f', 'ge', 'intc', 'lumn', 'src', 't']
+secutities = []
 
+with open("ticker-updates,cong", r) as conf_file:
+    securities = conf_file.readlines()
+    securities = [s.strip() for s in securities]
+    
 for security in securities:
    query = URL + security
 
