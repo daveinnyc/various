@@ -12,7 +12,7 @@ def get_securities_list():
  
    return securities
 
-   
+
 def update_information(security):
    symbol, sell_price = security.split(',')
 
@@ -33,10 +33,16 @@ def update_information(security):
          )
 
 
+def print_header():
+   print(f"SYMBOL   OPEN    PRICE   SELL    DIFF    PERCENT")
+   print(f"========+=======================================")
+   
+   
 ############
 ### MAIN ###
 ############
 securities = get_securities_list()
+print_header()
 for security in securities:
     update_information(security)
     
