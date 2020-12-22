@@ -1,3 +1,6 @@
-rename "IMG" "img" *
-rename "PNG" "png" *
-mogrify -format jpg -quality 95%% -background white -flatten *.png
+for f in $(ls) 
+  do 
+     mv ${f} $(echo ${f} |tr 'A-Z' 'a-z') 
+  done
+
+mogrify -format jpg -quality 100%% -background white -flatten *.png
