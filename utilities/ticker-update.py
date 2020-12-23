@@ -28,19 +28,23 @@ def update_information(security):
    sell_price = float(sell_price)
    diff = sell_price - price
    percent = diff / sell_price
+   price_up = (price - open_price) > 0
    
-   return (symbol, price, open_price, sell_price, diff, percent)
+   return (symbol, price, open_price, sell_price, diff, percent, price_up)
 
   
 def print_row(stock):
-   symbol, price, open_price, sell_price, diff, percent = stock
+   symbol, price, open_price, sell_price, diff, percent, up = stock
+   direction = '+' if up else '-'
+   
    print(f"{symbol:>6}:  {open_price:<6}  {price:<6}  "
          f"{sell_price:<6}  {diff:<6.3f}  {percent :<6.2f}"
+         f"{direction:<3}"
          )
 
 
 def print_header():
-   print(f"SYMBOL   OPEN    PRICE   SELL    DIFF    PERCENT")
+   print(f"SYMBOL   OPEN    PRICE   SELL    DIFF    TO GO D")
    print(f"================================================")
    
 
