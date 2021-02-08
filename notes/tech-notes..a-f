@@ -140,6 +140,8 @@ dns: server used -> /etc/resolv.conf
 
 drac: default usr/pwd from Dell -> root / calvin
 
+du: total size of files in a directory -> du -ch *jpg | grep total
+
 
 echo: omit trailing newline -> echo -n <some output>
 
