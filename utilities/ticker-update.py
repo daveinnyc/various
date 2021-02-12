@@ -57,7 +57,7 @@ def print_header():
    
 
 def print_table(update_list):
-   update_list.sort(key=lambda sort_value: sort_value[5])
+   update_list.sort(key=lambda sort_value: sort_value[0])
    print_header()
    for stock in update_list:
       print_row(stock)
