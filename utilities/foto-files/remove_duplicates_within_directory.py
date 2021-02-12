@@ -1,4 +1,6 @@
 '''
+DEPRECATED  
+
 Compare File Contents and remove duplicate files
 
     get sha256 hash for each file found
