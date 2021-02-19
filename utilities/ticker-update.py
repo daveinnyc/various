@@ -46,11 +46,11 @@ def print_row(stock):
    print(f"{symbol: >7}:  "
          f"{direction}{direction}  "
          f"{percent: >8.3f}"
-         f"{diff: >8.3f}"
-         f"{change: >8.3f}"
-         f"{price: >8.3f}"
-         f"{open_price: >8.3f}"
-         f"{sell_price: >8.3f}"
+         f"{diff: >8.2f}"
+         f"{change: >8.2f}"
+         f"{price: >8.2f}"
+         f"{open_price: >8.2f}"
+         f"{sell_price: >8.2f}"
         )
 
 
