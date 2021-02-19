@@ -33,28 +33,30 @@ def update_information(security):
    sell_price = float(sell_price)
    diff = sell_price - price
    percent = round(diff / sell_price * 100, 3)
-   price_up = (price - open_price) > 0
+   change = (price - open_price) 
+   price_up = change > 0
    
-   return (symbol, price, open_price, sell_price, diff, percent, price_up)
+   return (symbol, price, open_price, sell_price, diff, percent, change, price_up)
 
 
 def print_row(stock):
-   symbol, price, open_price, sell_price, diff, percent, up = stock
+   symbol, price, open_price, sell_price, diff, percent, change, up = stock
    direction = '+' if up else '-'
    
    print(f"{symbol: >7}:  "
          f"{direction}{direction}  "
          f"{percent: >8.3f}"
          f"{diff: >8.3f}"
+         f"{change: >8.3f}"
          f"{price: >8.3f}"
-         f"{sell_price: >8.2f}"
-         f"{open_price: >8.2f}"
+         f"{open_price: >8.3f}"
+         f"{sell_price: >8.3f}"
         )
 
 
 def print_header():
-   print(f" SYMBOL   D     %TO GO    DIFF   PRICE    SELL    OPEN  ")
-   print(f"========================================================")
+   print(f" SYMBOL   D     %TO GO    DIFF   CHNG    PRICE    OPEN    SELL  ")
+   print(f"================================================================")
    
 
 def print_table(update_list):
